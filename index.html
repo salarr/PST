@@ -224,7 +224,16 @@ html,body{overflow-x:hidden}
   .actions button{width:100%}
   #appeals table{min-width:900px}
   .login-card{padding:24px;width:min(340px,100%)}
+  .head-actions .headbtn{display:none!important}
+  .mobile-bottom-actions{display:flex!important}
 }
+.mobile-bottom-actions{display:none;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b;padding:16px;margin:20px auto 30px;max-width:1500px}
+.mobile-bottom-actions .mbtitle{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.mobile-bottom-actions button{width:100%;text-align:left;padding:12px 14px;font-size:14px}
+.pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding:14px 0 4px;flex-wrap:wrap}
+.pagination button{padding:8px 16px}
+.pagination button:disabled{opacity:.45;cursor:not-allowed}
+.pagination span{font-size:13px;color:var(--muted);font-weight:600}
 @media(max-width:480px){
   .head h1{font-size:15px}
   .head small{font-size:11px}
@@ -250,17 +259,26 @@ html,body{overflow-x:hidden}
   </div>
 </div>
 <div id="appRoot" style="display:none">
-<header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:13px"></span><button class="light" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light" onclick="syncFromServer()">↻ Refresh</button><button class="light" onclick="logout()">🚪 Logout</button></div></div></header>
+<header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:13px"></span><button class="light headbtn" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light headbtn" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light headbtn" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light headbtn" onclick="syncFromServer()">↻ Refresh</button><button class="light headbtn" onclick="logout()">🚪 Logout</button></div></div></header>
 <div class="wrap">
 <div class="toolbar"><div class="search"><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><button class="primary" type="button" onclick="openAppealEntryModal()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button></div>
 
 <div class="tabs">
 <button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button>
 </div>
-<div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div></div></div>
+<div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
 <div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
 <div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="title"><h2>📅 Upcoming Hearings — Next 7 Days</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
+
+<div class="mobile-bottom-actions" id="mobileBottomActions">
+<div class="mbtitle">Account &amp; Settings</div>
+<button class="light" id="usersBtnMobile" style="display:none" onclick="openUsersModal()">👤 Users</button>
+<button class="light" id="activityBtnMobile" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button>
+<button class="light" onclick="openChangePasswordModal()">🔑 Change Password</button>
+<button class="light" onclick="syncFromServer()">↻ Refresh</button>
+<button class="light" onclick="logout()">🚪 Logout</button>
+</div>
 
 </div>
 
@@ -295,6 +313,8 @@ async function doLogin(){
     $("whoami").textContent=`👋 ${currentUser.username} (${roleLabel(currentUser.role)})`;
     $("usersBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
     $("activityBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+    $("usersBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
+    $("activityBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
     syncFromServer();
   }catch(e){errEl.textContent="Server error: "+e.message}
 }
@@ -682,8 +702,25 @@ function renderUpcomingHearings(){
    return `<tr><td${dateStyle}>${x.date.toLocaleDateString("en-GB")}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td></tr>`;
  }).join(""):empty(7);
 }
+const APPEALS_PER_PAGE=10;let appealsPage=1;let appealsCurrentList=[];
+function renderAppealsList(list){
+ appealsCurrentList=list;
+ const totalPages=Math.max(1,Math.ceil(list.length/APPEALS_PER_PAGE));
+ if(appealsPage>totalPages)appealsPage=totalPages;
+ if(appealsPage<1)appealsPage=1;
+ const start=(appealsPage-1)*APPEALS_PER_PAGE;
+ const pageItems=list.slice(start,start+APPEALS_PER_PAGE);
+ $("appealRows").innerHTML=pageItems.map(appealRow).join("")||empty(10);
+ renderAppealsPagination(list.length,totalPages);
+}
+function renderAppealsPagination(total,totalPages){
+ const el=$("appealsPagination"); if(!el)return;
+ if(total<=APPEALS_PER_PAGE){el.innerHTML="";return}
+ el.innerHTML=`<button class="light" type="button" onclick="appealsGoPage(${appealsPage-1})" ${appealsPage<=1?"disabled":""}>‹ Prev</button><span>Page ${appealsPage} of ${totalPages} (${total} appeals)</span><button class="light" type="button" onclick="appealsGoPage(${appealsPage+1})" ${appealsPage>=totalPages?"disabled":""}>Next ›</button>`;
+}
+function appealsGoPage(p){appealsPage=p;renderAppealsList(appealsCurrentList);}
 function render(){
-$("appealRows").innerHTML=db.appeals.map(appealRow).join("")||empty(10);
+renderAppealsList(db.appeals);
 $("cmRows").innerHTML=db.cms.map(cmRow).join("")||empty(8);
 $("cplaRows").innerHTML=db.cplas.map(cplaRow).join("")||empty(9);
 renderUpcomingHearings();
@@ -692,13 +729,14 @@ function empty(n){return `<tr><td colspan="${n}" style="text-align:center;paddin
 function searchAppeals(){
  const q=$("search").value.toLowerCase().trim();
  const type=$("searchType")?.value||"all";
- if(!q){render();return}
+ if(!q){appealsPage=1;render();return}
  const match=(r)=>Object.values(r||{}).join(" ").toLowerCase().includes(q);
  let appeals=[], cms=[], cplas=[];
  if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
  if(type==="all"||type==="cm"){cms=db.cms.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
  if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
- $("appealRows").innerHTML=appeals.map(appealRow).join("")||empty(10);
+ appealsPage=1;
+ renderAppealsList(appeals);
  $("cmRows").innerHTML=cms.map(cmRow).join("")||empty(8);
  $("cplaRows").innerHTML=cplas.map(cplaRow).join("")||empty(9);
  // Keep the main Appeals register visible for All/Appeal; show the matching register for CM/CPLA.
