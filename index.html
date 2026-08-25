@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PST Appeal Management System</title>
+<style>
+:root{--nav:#5b2a86;--accent:#0f766e;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#ddd6fe;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#7c3aed}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:25px}.head small{color:#ede9fe}
+.wrap{max-width:1500px;margin:20px auto;padding:0 16px}.toolbar,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b}.toolbar{padding:13px;display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:260px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff;font:inherit}textarea{min-height:85px;resize:vertical}
+button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--nav);color:#fff}.green{background:var(--green);color:#fff}.red{background:var(--red);color:#fff}.gray{background:#657386;color:#fff}.light{background:#ede9fe;color:#5b2a86}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.stat{padding:15px}.stat b{font-size:24px;color:var(--nav)}.stat small{display:block;color:var(--muted);margin-top:4px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tab{background:white;color:#536273;border:1px solid var(--line)}.tab.active{background:var(--nav);color:#fff}
+.panel{display:none}.panel.active{display:block}.title{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.title h2{margin:0;font-size:18px}.body{padding:16px}.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f3e8ff;font-size:12px;color:#5b21b6}tr:hover td{background:#faf5ff}.badge{padding:4px 8px;border-radius:20px;background:#e8f4ed;color:#17613d;font-size:11px;font-weight:bold}
+.modal-bg{display:none;position:fixed;inset:0;background:#0007;z-index:50;padding:20px;align-items:center;justify-content:center}.modal-bg.show{display:flex}.modal{width:min(1050px,100%);max-height:92vh;overflow:auto;background:white;border-radius:15px}.mh{background:var(--nav);color:#fff;padding:14px 18px;display:flex;justify-content:space-between}.mh h3{margin:0}.close{background:none;color:#fff;font-size:25px;padding:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{font-size:12px;font-weight:bold;color:#536273;display:block;margin-bottom:4px}.full{grid-column:1/-1}.actions{display:flex;gap:8px;margin-top:12px}
+.search{display:flex;gap:8px;flex:1}.search select{max-width:150px}
+.report{width:210mm;min-height:297mm;background:white;margin:auto;padding:18mm;font-family:Arial}.report h1{text-align:center;font-size:16pt;margin:0;text-decoration:underline}.report h2{text-align:center;font-size:14pt;margin:25px 0;text-decoration:underline}.report p{line-height:1.5}.rtable{min-width:0;border-collapse:collapse}.rtable th,.rtable td{border:1px solid #777}.printbar{position:fixed;right:15px;top:15px}@media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media print{body{background:white}.printbar{display:none}.report{margin:0}}
+
+/* Attractive UI additions */
+.icon{font-size:17px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.filebox{display:flex;align-items:center;gap:8px;background:#fff7ed;border:1px dashed #c4b5fd;border-radius:10px;padding:6px 8px}
+.filebox input{display:none}.filebox label{cursor:pointer;font-weight:700;color:#6d28d9;padding:6px 9px}
+.btnexcel{background:#287a58!important;color:#fff!important}.btnexport{background:#c96f32!important;color:#fff!important}
+.toolbar{background:linear-gradient(135deg,#ffffff,#f5f3ff)}.stat:nth-child(1){border-top:4px solid #c96f32}.stat:nth-child(2){border-top:4px solid #287a58}.stat:nth-child(3){border-top:4px solid #72539a}.stat:nth-child(4){border-top:4px solid #d6a84f}.stat:nth-child(5){border-top:4px solid #b85b72}.stat:nth-child(6){border-top:4px solid #8b6a54}
+.title{background:linear-gradient(90deg,#fff9f5,#fff)}.tab{transition:.15s}.tab:hover{transform:translateY(-1px);box-shadow:0 3px 10px #5b2a8618}
+button{transition:.15s}button:hover{transform:translateY(-1px)}
+<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}.searchmatches{position:relative;z-index:20;margin-top:4px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;max-height:190px;overflow:auto}.match{padding:9px 11px;border-bottom:1px solid #f0e6df;cursor:pointer}.match:hover{background:#fff7ed}.match.muted{color:#777;cursor:default}.picked{margin-top:6px;padding:8px 10px;background:#eef8f0;border:1px solid #c9e7d0;border-radius:8px}.mini{padding:3px 8px;font-size:12px;margin-left:8px}</style></style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+
+<style id="large-action-icons">
+.icon-action{
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  padding:0 !important;
+  margin:2px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:12px !important;
+  font-size:25px !important;
+  line-height:1 !important;
+  cursor:pointer !important;
+  border:1px solid #cbd5e1 !important;
+  background:#fff !important;
+  box-shadow:0 2px 5px rgba(0,0,0,.08) !important;
+}
+.icon-action:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 9px rgba(0,0,0,.13) !important;
+}
+.icon-action.edit-action{color:#2563eb !important;}
+.icon-action.delete-action{color:#dc2626 !important;}
+.icon-action.report-action{color:#7c3aed !important;}
+</style>
+
+<style id="action-icon-hard-fix">
+/* Large icon-only actions in Appeals / CM / CPLA registers */
+.action-btn,
+.appeal-actions button,
+.cm-actions button,
+.cpla-actions button{
+  min-width:52px !important;
+  width:52px !important;
+  height:52px !important;
+  padding:0 !important;
+  margin:3px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:12px !important;
+  font-size:0 !important;
+  line-height:1 !important;
+  position:relative !important;
+  vertical-align:middle !important;
+}
+.action-btn::before,
+.appeal-actions button::before,
+.cm-actions button::before,
+.cpla-actions button::before{
+  font-size:27px !important;
+  line-height:1 !important;
+  display:block !important;
+}
+.action-btn.edit::before,
+.appeal-actions button.edit::before,
+.cm-actions button.edit::before,
+.cpla-actions button.edit::before,
+.actions button.edit::before{content:"✏️" !important;}
+
+.action-btn.delete::before,
+.appeal-actions button.delete::before,
+.cm-actions button.delete::before,
+.cpla-actions button.delete::before,
+.actions button.delete::before{content:"🗑️" !important;}
+
+.action-btn.report::before,
+.appeal-actions button.report::before,
+.cm-actions button.report::before,
+.cpla-actions button.report::before,
+.actions button.report::before{content:"📄" !important;}
+
+/* Also catch buttons by title/aria-label, even if their class names differ */
+button[title="Edit"],button[aria-label="Edit"],
+button[title="Delete"],button[aria-label="Delete"],
+button[title="Report"],button[aria-label="Report"]{
+  min-width:52px !important;width:52px !important;height:52px !important;
+  padding:0 !important;font-size:0 !important;
+  display:inline-flex !important;align-items:center !important;justify-content:center !important;
+}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;}
+button[title="Delete"]::before,button[aria-label="Delete"]::before{content:"🗑️";font-size:27px;}
+button[title="Report"]::before,button[aria-label="Report"]::before{content:"📄";font-size:27px;}
+.status-pending{color:#b91c1c;font-weight:800}.status-decided{color:#15803d;font-weight:800}.resp-table{width:100%;border-collapse:collapse}.resp-table th,.resp-table td{padding:10px;border-bottom:1px solid var(--line)}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5b2a86,#7c3aed);padding:16px}
+.login-card{background:#fff;padding:32px;border-radius:16px;width:min(380px,100%);box-shadow:0 10px 40px #0004}
+.login-card h1{font-size:20px;margin:0 0 6px;color:#25213a}.login-card p{margin:0 0 18px;color:#6b6578}
+.login-card .field{margin-bottom:12px}
+table.t{width:100%;border-collapse:collapse}
+table.t th,table.t td{border:1px solid #d1d5db;padding:7px;text-align:left;font-size:13px}
+table.t th{background:#f3e8ff}
+</style>
+
+<style id="requested-ui-fixes">
+.selected-resp-list{border:1px solid #d1d5db;border-radius:10px;max-height:220px;overflow:auto;background:#fff}
+.selected-resp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-bottom:1px solid #e5e7eb}
+.selected-resp-row:last-child{border-bottom:0}
+.resp-x{width:28px!important;height:28px!important;min-width:28px;padding:0!important;border-radius:50%!important;background:#dc2626!important;color:#fff!important;font-size:21px!important;line-height:1!important;display:inline-flex!important;align-items:center;justify-content:center;box-shadow:none!important}
+.resp-x:hover{background:#b91c1c!important;transform:scale(1.05)!important}
+.tomorrow-date{color:#dc2626!important;font-weight:800!important;background:#fee2e2!important;border-radius:6px}
+</style>
+
+<style id="final-color-theme">
+:root{--nav:#1f2937;--accent:#0f766e;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#0f766e}
+body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
+header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px rgba(31,41,55,.18)}
+.head small{color:#d1fae5}
+.toolbar,.card,.stat{border-color:#d8e2dc;box-shadow:0 7px 22px rgba(31,41,55,.07)}
+.toolbar{background:linear-gradient(135deg,#fff,#f0f7f3)}
+.primary{background:linear-gradient(135deg,#0f766e,#159a86);color:#fff}
+.green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
+.light{background:#e8f5ef;color:#116149;border:1px solid #c9e4d8}
+.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#0f766e;color:#fff;border-color:#0f766e}
+.title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
+th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
+.stat b{color:#0f766e}
+.stat:nth-child(1){border-top-color:#0f766e}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
+.login-wrap{background:linear-gradient(135deg,#20262e,#0f766e)}
+.login-card h1{color:#1f2933}.login-card p{color:#667085}
+.modal-bg{background:rgba(15,23,42,.68)}.mh{background:linear-gradient(135deg,#20262e,#374151)}
+.match:hover{background:#f0fdf4}.picked{background:#ecfdf5;border-color:#bbf7d0}
+.selected-resp-list{border-color:#d8e2dc}.selected-resp-row{border-color:#e5ebe7}
+.resp-x{background:#e11d48!important}.resp-x:hover{background:#be123c!important}
+.tomorrow-date{color:#be123c!important;background:#ffe4e6!important}
+.icon-action.edit-action{color:#0f766e!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#0f766e}
+.status-pending{color:#be123c}.status-decided{color:#15803d}
+</style>
+
+<style id="appeal-register-compact-actions">
+/* Compact action buttons in Appeal Register rows */
+#appealRows .actionbuttons{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+#appealRows .actionbuttons .actionbtn,
+#appealRows .actionbuttons button[title="Report"]{
+  min-width:0 !important;
+  width:auto !important;
+  height:32px !important;
+  min-height:32px !important;
+  padding:5px 9px !important;
+  margin:0 !important;
+  border-radius:7px !important;
+  font-size:12px !important;
+  line-height:20px !important;
+}
+#appealRows .actionbuttons .actionbtn::before,
+#appealRows .actionbuttons button[title="Report"]::before{
+  font-size:15px !important;
+  line-height:1 !important;
+  margin-right:3px !important;
+}
+</style>
+
+<style id="appeal-register-one-row-fix">
+#appeals .tablewrap{overflow-x:auto}
+#appeals table{min-width:1180px;table-layout:auto}
+#appeals th,#appeals td{padding:7px 8px;white-space:nowrap;font-size:12px;vertical-align:middle}
+#appeals td:nth-child(3){white-space:normal;min-width:180px}
+#appeals td:last-child{white-space:nowrap;min-width:190px}
+#appealRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
+#appealRows .actionbuttons button{flex:0 0 auto!important}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <h1>🔐 PST Appeal Management System</h1>
+    <div class="field" style="margin-top:18px"><label>Username</label><input id="li_username" type="text" placeholder="Username" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="field"><label>Password</label><input id="li_password" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="primary" type="button" style="width:100%" onclick="doLogin()">Login</button>
+    <div id="loginError" style="color:#b83b35;margin-top:10px;font-size:13px"></div>
+  </div>
+</div>
+<div id="appRoot" style="display:none">
+<header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:13px"></span><button class="light" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light" onclick="syncFromServer()">↻ Refresh</button><button class="light" onclick="logout()">🚪 Logout</button></div></div></header>
+<div class="wrap">
+<div class="toolbar"><div class="search"><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><button class="primary" type="button" onclick="openAppealEntryModal()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button></div>
+
+<div class="tabs">
+<button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button>
+</div>
+<div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div></div></div>
+<div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
+<div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
+<div id="upcoming" class="panel card"><div class="title"><h2>📅 Upcoming Hearings — Next 7 Days</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
+
+</div>
+
+<div id="modal" class="modal-bg"><div class="modal"><div class="mh"><h3 id="mtitle"></h3><button class="close" onclick="closeM()">×</button></div><div class="body" id="mbody"></div></div></div>
+<div id="respModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(520px,100%)"><div class="mh"><h3>👥 Select Respondents</h3><button class="close" onclick="closeRespModal()">×</button></div><div class="body" id="respModalBody"></div></div></div>
+<div id="usersModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(560px,100%)"><div class="mh"><h3>👤 Users (Admin / Child Accounts)</h3><button class="close" onclick="closeUsersModal()">×</button></div><div class="body" id="usersModalBody"></div></div></div>
+<div id="activityModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(760px,100%)"><div class="mh"><h3>🗒️ User Activity Log</h3><button class="close" onclick="closeActivityModal()">×</button></div><div class="body" id="activityModalBody"></div></div></div>
+</div>
+<script>
+// ===== GOOGLE SHEETS CONNECTION =====
+// Apps Script Web App URL یہاں paste کریں
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwzjemK3Hb3W5vtt37QlC-L3jwrQQ3NMW7DzbOdRFCRZQLi_2HqEzTTbi-kHtBnUhs/exec";
+let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:[],respondents:[]},editId=null;
+let authToken=null,currentUser=null;
+const $=x=>document.getElementById(x), id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+async function api(action,payload={}){if(!WEB_APP_URL.startsWith("http"))throw new Error("Apps Script Web App URL ابھی set نہیں کی گئی");const r=await fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,payload,token:authToken})});return await r.json()}
+async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
+
+// ===== LOGIN / USERS =====
+async function doLogin(){
+  const u=$("li_username").value.trim(),p=$("li_password").value;
+  const errEl=$("loginError");errEl.textContent="";
+  if(!u||!p){errEl.textContent="Username اور password دونوں لکھیں۔";return}
+  if(!WEB_APP_URL.startsWith("http")){errEl.textContent="Apps Script Web App URL ابھی set نہیں کی گئی۔ code.gs deploy کریں۔";return}
+  try{
+    const res=await api("login",{username:u,password:p});
+    if(!res.ok){errEl.textContent=res.error||"Login ناکام ہوئی۔";return}
+    authToken=res.token;currentUser={username:res.username,role:res.role};
+    $("loginScreen").style.display="none";
+    $("appRoot").style.display="block";
+    $("whoami").textContent=`👋 ${currentUser.username} (${roleLabel(currentUser.role)})`;
+    $("usersBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+    $("activityBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+    syncFromServer();
+  }catch(e){errEl.textContent="Server error: "+e.message}
+}
+function logout(){authToken=null;currentUser=null;$("appRoot").style.display="none";$("loginScreen").style.display="flex";$("li_password").value="";$("loginError").textContent="";}
+function openChangePasswordModal(){
+  modal("🔑 Change Password",`<div class="grid">
+    <div class="field full"><label>موجودہ Password</label><input id="cp_old" type="password" placeholder="Current Password"></div>
+    <div class="field full"><label>نیا Password</label><input id="cp_new" type="password" placeholder="New Password"></div>
+    <div class="field full"><label>نیا Password دوبارہ لکھیں</label><input id="cp_new2" type="password" placeholder="Confirm New Password"></div>
+    <div id="cpError" class="full" style="color:#b83b35;font-size:13px"></div>
+    <div class="actions full"><button class="green" type="button" onclick="submitChangePassword()">💾 Save</button><button class="gray" type="button" onclick="closeM()">✖ Cancel</button></div>
+  </div>`);
+}
+async function submitChangePassword(){
+  const oldP=$("cp_old").value,newP=$("cp_new").value,newP2=$("cp_new2").value;
+  const errEl=$("cpError");errEl.textContent="";
+  if(!oldP||!newP||!newP2){errEl.textContent="سب fields لازمی ہیں۔";return}
+  if(newP!==newP2){errEl.textContent="نیا password دونوں جگہ ایک جیسا نہیں ہے۔";return}
+  if(newP.length<4){errEl.textContent="نیا password کم از کم 4 حروف کا ہونا چاہیے۔";return}
+  try{
+    const res=await api("changePassword",{oldPassword:oldP,newPassword:newP});
+    if(!res.ok){errEl.textContent=res.error||"Password تبدیل نہیں ہو سکا۔";return}
+    alert("✅ Password کامیابی سے تبدیل ہو گیا۔ اگلی بار نئے password سے login کریں۔");
+    closeM();
+  }catch(e){errEl.textContent="Server error: "+e.message}
+}
+function logActivity(action,details){if(!authToken)return;api("logActivity",{action,details}).catch(()=>{});}
+function openActivityLogModal(){
+ if(currentUser?.role!=="admin")return;
+ const body=$("activityModalBody");
+ body.innerHTML=`<div class="field full" style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">
+   <div style="flex:1;min-width:160px"><label>Date کے مطابق filter کریں</label><input id="al_date" type="date"></div>
+   <button type="button" class="green" onclick="loadActivityLog(false)">🔍 Filter</button>
+   <button type="button" class="gray" onclick="loadActivityLog(true)">Show Recent (All)</button>
+ </div>
+ <div id="activityLogList" style="margin-top:14px">Loading...</div>
+ <div class="actions full"><button class="gray" type="button" onclick="closeActivityModal()">✖ Close</button></div>`;
+ $("activityModal").classList.add("show");
+ loadActivityLog(true);
+}
+function closeActivityModal(){$("activityModal").classList.remove("show")}
+async function loadActivityLog(all){
+ const list=$("activityLogList");if(!list)return;
+ list.innerHTML="Loading...";
+ const date=all?"":($("al_date")?.value||"");
+ try{
+   const res=await api("getActivityLog",{date});
+   if(!res.ok){list.innerHTML=`<div style="color:#b83b35">${esc(res.error)}</div>`;return}
+   if(!res.logs.length){list.innerHTML=`<div style="padding:12px;color:#6b6578">کوئی activity نہیں ملی۔</div>`;return}
+   list.innerHTML=`<table class="t"><tr><th>Date</th><th>User</th><th>Action</th><th>Details</th></tr>${res.logs.map(l=>`<tr><td>${esc(new Date(l.Timestamp).toLocaleDateString("en-GB"))}</td><td>${esc(l.Username)}</td><td>${esc(l.Action)}</td><td>${esc(l.Details)}</td></tr>`).join("")}</table>`;
+ }catch(e){list.innerHTML=`<div style="color:#b83b35">Error: ${esc(e.message)}</div>`}
+}
+function openUsersModal(){if(currentUser?.role!=="admin")return;renderUsersModal();$("usersModal").classList.add("show")}
+function closeUsersModal(){$("usersModal").classList.remove("show")}
+function roleLabel(role){return role==="admin"?"Admin":"User"}
+async function renderUsersModal(){
+  const body=$("usersModalBody");
+  body.innerHTML=`<div style="padding:12px;color:#6b6578">Loading...</div>`;
+  try{
+    const res=await api("listUsers",{});
+    if(!res.ok){body.innerHTML=`<div style="padding:12px;color:#b83b35">${esc(res.error)}</div>`;return}
+    body.innerHTML=`<div class="field full"><label>➕ نیا User (Child یا Admin) بنائیں</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px">
+        <input id="nu_username" placeholder="Username">
+        <input id="nu_password" placeholder="Password" type="text">
+        <select id="nu_role"><option value="child">User</option><option value="admin">Admin</option></select>
+        <button type="button" class="green" onclick="createChildUser()">➕ Add</button>
+      </div></div>
+    <table class="t" style="margin-top:14px"><tr><th>Username</th><th>Role</th><th>Created</th><th>Action</th></tr>
+      ${res.users.map(u=>`<tr><td>${esc(u.Username)}</td><td>${esc(roleLabel(u.Role))}</td><td>${esc(String(u.CreatedAt).slice(0,10))}</td><td>${u.Username.toLowerCase()===currentUser.username.toLowerCase()?"—":`<button type="button" class="red mini" onclick="deleteUser_('${u.ID}','${esc(u.Username)}')">🗑️ Del</button>`}</td></tr>`).join("")}
+    </table>
+    <div class="actions full"><button class="gray" type="button" onclick="closeUsersModal()">✖ Close</button></div>`;
+  }catch(e){body.innerHTML=`<div style="padding:12px;color:#b83b35">Error: ${esc(e.message)}</div>`}
+}
+async function createChildUser(){
+  const u=$("nu_username").value.trim(),p=$("nu_password").value,role=$("nu_role").value;
+  if(!u||!p)return alert("Username اور password دونوں لکھیں۔");
+  const res=await api("createUser",{username:u,password:p,role});
+  if(!res.ok)return alert(res.error||"User نہیں بن سکا۔");
+  renderUsersModal();
+}
+async function deleteUser_(uid,uname){
+  if(!confirm(`"${uname}" کو delete کریں؟`))return;
+  const res=await api("deleteUser",{id:uid});
+  if(!res.ok)return alert(res.error||"Delete نہیں ہو سکا۔");
+  renderUsersModal();
+}
+
+// ===== BREAKDOWN REPORT =====
+function isDecidedEntity(type,e){
+  if(type==="appeal")return String(e.Status||"").trim().toLowerCase()==="decided";
+  if(type==="cm")return String(e.CM_Status||"").trim().toLowerCase().includes("decid");
+  return String(e.CPLA_Status||"").trim().toLowerCase().includes("decid");
+}
+function decisionDateFor(type,e){
+  let hearings=[];
+  if(type==="appeal")hearings=db.appealHearings.filter(h=>h.parent_id===e.id);
+  else if(type==="cm")hearings=db.cmHearings.filter(h=>h.parent_id===e.id);
+  else hearings=db.cplaHearings.filter(h=>h.parent_id===e.id);
+  const dated=hearings.filter(h=>h.Date_of_Hearing).sort((a,b)=>new Date(b.Date_of_Hearing)-new Date(a.Date_of_Hearing));
+  return dated.length?dated[0].Date_of_Hearing:null;
+}
+function computeBreakdown(type){
+  const list=type==="appeal"?db.appeals:(type==="cm"?db.cms:db.cplas);
+  const total=list.length;
+  const decided=list.filter(e=>isDecidedEntity(type,e));
+  const underHearing=total-decided.length;
+  const yearWise={},monthWise={};
+  const now=new Date(),curY=now.getFullYear(),curM=now.getMonth();
+  let decidedThisMonth=0;
+  decided.forEach(e=>{
+    const ds=decisionDateFor(type,e);
+    let y="Not Dated",m="Not Dated";
+    if(ds){const d=new Date(ds);if(!isNaN(d)){y=String(d.getFullYear());m=d.toLocaleString("en",{month:"long"})+" "+d.getFullYear();if(d.getFullYear()===curY&&d.getMonth()===curM)decidedThisMonth++;}}
+    yearWise[y]=(yearWise[y]||0)+1;
+    monthWise[m]=(monthWise[m]||0)+1;
+  });
+  return{total,decidedCount:decided.length,underHearing,yearWise,monthWise,decidedThisMonth};
+}
+function breakdownSectionHtml(title,icon,type){
+  const b=computeBreakdown(type);
+  const yearRows=Object.keys(b.yearWise).sort().map(y=>`<tr><td>${esc(y)}</td><td>${b.yearWise[y]}</td></tr>`).join("")||'<tr><td colspan="2">-</td></tr>';
+  const monthRows=Object.keys(b.monthWise).sort((a,c)=>{if(a==="Not Dated")return 1;if(c==="Not Dated")return -1;return new Date("1 "+a)-new Date("1 "+c)}).map(m=>`<tr><td>${esc(m)}</td><td>${b.monthWise[m]}</td></tr>`).join("")||'<tr><td colspan="2">-</td></tr>';
+  return `<div class="title"><h2>${icon} ${title}</h2></div><div class="body">
+   <table class="t" style="margin-bottom:14px"><tr><th>Total</th><td>${b.total}</td></tr><tr><th>Decided (Total)</th><td>${b.decidedCount}</td></tr><tr><th>Decided this Month</th><td>${b.decidedThisMonth}</td></tr><tr><th>Under Hearing</th><td>${b.underHearing}</td></tr></table>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div><b>Year Wise Decided</b><table class="t" style="margin-top:6px"><tr><th>Year</th><th>Decided</th></tr>${yearRows}</table></div>
+    <div><b>Month Wise Decided</b><table class="t" style="margin-top:6px"><tr><th>Month</th><th>Decided</th></tr>${monthRows}</table></div>
+   </div></div>`;
+}
+function breakdownContentHtml(){return breakdownSectionHtml("Appeals","⚖️","appeal")+breakdownSectionHtml("CMs","📁","cm")+breakdownSectionHtml("CPLAs","📜","cpla")}
+function openBreakdownModal(){modal("📊 Breakdown Report",`<div id="breakdownBody">${breakdownContentHtml()}</div><div class="actions full"><button class="green" type="button" onclick="printBreakdown()">🖨️ Print Report</button><button class="gray" type="button" onclick="closeM()">✖ Close</button></div>`)}
+function printBreakdown(){
+  const w=open("","_blank");
+  w.document.write(`<html><head><title>Breakdown Report</title><style>body{font-family:Arial;margin:20mm}h1{text-align:center}h2{margin-top:22px}table.t{width:100%;border-collapse:collapse;margin-top:6px}table.t th,table.t td{border:1px solid #777;padding:6px;text-align:left}</style>
+<style id="final-color-theme">
+:root{--nav:#1f2937;--accent:#0f766e;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#0f766e}
+body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
+header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px rgba(31,41,55,.18)}
+.head small{color:#d1fae5}
+.toolbar,.card,.stat{border-color:#d8e2dc;box-shadow:0 7px 22px rgba(31,41,55,.07)}
+.toolbar{background:linear-gradient(135deg,#fff,#f0f7f3)}
+.primary{background:linear-gradient(135deg,#0f766e,#159a86);color:#fff}
+.green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
+.light{background:#e8f5ef;color:#116149;border:1px solid #c9e4d8}
+.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#0f766e;color:#fff;border-color:#0f766e}
+.title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
+th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
+.stat b{color:#0f766e}
+.stat:nth-child(1){border-top-color:#0f766e}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
+.login-wrap{background:linear-gradient(135deg,#20262e,#0f766e)}
+.login-card h1{color:#1f2933}.login-card p{color:#667085}
+.modal-bg{background:rgba(15,23,42,.68)}.mh{background:linear-gradient(135deg,#20262e,#374151)}
+.match:hover{background:#f0fdf4}.picked{background:#ecfdf5;border-color:#bbf7d0}
+.selected-resp-list{border-color:#d8e2dc}.selected-resp-row{border-color:#e5ebe7}
+.resp-x{background:#e11d48!important}.resp-x:hover{background:#be123c!important}
+.tomorrow-date{color:#be123c!important;background:#ffe4e6!important}
+.icon-action.edit-action{color:#0f766e!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#0f766e}
+.status-pending{color:#be123c}.status-decided{color:#15803d}
+</style>
+
+<style id="appeal-register-compact-actions">
+/* Compact action buttons in Appeal Register rows */
+#appealRows .actionbuttons{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+#appealRows .actionbuttons .actionbtn,
+#appealRows .actionbuttons button[title="Report"]{
+  min-width:0 !important;
+  width:auto !important;
+  height:32px !important;
+  min-height:32px !important;
+  padding:5px 9px !important;
+  margin:0 !important;
+  border-radius:7px !important;
+  font-size:12px !important;
+  line-height:20px !important;
+}
+#appealRows .actionbuttons .actionbtn::before,
+#appealRows .actionbuttons button[title="Report"]::before{
+  font-size:15px !important;
+  line-height:1 !important;
+  margin-right:3px !important;
+}
+</style>
+</head><body><h1>PST Appeal Management — Breakdown Report</h1><p style="text-align:center">Generated: ${new Date().toLocaleString()}</p>${breakdownContentHtml()}</body></html>`);
+  w.document.close();
+  setTimeout(()=>w.print(),400);
+}
+function seedDefaultRespondents(){if(!db.respondents||db.respondents.length===0){db.respondents=[{id:"r1",Respondent:"IGP, Punjab, Lahore"},{id:"r2",Respondent:"RPO, Faisalabad"},{id:"r3",Respondent:"CPO, Faisalabad"},{id:"r4",Respondent:"CTO, Faisalabad"}];}}
+async function persist(){render();fillRespondentSelect();try{await api("saveAll",db)}catch(e){console.error(e);alert("Data local screen پر ہے لیکن Google Sheet save نہیں ہوئی: "+e.message)}}
+function refreshRespondentOptions(selectId,alsoSelect){const el=$(selectId);if(!el)return;const selected=Array.from(el.selectedOptions||[]).map(o=>o.value);if(alsoSelect&&!selected.includes(alsoSelect))selected.push(alsoSelect);el.innerHTML=(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}" ${selected.includes(r.Respondent)?"selected":""}>${esc(r.Respondent)}</option>`).join("")}
+function fillRespondentSelect(){refreshRespondentOptions("ae_Respondents");refreshRespondentOptions("Respondents");updateRespondentsBtnLabel("ae_Respondents");updateRespondentsBtnLabel("Respondents")}
+function selectedRespondents(id){const e=$(id);return e?Array.from(e.selectedOptions).map(o=>o.value).join(", "):""}
+function updateRespondentsBtnLabel(selectId){const sel=$(selectId),btn=$(selectId+"Btn");if(!sel||!btn)return;const vals=Array.from(sel.selectedOptions).map(o=>o.value);btn.textContent=vals.length?`👥 Respondents (${vals.length}): ${vals.slice(0,2).join(", ")}${vals.length>2?"…":""}`:"👥 Select Respondents"}
+let respPickerTarget=null,respPickerSelected=new Set(),respPickerAddingNew=false;
+function openRespondentPicker(selectId){const sel=$(selectId);respPickerTarget=selectId;respPickerSelected=new Set(sel?Array.from(sel.selectedOptions).map(o=>o.value):[]);respPickerAddingNew=false;renderRespPicker();$("respModal").classList.add("show")}
+function closeRespModal(){$("respModal").classList.remove("show");respPickerTarget=null}
+function renderRespPicker(){
+ const body=$("respModalBody");
+ const dropdownOptions=(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}">${esc(r.Respondent)}</option>`).join("");
+ const listHtml=respPickerSelected.size?Array.from(respPickerSelected).map(name=>{
+   const arg=JSON.stringify(name).replace(/</g,"\\u003c");
+   return `<div class="selected-resp-row"><span>${esc(name)}</span><button type="button" class="resp-x" title="Remove respondent" aria-label="Remove respondent" onclick='removeFromRespPickerList(${arg})'>×</button></div>`;
+ }).join(""):`<div style="padding:12px;color:#6b6578">ابھی کوئی respondent select نہیں کیا گیا</div>`;
+ body.innerHTML=`<div class="field full"><label>Respondent منتخب کریں</label><select id="respPickerDropdown" onchange="handleRespDropdownChange(this.value)"><option value="">-- Select Respondent --</option>${dropdownOptions}<option value="__add_new__">➕ Add New Respondent</option></select></div>
+ ${respPickerAddingNew?`<div class="field full" style="margin-top:8px"><label>نیا Respondent کا نام</label><div style="display:flex;gap:8px"><input id="respPickerNewInput" placeholder="e.g. IGP, Punjab, Lahore" onkeydown="if(event.key==='Enter'){event.preventDefault();confirmAddNewRespondent();}"><button type="button" class="green" onclick="confirmAddNewRespondent()">➕ Add</button><button type="button" class="gray" onclick="cancelAddNewRespondent()">✖</button></div></div>`:""}
+ <div class="field full" style="margin-top:14px"><label>Selected Respondents (${respPickerSelected.size})</label><div class="selected-resp-list">${listHtml}</div></div>
+ <div class="actions full"><button class="green" type="button" onclick="saveRespPicker()">💾 Save</button><button class="gray" type="button" onclick="closeRespModal()">✖ Close</button></div>`;
+ if(respPickerAddingNew)$("respPickerNewInput")?.focus();
+}
+function handleRespDropdownChange(val){
+ if(!val)return;
+ if(val==="__add_new__"){respPickerAddingNew=true;renderRespPicker();return;}
+ respPickerSelected.add(val);
+ respPickerAddingNew=false;
+ renderRespPicker();
+}
+function cancelAddNewRespondent(){respPickerAddingNew=false;renderRespPicker();}
+async function confirmAddNewRespondent(){
+ const input=$("respPickerNewInput"),v=(input?.value||"").trim();if(!v)return;
+ if(!(db.respondents||[]).some(r=>r.Respondent.toLowerCase()===v.toLowerCase())){db.respondents=db.respondents||[];db.respondents.push({id:id(),Respondent:v});await persist();}
+ respPickerSelected.add(v);
+ respPickerAddingNew=false;
+ renderRespPicker();
+ $("respModal").classList.add("show");
+}
+function removeFromRespPickerList(name){respPickerSelected.delete(name);renderRespPicker();}
+function saveRespPicker(){const sel=$(respPickerTarget);if(sel){Array.from(sel.options).forEach(o=>{o.selected=respPickerSelected.has(o.value)})}updateRespondentsBtnLabel(respPickerTarget);closeRespModal();}
+
+function tab(x,b){document.querySelectorAll(".panel").forEach(e=>e.classList.remove("active"));$(x).classList.add("active");document.querySelectorAll(".tab").forEach(e=>e.classList.remove("active"));b.classList.add("active")}
+function closeM(){$("modal").classList.remove("show");editId=null}
+function modal(title,html){$("mtitle").textContent=title;$("mbody").innerHTML=html;$("modal").classList.add("show")}
+function fld(label,id,type="text",v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><input id="${id}" type="${type}" value="${esc(v)}"></div>`}
+function area(label,id,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><textarea id="${id}">${esc(v)}</textarea></div>`}
+function sel(label,id,arr,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><select id="${id}">${arr.map(o=>`<option value="${esc(o.v??o)}" ${(o.v??o)==v?"selected":""}>${esc(o.t??o)}</option>`).join("")}</select></div>`}
+function appealEntryFormHtml(){return `<div class="grid">
+<div class="field"><label>Appeal LMS</label><select id="ae_Appeal_LMS" onchange="toggleOtherLMS('ae_Appeal_LMS','ae_Appeal_LMS_OtherWrap')"><option value="Yes">Yes</option><option value="No">No</option><option value="Other">Other</option></select><div id="ae_Appeal_LMS_OtherWrap" style="display:none;margin-top:6px"><input id="ae_Appeal_LMS_Other" type="text" placeholder="Enter Other"></div></div>
+<div class="field"><label>Appeal No. <b>*</b></label><input id="ae_Appeal_Num" type="number" placeholder="Appeal No."></div>
+<div class="field"><label>Appeal Year</label><input id="ae_Appeal_Year" type="number" placeholder="Year"></div>
+<div class="field"><label>Name of Appellant <b>*</b></label><input id="ae_Name_of_Appellant" type="text" placeholder="Name of Appellant"></div>
+<div class="field"><label>Name Urdu</label><input id="ae_Name_Urdu" type="text" placeholder="Name Urdu"></div>
+<div class="field"><label>Respondents</label><button type="button" class="light" id="ae_RespondentsBtn" style="width:100%;text-align:left" onclick="openRespondentPicker('ae_Respondents')">👥 Select Respondents</button><select id="ae_Respondents" multiple style="display:none"></select></div>
+<div class="field"><label>Member</label><select id="ae_Member"><option>Chairman</option><option>Member-I</option><option>Member-II</option><option>Member-III</option><option>Member-IV</option><option>Member-V</option><option>Member-VI</option></select></div>
+<div class="field"><label>File No.</label><input id="ae_File_No" type="text" placeholder="File No."></div>
+<div class="field"><label>Status</label><select id="ae_Status"><option value="Pending">Pending</option><option value="Decided">Decided</option></select></div>
+<div class="field"><label>Bench</label><select id="ae_Bench"><option>Faisalabad</option><option>Lahore</option></select></div>
+<div class="field full"><label>Prayer</label><textarea id="ae_Prayer" placeholder="Prayer"></textarea></div>
+<div class="actions full"><button class="green" type="button" onclick="saveAppealEntry()">➕ Add Appeal</button><button class="gray" type="button" onclick="clearAppealEntry()">↺ Clear</button></div>
+</div>`}
+function openAppealEntryModal(){modal("⚖️ Appeal Entry",appealEntryFormHtml());fillRespondentSelect();clearAppealEntry();}
+function clearAppealEntry(){["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Member","File_No","Status","Bench","Prayer"].forEach(k=>{const e=$("ae_"+k);if(e)e.value=k==="Appeal_LMS"?"Yes":"";});const rs=$("ae_Respondents");if(rs)Array.from(rs.options).forEach(o=>o.selected=false);updateRespondentsBtnLabel("ae_Respondents");const ow=$("ae_Appeal_LMS_OtherWrap");if(ow)ow.style.display="none";const oi=$("ae_Appeal_LMS_Other");if(oi)oi.value="";$("ae_Appeal_Num")?.focus();}
+function isDuplicateAppeal(num,year,excludeId){num=String(num||"").trim();year=String(year||"").trim();return db.appeals.some(x=>x.id!==excludeId && String(x.Appeal_Num||"").trim()===num && String(x.Appeal_Year||"").trim()===year)}
+function saveAppealEntry(){const keys=["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Respondents","Member","File_No","Status","Bench","Prayer"];let r={id:id()};keys.forEach(k=>{const e=$("ae_"+k);r[k]=e?e.value.trim():"";});if(r.Appeal_LMS==="Other"){r.Appeal_LMS=$("ae_Appeal_LMS_Other")?.value.trim()||"";if(!r.Appeal_LMS)return alert("Other کی detail لکھیں۔");}r.Respondents=selectedRespondents("ae_Respondents");if(!r.Appeal_Num)return alert("Appeal No. required");if(!r.Name_of_Appellant)return alert("Name of Appellant required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}db.appeals.push(r);persist();logActivity("Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);clearAppealEntry();alert("Appeal added successfully.");}
+function appealRecordById(eid){return db.appeals.find(x=>String(x.id??x.ID??x.Appeal_ID)===String(eid))||null}
+function appealForm(eid=null){
+ let r=eid?appealRecordById(eid):{};
+ if(eid&&!r){alert("Appeal record نہیں ملا۔ Refresh کر کے دوبارہ کوشش کریں۔");return;}
+ r=r||{}; editId=eid?String(r.id??r.ID??r.Appeal_ID):null;
+ const lmsVal=String(r.Appeal_LMS||"Yes");
+ const standard=["Yes","No","Other"]; const isOther=!standard.includes(lmsVal);
+ const lmsOptions=standard.map(v=>`<option value="${v}" ${(isOther?v==="Other":v===lmsVal)?"selected":""}>${v}</option>`).join("");
+ modal(eid?"Edit Appeal":"New Appeal",`<div class="grid">
+ <div class="field"><label>Appeal LMS</label><select id="Appeal_LMS" onchange="toggleOtherLMS('Appeal_LMS','Appeal_LMS_OtherWrap')">${lmsOptions}</select><div id="Appeal_LMS_OtherWrap" style="display:${isOther||lmsVal==='Other'?'block':'none'};margin-top:6px"><input id="Appeal_LMS_Other" type="text" placeholder="Enter Other" value="${esc(isOther?lmsVal:'')}"></div></div>
+ ${fld("Appeal No.","Appeal_Num","number",r.Appeal_Num)}${fld("Appeal Year","Appeal_Year","number",r.Appeal_Year)}${fld("Name of Appellant","Name_of_Appellant","text",r.Name_of_Appellant)}${fld("Name Urdu","Name_Urdu","text",r.Name_Urdu)}${respondentSelectField(r.Respondents)}${sel("Member","Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member)}${fld("File No.","File_No","text",r.File_No)}${sel("Status","Status",["Pending","Decided"],r.Status)}${sel("Bench","Bench",["Faisalabad","Lahore"],r.Bench)}${area("Prayer","Prayer",r.Prayer,"full")}<div class="actions full"><button class="green" type="button" onclick="saveAppeal()">Save</button><button class="gray" type="button" onclick="closeM()">Cancel</button></div></div>`);
+}
+function toggleOtherLMS(selectId,wrapId){const s=$(selectId),w=$(wrapId);if(!s||!w)return;w.style.display=s.value==='Other'?'block':'none';}
+function normalizeAppealLMS(prefix){const s=$(prefix+'_Appeal_LMS')||$(prefix==='ae'?'ae_Appeal_LMS':prefix);return ''}
+
+function saveAppeal(){const wasEdit=!!editId;const old=wasEdit?appealRecordById(editId):null;let r={...(old||{}),id:old?.id??old?.ID??old?.Appeal_ID??editId??id()};["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Member","File_No","Prayer","Status","Bench"].forEach(k=>{const e=$(k);r[k]=e?e.value:""});if(r.Appeal_LMS==="Other"){const other=$("Appeal_LMS_Other")?.value.trim();if(!other)return alert("Other کی detail لکھیں۔");r.Appeal_LMS=other;}r.Respondents=selectedRespondents("Respondents");if(!r.Appeal_Num)return alert("Appeal No. required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year,editId)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}if(wasEdit)db.appeals=db.appeals.map(x=>String(x.id??x.ID??x.Appeal_ID)===String(editId)?r:x);else db.appeals.push(r);persist();logActivity(wasEdit?"Edit Appeal":"Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);closeM()}
+function ensureRespondentsExist(names){let changed=false;(names||[]).forEach(n=>{n=String(n||"").trim();if(n&&!(db.respondents||[]).some(r=>r.Respondent.toLowerCase()===n.toLowerCase())){db.respondents=db.respondents||[];db.respondents.push({id:id(),Respondent:n});changed=true;}});return changed;}
+function respondentSelectField(v=""){const vals=String(v||"").split(",").map(x=>x.trim()).filter(Boolean);ensureRespondentsExist(vals);const label=vals.length?`👥 Respondents (${vals.length}): ${esc(vals.slice(0,2).join(", "))}${vals.length>2?"…":""}`:"👥 Select Respondents";return `<div class="field"><label>Respondents</label><button type="button" class="light" id="RespondentsBtn" style="width:100%;text-align:left" onclick="openRespondentPicker('Respondents')">${label}</button><select id="Respondents" multiple style="display:none">${(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}" ${vals.includes(r.Respondent)?"selected":""}>${esc(r.Respondent)}</option>`).join("")}</select></div>`}
+function optionsAppeal(){return db.appeals.map(x=>({v:x.id,t:`${x.Appeal_Num} - ${x.Name_of_Appellant}`}))}
+function appealPicker(currentId=""){
+ const a=getAppeal(currentId);
+ const current=a?`<div id="pickedAppeal" class="picked">Selected Appeal: <b>${esc(a.Appeal_Num)}/${esc(a.Appeal_Year)}</b> — ${esc(a.Name_of_Appellant)} <button type="button" class="gray mini" onclick="clearAppealPicker()">Change</button></div>`:`<div id="pickedAppeal" class="picked" style="display:none"></div>`;
+ return `<div class="field full"><label>Search Appeal</label><input id="appealSearch" type="text" placeholder="Search Appeal No, Year or Appellant..." oninput="searchAppealPicker(this.value)" autocomplete="off"><input id="appeal_id" type="hidden" value="${esc(currentId)}"><div id="appealMatches" class="searchmatches"></div>${current}</div>`;
+}
+function searchAppealPicker(value){
+ const box=$("appealMatches"), q=(value||"").toLowerCase().trim(); if(!box)return;
+ if(!q){box.innerHTML="";return}
+ const items=db.appeals.filter(a=>Object.values(a).join(" ").toLowerCase().includes(q)).slice(0,12);
+ box.innerHTML=items.length?items.map(a=>`<div class="match" onclick="chooseAppealForForm('${a.id}')"><b>⚖️ ${esc(a.Appeal_Num)}/${esc(a.Appeal_Year)}</b> — ${esc(a.Name_of_Appellant)}</div>`).join(""):`<div class="match muted">No appeal found</div>`;
+}
+function chooseAppealForForm(appealId){
+ const h=$("appeal_id"); if(!h)return; h.value=appealId; const a=getAppeal(appealId); const p=$("pickedAppeal");
+ if(p&&a){p.style.display="block";p.innerHTML=`Selected Appeal: <b>${esc(a.Appeal_Num)}/${esc(a.Appeal_Year)}</b> — ${esc(a.Name_of_Appellant)} <button type="button" class="gray mini" onclick="clearAppealPicker()">Change</button>`;}
+ const q=$("appealSearch"); if(q)q.value=""; const box=$("appealMatches"); if(box)box.innerHTML="";
+}
+function clearAppealPicker(){const h=$("appeal_id");if(h)h.value="";const p=$("pickedAppeal");if(p){p.style.display="none";p.innerHTML="";}const q=$("appealSearch");if(q){q.value="";q.focus();}const box=$("appealMatches");if(box)box.innerHTML="";}
+function cmForm(eid=null,presetAppeal=null){let r=eid?db.cms.find(x=>x.id===eid):{};editId=eid;let appealId=r.appeal_id||presetAppeal||"";modal(eid?"Edit CM":"New CM",`<div class="grid">${appealPicker(appealId)}${fld("CM No.","CM_No","number",r.CM_No)}${fld("CM Year","CM_Year","number",r.CM_Year)}${fld("CM File","CM_File","text",r.CM_File)}${fld("CM Members","CM_Members","text",r.CM_Members)}${fld("CM Respondents","CM_Respondents","text",r.CM_Respondents)}${fld("CM Status","CM_Status","text",r.CM_Status)}${area("CM Prayer","CM_Prayer",r.CM_Prayer,"full")}<div class="actions full"><button class="green" onclick="saveCM()">Save</button><button class="gray" onclick="closeM()">Cancel</button></div></div>`)}
+function saveCM(){const wasEdit=!!editId;let r={id:editId||id()};["appeal_id","CM_No","CM_Year","CM_File","CM_Members","CM_Respondents","CM_Status","CM_Prayer"].forEach(k=>r[k]=$(k).value);if(!r.appeal_id)return alert("Please search and select an Appeal first");if(!r.CM_No)return alert("CM No. required");if(editId)db.cms=db.cms.map(x=>x.id===editId?r:x);else db.cms.push(r);persist();logActivity(wasEdit?"Edit CM":"Add CM",`CM ${r.CM_No}/${r.CM_Year}`);closeM()}
+function cplaForm(eid=null,presetAppeal=null){let r=eid?db.cplas.find(x=>x.id===eid):{};editId=eid;let appealId=r.appeal_id||presetAppeal||"";modal(eid?"Edit CPLA":"New CPLA",`<div class="grid">${appealPicker(appealId)}${fld("CPLA Title","CPLA_Title","text",r.CPLA_Title)}${fld("CPLA No.","CPLA_No","text",r.CPLA_No)}${fld("CPLA Year","CPLA_Year","text",r.CPLA_Year)}${fld("CPLA Status","CPLA_Status","text",r.CPLA_Status)}${fld("Filed Against Judgement","CPLA_filed_against_the_Judgement","date",r.CPLA_filed_against_the_Judgement)}${sel("Judgement Implemented?","Judgement_Implemented_or_Not",["Yes","No"],r.Judgement_Implemented_or_Not)}${area("CPLA Brief","CPLA_Brief",r.CPLA_Brief,"full")}<div class="actions full"><button class="green" onclick="saveCPLA()">Save</button><button class="gray" onclick="closeM()">Cancel</button></div></div>`)}
+function saveCPLA(){const wasEdit=!!editId;let r={id:editId||id()};["appeal_id","CPLA_Title","CPLA_No","CPLA_Year","CPLA_Status","CPLA_Brief","CPLA_filed_against_the_Judgement","Judgement_Implemented_or_Not"].forEach(k=>r[k]=$(k).value);if(!r.appeal_id)return alert("Please search and select an Appeal first");if(!r.CPLA_No)return alert("CPLA No. required");if(editId)db.cplas=db.cplas.map(x=>x.id===editId?r:x);else db.cplas.push(r);persist();logActivity(wasEdit?"Edit CPLA":"Add CPLA",`CPLA ${r.CPLA_No}/${r.CPLA_Year}`);closeM()}
+function hearingSearch(type, value, selectedId){
+ const q=(value||"").toLowerCase().trim(), box=$("hearingMatches");
+ if(!q){box.innerHTML="";return}
+ let items=[];
+ if(type==="appeal") items=db.appeals.filter(a=>Object.values(a).join(" ").toLowerCase().includes(q)).slice(0,12).map(a=>({id:a.id,text:`⚖️ Appeal ${a.Appeal_Num}/${a.Appeal_Year} — ${a.Name_of_Appellant}`}));
+ if(type==="cm") items=db.cms.filter(c=>{let a=getAppeal(c.appeal_id);return Object.values(c).join(" ").toLowerCase().includes(q)||(a&&Object.values(a).join(" ").toLowerCase().includes(q))}).slice(0,12).map(c=>{let a=getAppeal(c.appeal_id);return {id:c.id,text:`📁 CM ${c.CM_No}/${c.CM_Year} — Appeal ${a?.Appeal_Num||"-"} — ${a?.Name_of_Appellant||""}`}});
+ if(type==="cpla") items=db.cplas.filter(c=>{let a=getAppeal(c.appeal_id);return Object.values(c).join(" ").toLowerCase().includes(q)||(a&&Object.values(a).join(" ").toLowerCase().includes(q))}).slice(0,12).map(c=>{let a=getAppeal(c.appeal_id);return {id:c.id,text:`📜 CPLA ${c.CPLA_No}/${c.CPLA_Year} — Appeal ${a?.Appeal_Num||"-"} — ${a?.Name_of_Appellant||""}`}});
+ box.innerHTML=items.map(x=>`<div onclick="selectHearingParent('${type}','${x.id}')" style="padding:10px;border-bottom:1px solid #e5e7eb;cursor:pointer;background:#fff;white-space:normal">${esc(x.text)}</div>`).join("")||`<div style="padding:10px;color:#6b6578">No matching record</div>`;
+}
+function selectHearingParent(type, value){
+ $("parent_id").value=value;
+ let label="";
+ if(type==="appeal"){let a=getAppeal(value);label=`⚖️ Appeal ${a?.Appeal_Num||""}/${a?.Appeal_Year||""} — ${a?.Name_of_Appellant||""}`;}
+ if(type==="cm"){let c=db.cms.find(x=>x.id===value),a=getAppeal(c?.appeal_id);label=`📁 CM ${c?.CM_No||""}/${c?.CM_Year||""} — Appeal ${a?.Appeal_Num||""} — ${a?.Name_of_Appellant||""}`;}
+ if(type==="cpla"){let c=db.cplas.find(x=>x.id===value),a=getAppeal(c?.appeal_id);label=`📜 CPLA ${c?.CPLA_No||""}/${c?.CPLA_Year||""} — Appeal ${a?.Appeal_Num||""} — ${a?.Name_of_Appellant||""}`;}
+ $("hearingSearchInput").value=label;$("hearingMatches").innerHTML="";
+}
+function hearingForm(type,eid=null){
+ let key=type==="appeal"?"appealHearings":type==="cm"?"cmHearings":"cplaHearings",r=eid?db[key].find(x=>x.id===eid):{};
+ editId=eid;
+ let selected=r.parent_id||"";
+ let selectedText="";
+ if(selected){
+  if(type==="appeal"){let a=getAppeal(selected);selectedText=`Appeal ${a?.Appeal_Num||""}/${a?.Appeal_Year||""} — ${a?.Name_of_Appellant||""}`;}
+  if(type==="cm"){let c=db.cms.find(x=>x.id===selected),a=getAppeal(c?.appeal_id);selectedText=`CM ${c?.CM_No||""}/${c?.CM_Year||""} — Appeal ${a?.Appeal_Num||""} — ${a?.Name_of_Appellant||""}`;}
+  if(type==="cpla"){let c=db.cplas.find(x=>x.id===selected),a=getAppeal(c?.appeal_id);selectedText=`CPLA ${c?.CPLA_No||""}/${c?.CPLA_Year||""} — Appeal ${a?.Appeal_Num||""} — ${a?.Name_of_Appellant||""}`;}
+ }
+ modal(eid?"Edit Hearing":"New Hearing",`<div class="grid">
+ <div class="field full"><label>🔎 Search ${type==="appeal"?"Appeal / Appellant":type==="cm"?"CM / Appeal / Appellant":"CPLA / Appeal / Appellant"}</label>
+ <input id="hearingSearchInput" placeholder="Type Appeal No, CM No, CPLA No or Appellant name..." value="${esc(selectedText)}" oninput="hearingSearch('${type}',this.value)">
+ <input type="hidden" id="parent_id" value="${esc(selected)}">
+ <div id="hearingMatches" style="border:1px solid #e5e7eb;border-radius:8px;margin-top:5px;overflow:hidden;max-height:180px;overflow-y:auto"></div></div>
+ ${fld("Date of Hearing","Date_of_Hearing","date",r.Date_of_Hearing)}
+ ${area(type==="appeal"?"Court Proceedings":"Decision","hearing_text",r.hearing_text,"full")}
+ ${type==="appeal"?area("Crux of Judgement","crux_of_Judgement",r.crux_of_Judgement,"full"):""}
+ <div class="actions full"><button class="green" onclick="saveHearing('${type}')">💾 Save</button><button class="gray" onclick="closeM()">✖ Cancel</button></div></div>`)
+}
+function saveHearing(type){if(!$("parent_id").value)return alert("پہلے search کر کے Appeal / CM / CPLA select کریں");const wasEdit=!!editId;let r={id:editId||id(),parent_id:$("parent_id").value,Date_of_Hearing:$("Date_of_Hearing").value,hearing_text:$("hearing_text").value};if(type==="appeal")r.crux_of_Judgement=$("crux_of_Judgement").value;let key=type==="appeal"?"appealHearings":type==="cm"?"cmHearings":"cplaHearings";if(editId)db[key]=db[key].map(x=>x.id===editId?r:x);else db[key].push(r);persist();logActivity(wasEdit?"Edit Hearing":"Add Hearing",`${type.toUpperCase()} hearing on ${r.Date_of_Hearing}`);closeM()}
+function getAppeal(aid){return db.appeals.find(x=>x.id===aid)}
+function del(key,eid){
+ let msg="Delete this record?";
+ if(key==="appeals") msg="Delete this Appeal?\n\nThis will also delete its Appeal Hearings, all CMs with their CM Hearings, and all CPLA records with their CPLA Hearings.";
+ if(key==="cms") msg="Delete this CM?\n\nThis will also delete all hearings of this CM.";
+ if(key==="cplas") msg="Delete this CPLA?\n\nThis will also delete all hearings of this CPLA.";
+ if(!confirm(msg)) return;
+ let logDetail=eid;
+ if(key==="appeals"){const a=getAppeal(eid);if(a)logDetail=`${a.Appeal_Num}/${a.Appeal_Year} - ${a.Name_of_Appellant}`;}
+ else if(key==="cms"){const c=db.cms.find(x=>x.id===eid);if(c)logDetail=`CM ${c.CM_No}/${c.CM_Year}`;}
+ else if(key==="cplas"){const c=db.cplas.find(x=>x.id===eid);if(c)logDetail=`CPLA ${c.CPLA_No}/${c.CPLA_Year}`;}
+ if(key==="appeals"){
+   db.appealHearings=db.appealHearings.filter(x=>x.parent_id!==eid);
+   const cmIds=db.cms.filter(x=>x.appeal_id===eid).map(x=>x.id);
+   const cplaIds=db.cplas.filter(x=>x.appeal_id===eid).map(x=>x.id);
+   db.cmHearings=db.cmHearings.filter(x=>!cmIds.includes(x.parent_id));
+   db.cplaHearings=db.cplaHearings.filter(x=>!cplaIds.includes(x.parent_id));
+   db.cms=db.cms.filter(x=>x.appeal_id!==eid);
+   db.cplas=db.cplas.filter(x=>x.appeal_id!==eid);
+   db.appeals=db.appeals.filter(x=>x.id!==eid);
+ }else if(key==="cms"){
+   db.cmHearings=db.cmHearings.filter(x=>x.parent_id!==eid);
+   db.cms=db.cms.filter(x=>x.id!==eid);
+ }else if(key==="cplas"){
+   db.cplaHearings=db.cplaHearings.filter(x=>x.parent_id!==eid);
+   db.cplas=db.cplas.filter(x=>x.id!==eid);
+ }else{
+   db[key]=db[key].filter(x=>x.id!==eid);
+ }
+ persist();
+ logActivity("Delete "+key,logDetail);
+}
+function acts(key,eid,fn){return `<button class="light actionbtn" onclick="${fn}('${eid}')">✏️ Edit</button><button class="red actionbtn" onclick="del('${key}','${eid}')">🗑️ Delete</button>`}
+function cmRow(r){return `<tr><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${esc(r.CM_Status)}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <button class="light actionbtn" onclick="cmDetails('${r.id}')">📅 Hearings</button></td></tr>`}
+function cplaRow(r){return `<tr><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${esc(r.CPLA_Status)}</td><td>${esc(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cplas",r.id,"cplaForm")} <button class="light actionbtn" onclick="cplaDetails('${r.id}')">📅 Hearings</button></td></tr>`}
+function renderUpcomingHearings(){
+ const today=new Date();today.setHours(0,0,0,0);
+ const endDate=new Date(today);endDate.setDate(endDate.getDate()+6);
+ const tomorrow=new Date(today);tomorrow.setDate(tomorrow.getDate()+1);
+ const dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+ const rows=[];
+ db.appealHearings.forEach(h=>{
+   if(!h.Date_of_Hearing)return;
+   const d=new Date(h.Date_of_Hearing);if(isNaN(d))return;
+   d.setHours(0,0,0,0);
+   if(d>=today&&d<=endDate){const a=getAppeal(h.parent_id);if(a)rows.push({date:d,a});}
+ });
+ rows.sort((x,y)=>x.date-y.date);
+ const el=$("upcomingRows");if(!el)return;
+ el.innerHTML=rows.length?rows.map(x=>{
+   const isTomorrow=x.date.getTime()===tomorrow.getTime();
+   const dateStyle=isTomorrow?' class="tomorrow-date"':'';
+   return `<tr><td${dateStyle}>${x.date.toLocaleDateString("en-GB")}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td></tr>`;
+ }).join(""):empty(7);
+}
+function render(){
+$("appealRows").innerHTML=db.appeals.map(appealRow).join("")||empty(10);
+$("cmRows").innerHTML=db.cms.map(cmRow).join("")||empty(8);
+$("cplaRows").innerHTML=db.cplas.map(cplaRow).join("")||empty(9);
+renderUpcomingHearings();
+}
+function empty(n){return `<tr><td colspan="${n}" style="text-align:center;padding:30px;color:#718096">No records found</td></tr>`}
+function searchAppeals(){
+ const q=$("search").value.toLowerCase().trim();
+ const type=$("searchType")?.value||"all";
+ if(!q){render();return}
+ const match=(r)=>Object.values(r||{}).join(" ").toLowerCase().includes(q);
+ let appeals=[], cms=[], cplas=[];
+ if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
+ if(type==="all"||type==="cm"){cms=db.cms.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
+ if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
+ $("appealRows").innerHTML=appeals.map(appealRow).join("")||empty(10);
+ $("cmRows").innerHTML=cms.map(cmRow).join("")||empty(8);
+ $("cplaRows").innerHTML=cplas.map(cplaRow).join("")||empty(9);
+ // Keep the main Appeals register visible for All/Appeal; show the matching register for CM/CPLA.
+ if(type==="cm") tab("cm",document.querySelector('.tab:nth-child(2)'));
+ else if(type==="cpla") tab("cpla",document.querySelector('.tab:nth-child(3)'));
+ else tab("appeals",document.querySelector('.tab:nth-child(1)'));
+}
+function dateOnly(value){
+  if(value===undefined||value===null||value==="")return "-";
+  const s=String(value).trim();
+  // Google Sheets may return an ISO timestamp; keep only the calendar date.
+  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return `${m[3]}/${m[2]}/${m[1]}`;
+  const d=new Date(s);
+  if(isNaN(d))return esc(s.split(/[T ]/)[0]);
+  return d.toLocaleDateString("en-GB");
+}
+function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
+function appealRow(r){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.Member)}</td><td><span class="badge">${esc(r.Status)}</span></td><td>${esc(r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn" onclick="report('${rid}')" title="Report" aria-label="Report">📄 Report</button><button class="light actionbtn" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">📅 Hearings</button></div></td></tr>`}
+
+function normalize(v){return v===undefined||v===null?"":v}
+function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
+function importExcel(ev){
+ const file=ev.target.files[0]; if(!file)return;
+ if(typeof XLSX==="undefined"){alert("Excel library load نہیں ہوئی۔ Internet connection check کریں۔");return}
+ const reader=new FileReader();
+ reader.onload=e=>{
+   try{
+    const wb=XLSX.read(e.target.result,{type:"array"});
+    const read=(name)=>wb.Sheets[name]?sheetToObjects(wb.Sheets[name]):[];
+    const a=read("Appeal LMS"), ah=read("Appeal Hearing"), c=read("CM"), ch=read("CM Hearing"), p=read("CPLA"), ph=read("CPLA Hearing");
+    db.appeals=a.map(r=>({...r,id:String(r.ID||id())}));
+    db.appealHearings=ah.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.Appeal_ID||"")}));
+    db.cms=c.map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
+    db.cmHearings=ch.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.CM_ID||"")}));
+    db.cplas=p.map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
+    db.cplaHearings=ph.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.CPLA_ID||"")}));
+    persist(); alert("Excel successfully loaded.\n\nAppeals: "+db.appeals.length+"\nCMs: "+db.cms.length+"\nCPLAs: "+db.cplas.length);
+   }catch(err){console.error(err);alert("Excel file read نہیں ہو سکی۔ درست PST database Excel file استعمال کریں۔")}
+ };
+ reader.readAsArrayBuffer(file); ev.target.value="";
+}
+function exportExcel(){
+ if(typeof XLSX==="undefined"){alert("Excel library load نہیں ہوئی۔ Internet connection check کریں۔");return}
+ const wb=XLSX.utils.book_new();
+ const make=(headers,rows)=>XLSX.utils.json_to_sheet(rows.map(r=>{let o={};headers.forEach(h=>o[h]=normalize(r[h]));return o}),{header:headers});
+ const defs={
+ "Appeal LMS":["ID","Appeal LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Respondents","Member","File_No","Prayer","Status","Bench"],
+ "Appeal Hearing":["ID","Appeal_ID","Date_of_Hearing","Court_Proceedings","Crux_of_Judgement"],
+ "CM":["ID","Appeal_ID","CM_No","CM_Year","CM_File","CM_Members","CM_Respondents","CM_Status","CM_Prayer"],
+ "CM Hearing":["ID","CM_ID","Date_of_Hearing","Decision"],
+ "CPLA":["ID","Appeal_ID","CPLA_Title","CPLA_No","CPLA_Year","CPLA_Status","CPLA_Brief","CPLA_filed_against_the_Judgement","Judgement_Implemented_or_Not"],
+ "CPLA Hearing":["ID","CPLA_ID","Date_of_Hearing","Decision"]
+ };
+ const maps={"Appeal LMS":"appeals","Appeal Hearing":"appealHearings","CM":"cms","CM Hearing":"cmHearings","CPLA":"cplas","CPLA Hearing":"cplaHearings"};
+ Object.entries(defs).forEach(([name,headers])=>{
+   let rows=db[maps[name]].map(r=>{
+     let x={...r};
+     if(name==="Appeal Hearing")x.Appeal_ID=x.parent_id;
+     if(name==="CM Hearing")x.CM_ID=x.parent_id;
+     if(name==="CPLA Hearing")x.CPLA_ID=x.parent_id;
+     return x;
+   });
+   XLSX.utils.book_append_sheet(wb,make(headers,rows),name);
+ });
+ XLSX.writeFile(wb,"PST_Appeal_Management_Database.xlsx");
+}
+function cmFormForAppeal(aid){cmForm(null,aid)}
+function cplaFormForAppeal(aid){cplaForm(null,aid)}
+function addHearingFor(type,parentId){
+  hearingForm(type,null);
+  setTimeout(()=>selectHearingParent(type,parentId),0);
+}
+function appealDetails(aid){let a=getAppeal(aid),hs=db.appealHearings.filter(x=>x.parent_id===aid);modal(`Appeal ${esc(a.Appeal_Num)} — Details / Appeal Hearings`,`<div style="padding:10px"><b>Appellant:</b> ${esc(a.Name_of_Appellant)} &nbsp; <b>Status:</b> ${esc(a.Status)} &nbsp; <b>Member:</b> ${esc(a.Member)}</div><div class="actions"><button class="green" onclick="addHearingFor('appeal','${aid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Proceedings</th><th>Judgement</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td><td><button class="light mini" onclick="hearingForm('appeal','${h.id}')">✏️</button><button class="red mini" onclick="del('appealHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="4">No hearings</td></tr>'}</tbody></table></div>`)}
+function cmDetails(cid){let c=db.cms.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=db.cmHearings.filter(x=>x.parent_id===cid);modal(`CM ${esc(c?.CM_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CM_Year)} &nbsp; <b>Status:</b> ${esc(c?.CM_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cm','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cm','${h.id}')">✏️</button><button class="red mini" onclick="del('cmHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="3">No hearings</td></tr>'}</tbody></table></div>`)}
+function cplaDetails(cid){let c=db.cplas.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=db.cplaHearings.filter(x=>x.parent_id===cid);modal(`CPLA ${esc(c?.CPLA_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CPLA_Year)} &nbsp; <b>Status:</b> ${esc(c?.CPLA_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cpla','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cpla','${h.id}')">✏️</button><button class="red mini" onclick="del('cplaHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="3">No hearings</td></tr>'}</tbody></table></div>`)}
+function report(aid){let a=getAppeal(aid);let cms=db.cms.filter(x=>x.appeal_id===aid),cplas=db.cplas.filter(x=>x.appeal_id===aid),hs=db.appealHearings.filter(x=>x.parent_id===aid);let w=open("","_blank");w.document.write(`<html><head><title>Appeal Report</title><style>body{margin:0}.report{width:210mm;min-height:297mm;padding:18mm;font:12pt Arial}.report h1{text-align:center;font-size:16pt;text-decoration:underline}.report h2{text-align:center;text-decoration:underline}.report p{line-height:1.5}.t{width:100%;border-collapse:collapse}.t th,.t td{border:1px solid #777;padding:6px}<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}</style></style>
+<style id="final-color-theme">
+:root{--nav:#1f2937;--accent:#0f766e;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#0f766e}
+body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
+header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px rgba(31,41,55,.18)}
+.head small{color:#d1fae5}
+.toolbar,.card,.stat{border-color:#d8e2dc;box-shadow:0 7px 22px rgba(31,41,55,.07)}
+.toolbar{background:linear-gradient(135deg,#fff,#f0f7f3)}
+.primary{background:linear-gradient(135deg,#0f766e,#159a86);color:#fff}
+.green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
+.light{background:#e8f5ef;color:#116149;border:1px solid #c9e4d8}
+.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#0f766e;color:#fff;border-color:#0f766e}
+.title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
+th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
+.stat b{color:#0f766e}
+.stat:nth-child(1){border-top-color:#0f766e}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
+.login-wrap{background:linear-gradient(135deg,#20262e,#0f766e)}
+.login-card h1{color:#1f2933}.login-card p{color:#667085}
+.modal-bg{background:rgba(15,23,42,.68)}.mh{background:linear-gradient(135deg,#20262e,#374151)}
+.match:hover{background:#f0fdf4}.picked{background:#ecfdf5;border-color:#bbf7d0}
+.selected-resp-list{border-color:#d8e2dc}.selected-resp-row{border-color:#e5ebe7}
+.resp-x{background:#e11d48!important}.resp-x:hover{background:#be123c!important}
+.tomorrow-date{color:#be123c!important;background:#ffe4e6!important}
+.icon-action.edit-action{color:#0f766e!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#0f766e}
+.status-pending{color:#be123c}.status-decided{color:#15803d}
+</style>
+
+<style id="appeal-register-compact-actions">
+/* Compact action buttons in Appeal Register rows */
+#appealRows .actionbuttons{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+#appealRows .actionbuttons .actionbtn,
+#appealRows .actionbuttons button[title="Report"]{
+  min-width:0 !important;
+  width:auto !important;
+  height:32px !important;
+  min-height:32px !important;
+  padding:5px 9px !important;
+  margin:0 !important;
+  border-radius:7px !important;
+  font-size:12px !important;
+  line-height:20px !important;
+}
+#appealRows .actionbuttons .actionbtn::before,
+#appealRows .actionbuttons button[title="Report"]::before{
+  font-size:15px !important;
+  line-height:1 !important;
+  margin-right:3px !important;
+}
+</style>
+</head><body><div class="report"><h1>APPEAL CASE REPORT</h1><h2>Appeal No. ${esc(a.Appeal_Num)} / ${esc(a.Appeal_Year)}</h2><p><b>Name of Appellant:</b> ${esc(a.Name_of_Appellant)}</p><p><b>Name Urdu:</b> ${esc(a.Name_Urdu)}</p><p><b>Respondents:</b> ${esc(a.Respondents)}</p><p><b>Member:</b> ${esc(a.Member)} &nbsp; <b>Bench:</b> ${esc(a.Bench)}</p><p><b>File No:</b> ${esc(a.File_No)} &nbsp; <b>Status:</b> ${esc(a.Status)}</p><p><b>Prayer:</b> ${esc(a.Prayer)}</p><h3>Appeal Hearings</h3><table class="t"><tr><th>Date</th><th>Court Proceedings</th><th>Crux of Judgement</th></tr>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td></tr>`).join("")}</table><h3>CMs</h3><table class="t"><tr><th>CM No.</th><th>Year</th><th>Status</th><th>Members</th></tr>${cms.map(c=>`<tr><td>${esc(c.CM_No)}</td><td>${esc(c.CM_Year)}</td><td>${esc(c.CM_Status)}</td><td>${esc(c.CM_Members)}</td></tr>`).join("")}</table><h3>CPLAs</h3><table class="t"><tr><th>CPLA No.</th><th>Year</th><th>Status</th><th>Implemented</th></tr>${cplas.map(c=>`<tr><td>${esc(c.CPLA_No)}</td><td>${esc(c.CPLA_Year)}</td><td>${esc(c.CPLA_Status)}</td><td>${esc(c.Judgement_Implemented_or_Not)}</td></tr>`).join("")}</table></div></body></html>`);w.document.close();setTimeout(()=>w.print(),400)}
+function backup(){let b=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="PST_Appeal_Backup.json";a.click()}
+// App loads data only after successful login (see doLogin()).
+</script>
+</body>
+</html>
