@@ -959,7 +959,7 @@ function filterReportData(){
 }
 function reportHeaders(type){
   if(type==="appeal")return["Sr.#","Appeal No.","Appeal Year","Appellant Name","File No.","Respondents","Member","Prayer","Previous Date of Hearing","Next Date of Hearing"];
-  if(type==="cm")return["Sr.#","CM No.","Year","Appeal No.","File","Members","Status","Next / Decided Hearing Date"];
+  if(type==="cm")return["Sr.#","CM No.","CM Year","Appeal No.","Appeal Year","File","Name of Appellant","Previous Date of Hearing","Next Date of Hearing"];
   return["Sr.#","CPLA No.","Year","Appeal No.","Title","Status","Implemented","Next / Decided Hearing Date"];
 }
 function reportRowHtml(type,r,idx){
@@ -969,9 +969,13 @@ function reportRowHtml(type,r,idx){
     const next=dateOnly(reportDecisionDate(type,eid));
     return`<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.File_No)}</td><td>${esc(r.Respondents)}</td><td>${esc(r.Member)}</td><td>${esc(r.Prayer)}</td><td>${prev}</td><td>${next}</td></tr>`;
   }
-  const dd=dateOnly(reportDecisionDate(type,eid));
   const a=getAppeal(r.appeal_id);
-  if(type==="cm")return`<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${esc(a?.Appeal_Num||"-")}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${esc(r.CM_Status)}</td><td>${dd}</td></tr>`;
+  if(type==="cm"){
+    const prev=dateOnly(reportPreviousHearingDate(type,eid));
+    const next=dateOnly(reportDecisionDate(type,eid));
+    return`<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${esc(a?.Appeal_Num||"-")}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(r.CM_File)}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${prev}</td><td>${next}</td></tr>`;
+  }
+  const dd=dateOnly(reportDecisionDate(type,eid));
   return`<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${esc(a?.Appeal_Num||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${esc(r.CPLA_Status)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${dd}</td></tr>`;
 }
 function reportSubtitle(c){
