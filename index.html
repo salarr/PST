@@ -260,9 +260,10 @@ html,body{overflow-x:hidden}
 }
 .badge-pending{background:#fff1e6!important;color:#c2410c!important;border:1px solid #fed7aa}
 .badge-decided{background:#e8f8ee!important;color:#15803d!important;border:1px solid #bbf7d0}
-.hearings-link{color:#0f766e;text-decoration:underline;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;align-self:center}
-.hearings-link:hover{color:#0b544e}
+.hearings-link{color:#0f766e;text-decoration:none;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;align-self:center}
+.hearings-link:hover{color:#0b544e;text-decoration:none}
 .actionbuttons{align-items:center!important}
+.tab:not(.active):hover{background:#0f766e!important;color:#fff!important;border-color:#0f766e!important}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
 </style>
 </head>
@@ -282,7 +283,7 @@ html,body{overflow-x:hidden}
 <div class="toolbar"><div class="search"><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><button class="primary" type="button" onclick="openAppealEntryModal()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button></div>
 
 <div class="tabs">
-<button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)"><span class="icon">🖨️</span>Print Report</button>
+<button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
 </div>
 <div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
 <div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
@@ -362,6 +363,7 @@ function showAppAfterLogin(){
   $("whoami").textContent=`👋 ${currentUser.username} (${roleLabel(currentUser.role)})`;
   $("usersBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
   $("activityBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+  $("printReportTab").style.display=currentUser.role==="admin"?"inline-block":"none";
   $("usersBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
   $("activityBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
 }
