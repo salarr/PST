@@ -260,6 +260,9 @@ html,body{overflow-x:hidden}
 }
 .badge-pending{background:#fff1e6!important;color:#c2410c!important;border:1px solid #fed7aa}
 .badge-decided{background:#e8f8ee!important;color:#15803d!important;border:1px solid #bbf7d0}
+.hearings-link{color:#0f766e;text-decoration:underline;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;align-self:center}
+.hearings-link:hover{color:#0b544e}
+.actionbuttons{align-items:center!important}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
 </style>
 </head>
@@ -757,8 +760,8 @@ function del(key,eid){
  logActivity("Delete "+key,logDetail);
 }
 function acts(key,eid,fn){return `<button class="light actionbtn icon-only" title="Edit Record" aria-label="Edit Record" onclick="${fn}('${eid}')">${ICON_EDIT}</button><button class="red actionbtn icon-only" title="Delete Record" aria-label="Delete Record" onclick="del('${key}','${eid}')">${ICON_TRASH}</button>`}
-function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${statusBadge(r.CM_Status)}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <button class="light actionbtn" onclick="cmDetails('${r.id}')">📅 Hearings</button></td></tr>`}
-function cplaRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${esc(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cplas",r.id,"cplaForm")} <button class="light actionbtn" onclick="cplaDetails('${r.id}')">📅 Hearings</button></td></tr>`}
+function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${statusBadge(r.CM_Status)}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings</span></td></tr>`}
+function cplaRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${esc(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cplas",r.id,"cplaForm")} <span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings</span></td></tr>`}
 function renderUpcomingHearings(){
  const today=new Date();today.setHours(0,0,0,0);
  const endDate=new Date(today);endDate.setDate(endDate.getDate()+6);
@@ -833,7 +836,7 @@ function dateOnly(value){
   return d.toLocaleDateString("en-GB");
 }
 function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
-function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.Member)}</td><td>${statusBadge(r.Status)}</td><td>${esc(r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><button class="light actionbtn" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">📅 Hearings</button></div></td></tr>`}
+function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.Member)}</td><td>${statusBadge(r.Status)}</td><td>${esc(r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings</span></div></td></tr>`}
 
 function normalize(v){return v===undefined||v===null?"":v}
 function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
