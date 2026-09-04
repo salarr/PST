@@ -189,7 +189,8 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
 #appeals .tablewrap{overflow-x:auto}
 #appeals table{min-width:1180px;table-layout:auto}
 #appeals th,#appeals td{padding:7px 8px;white-space:nowrap;font-size:12px;vertical-align:middle}
-#appeals td:nth-child(3){white-space:normal;min-width:180px}
+#appeals td:nth-child(1){min-width:36px;text-align:center}
+#appeals td:nth-child(4){white-space:normal;min-width:180px}
 #appeals td:last-child{white-space:nowrap;min-width:190px}
 #appealRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
 #appealRows .actionbuttons button{flex:0 0 auto!important}
@@ -247,11 +248,18 @@ html,body{overflow-x:hidden}
   .login-card h1{font-size:17px}
 }
 </style>
+<style id="icon-and-badge-fixes">
+.icon-only{display:inline-flex!important;align-items:center;justify-content:center;gap:0!important;width:32px!important;padding:0!important}
+.icon-only svg{display:block;flex:0 0 auto}
+.badge-pending{background:#fff1e6!important;color:#c2410c!important;border:1px solid #fed7aa}
+.badge-decided{background:#e8f8ee!important;color:#15803d!important;border:1px solid #bbf7d0}
+#appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
+</style>
 </head>
 <body>
 <div id="loginScreen" class="login-wrap">
   <div class="login-card">
-    <h1>🔐 PST Appeal Management System</h1>
+    <h1 style="line-height:1.3">🔐 Punjab Service Tribunal<br><span style="font-size:0.65em;font-weight:600">Appeals Management System</span></h1>
     <div class="field" style="margin-top:18px"><label>Username</label><input id="li_username" type="text" placeholder="Username" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Password</label><input id="li_password" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="primary" type="button" style="width:100%" onclick="doLogin()">Login</button>
@@ -266,9 +274,9 @@ html,body{overflow-x:hidden}
 <div class="tabs">
 <button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)"><span class="icon">🖨️</span>Print Report</button>
 </div>
-<div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
-<div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
-<div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
+<div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
+<div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
+<div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="title"><h2>📅 Upcoming Hearings — Next 7 Days</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
 
 <div id="customReport" class="panel card">
@@ -312,8 +320,55 @@ let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:
 let authToken=null,currentUser=null;
 const $=x=>document.getElementById(x), id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+// ===== Vector (SVG) icons for row actions =====
+const ICON_EDIT=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`;
+const ICON_TRASH=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`;
+const ICON_PRINT=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`;
+function statusBadge(status){const s=String(status||"").trim();const key=s.toLowerCase();const cls=key==="decided"?"badge badge-decided":key==="pending"?"badge badge-pending":"badge";return `<span class="${cls}">${esc(s||"-")}</span>`}
 async function api(action,payload={}){if(!WEB_APP_URL.startsWith("http"))throw new Error("Apps Script Web App URL ابھی set نہیں کی گئی");const r=await fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,payload,token:authToken})});return await r.json()}
 async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
+
+// ===== SESSION PERSISTENCE (survive page refresh) + INACTIVITY AUTO-LOGOUT =====
+const SESSION_KEY="pst_session_v1";
+const INACTIVITY_LIMIT_MS=5*60*1000; // 5 minutes
+let inactivityTimer=null;
+function saveSession(){try{sessionStorage.setItem(SESSION_KEY,JSON.stringify({authToken,currentUser,lastActivity:Date.now()}))}catch(e){}}
+function touchSession(){if(!authToken)return;try{sessionStorage.setItem(SESSION_KEY,JSON.stringify({authToken,currentUser,lastActivity:Date.now()}))}catch(e){}}
+function clearSession(){try{sessionStorage.removeItem(SESSION_KEY)}catch(e){}}
+function resetInactivityTimer(){
+  if(!authToken)return;
+  touchSession();
+  if(inactivityTimer)clearTimeout(inactivityTimer);
+  inactivityTimer=setTimeout(()=>{alert("5 منٹ تک کوئی activity نہیں ہوئی، اس لیے آپ خودکار طور پر logout ہو گئے ہیں۔");logout()},INACTIVITY_LIMIT_MS);
+}
+function startInactivityWatcher(){
+  ["mousemove","keydown","click","scroll","touchstart"].forEach(evt=>document.addEventListener(evt,resetInactivityTimer,{passive:true}));
+  resetInactivityTimer();
+}
+function stopInactivityWatcher(){if(inactivityTimer)clearTimeout(inactivityTimer);inactivityTimer=null}
+function showAppAfterLogin(){
+  $("loginScreen").style.display="none";
+  $("appRoot").style.display="block";
+  $("whoami").textContent=`👋 ${currentUser.username} (${roleLabel(currentUser.role)})`;
+  $("usersBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+  $("activityBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
+  $("usersBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
+  $("activityBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
+}
+function tryRestoreSession(){
+  try{
+    const raw=sessionStorage.getItem(SESSION_KEY);
+    if(!raw)return false;
+    const s=JSON.parse(raw);
+    if(!s||!s.authToken||!s.currentUser)return false;
+    if(Date.now()-(s.lastActivity||0)>INACTIVITY_LIMIT_MS){clearSession();return false}
+    authToken=s.authToken;currentUser=s.currentUser;
+    showAppAfterLogin();
+    startInactivityWatcher();
+    syncFromServer();
+    return true;
+  }catch(e){return false}
+}
 
 // ===== LOGIN / USERS =====
 async function doLogin(){
@@ -325,17 +380,13 @@ async function doLogin(){
     const res=await api("login",{username:u,password:p});
     if(!res.ok){errEl.textContent=res.error||"Login ناکام ہوئی۔";return}
     authToken=res.token;currentUser={username:res.username,role:res.role};
-    $("loginScreen").style.display="none";
-    $("appRoot").style.display="block";
-    $("whoami").textContent=`👋 ${currentUser.username} (${roleLabel(currentUser.role)})`;
-    $("usersBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
-    $("activityBtn").style.display=currentUser.role==="admin"?"inline-block":"none";
-    $("usersBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
-    $("activityBtnMobile").style.display=currentUser.role==="admin"?"block":"none";
+    saveSession();
+    showAppAfterLogin();
+    startInactivityWatcher();
     syncFromServer();
   }catch(e){errEl.textContent="Server error: "+e.message}
 }
-function logout(){authToken=null;currentUser=null;$("appRoot").style.display="none";$("loginScreen").style.display="flex";$("li_password").value="";$("loginError").textContent="";}
+function logout(){stopInactivityWatcher();authToken=null;currentUser=null;clearSession();$("appRoot").style.display="none";$("loginScreen").style.display="flex";$("li_password").value="";$("loginError").textContent="";}
 function openChangePasswordModal(){
   modal("🔑 Change Password",`<div class="grid">
     <div class="field full"><label>موجودہ Password</label><input id="cp_old" type="password" placeholder="Current Password"></div>
@@ -698,9 +749,9 @@ function del(key,eid){
  persist();
  logActivity("Delete "+key,logDetail);
 }
-function acts(key,eid,fn){return `<button class="light actionbtn" onclick="${fn}('${eid}')">✏️ Edit</button><button class="red actionbtn" onclick="del('${key}','${eid}')">🗑️ Delete</button>`}
-function cmRow(r){return `<tr><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${esc(r.CM_Status)}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <button class="light actionbtn" onclick="cmDetails('${r.id}')">📅 Hearings</button></td></tr>`}
-function cplaRow(r){return `<tr><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${esc(r.CPLA_Status)}</td><td>${esc(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cplas",r.id,"cplaForm")} <button class="light actionbtn" onclick="cplaDetails('${r.id}')">📅 Hearings</button></td></tr>`}
+function acts(key,eid,fn){return `<button class="light actionbtn icon-only" title="Edit Record" aria-label="Edit Record" onclick="${fn}('${eid}')">${ICON_EDIT}</button><button class="red actionbtn icon-only" title="Delete Record" aria-label="Delete Record" onclick="del('${key}','${eid}')">${ICON_TRASH}</button>`}
+function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${esc(r.CM_Members)}</td><td>${statusBadge(r.CM_Status)}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <button class="light actionbtn" onclick="cmDetails('${r.id}')">📅 Hearings</button></td></tr>`}
+function cplaRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${esc(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cplas",r.id,"cplaForm")} <button class="light actionbtn" onclick="cplaDetails('${r.id}')">📅 Hearings</button></td></tr>`}
 function renderUpcomingHearings(){
  const today=new Date();today.setHours(0,0,0,0);
  const endDate=new Date(today);endDate.setDate(endDate.getDate()+6);
@@ -729,7 +780,7 @@ function renderAppealsList(list){
  if(appealsPage<1)appealsPage=1;
  const start=(appealsPage-1)*APPEALS_PER_PAGE;
  const pageItems=list.slice(start,start+APPEALS_PER_PAGE);
- $("appealRows").innerHTML=pageItems.map(appealRow).join("")||empty(10);
+ $("appealRows").innerHTML=pageItems.map((r,i)=>appealRow(r,start+i+1)).join("")||empty(11);
  renderAppealsPagination(list.length,totalPages);
 }
 function renderAppealsPagination(total,totalPages){
@@ -740,8 +791,8 @@ function renderAppealsPagination(total,totalPages){
 function appealsGoPage(p){appealsPage=p;renderAppealsList(appealsCurrentList);}
 function render(){
 renderAppealsList(db.appeals);
-$("cmRows").innerHTML=db.cms.map(cmRow).join("")||empty(8);
-$("cplaRows").innerHTML=db.cplas.map(cplaRow).join("")||empty(9);
+$("cmRows").innerHTML=db.cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
+$("cplaRows").innerHTML=db.cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
 renderUpcomingHearings();
 if($("rep_type"))populateReportYears();
 }
@@ -757,8 +808,8 @@ function searchAppeals(){
  if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
  appealsPage=1;
  renderAppealsList(appeals);
- $("cmRows").innerHTML=cms.map(cmRow).join("")||empty(8);
- $("cplaRows").innerHTML=cplas.map(cplaRow).join("")||empty(9);
+ $("cmRows").innerHTML=cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
+ $("cplaRows").innerHTML=cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
  // Keep the main Appeals register visible for All/Appeal; show the matching register for CM/CPLA.
  if(type==="cm") tab("cm",document.querySelector('.tab:nth-child(2)'));
  else if(type==="cpla") tab("cpla",document.querySelector('.tab:nth-child(3)'));
@@ -775,7 +826,7 @@ function dateOnly(value){
   return d.toLocaleDateString("en-GB");
 }
 function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
-function appealRow(r){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.Member)}</td><td><span class="badge">${esc(r.Status)}</span></td><td>${esc(r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn" onclick="report('${rid}')" title="Report" aria-label="Report">📄 Report</button><button class="light actionbtn" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">📅 Hearings</button></div></td></tr>`}
+function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.Member)}</td><td>${statusBadge(r.Status)}</td><td>${esc(r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><button class="light actionbtn" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">📅 Hearings</button></div></td></tr>`}
 
 function normalize(v){return v===undefined||v===null?"":v}
 function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
@@ -1029,7 +1080,8 @@ function printCustomReport(){
   setTimeout(()=>w.print(),400);
 }
 function backup(){let b=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="PST_Appeal_Backup.json";a.click()}
-// App loads data only after successful login (see doLogin()).
+// App loads data only after successful login (see doLogin()). On page load, try to restore an existing session (survives refresh) unless it went inactive for 5+ minutes.
+tryRestoreSession();
 </script>
 </body>
 </html>
