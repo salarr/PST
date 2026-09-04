@@ -249,8 +249,15 @@ html,body{overflow-x:hidden}
 }
 </style>
 <style id="icon-and-badge-fixes">
-.icon-only{display:inline-flex!important;align-items:center;justify-content:center;gap:0!important;width:32px!important;padding:0!important}
+.icon-only{display:inline-flex!important;align-items:center;justify-content:center;gap:0!important;width:26px!important;height:26px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 .icon-only svg{display:block;flex:0 0 auto}
+.icon-only.light{color:#0f766e!important}
+.icon-only.red{color:#e11d48!important}
+.icon-only:hover{opacity:.7}
+#appealRows .actionbuttons .actionbtn.icon-only,
+#appealRows .actionbuttons button.icon-only[title="Print Report"]{
+  padding:0!important;height:26px!important;min-height:26px!important;width:26px!important;min-width:0!important;border-radius:0!important;background:transparent!important;border:0!important;
+}
 .badge-pending{background:#fff1e6!important;color:#c2410c!important;border:1px solid #fed7aa}
 .badge-decided{background:#e8f8ee!important;color:#15803d!important;border:1px solid #bbf7d0}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
