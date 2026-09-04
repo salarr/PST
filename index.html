@@ -725,7 +725,7 @@ function hearingForm(type,eid=null){
  <div id="hearingMatches" style="border:1px solid #e5e7eb;border-radius:8px;margin-top:5px;overflow:hidden;max-height:180px;overflow-y:auto"></div></div>
  ${fld("Date of Hearing","Date_of_Hearing","date",r.Date_of_Hearing)}
  ${type==="cpla"?fld("Officer Appeared","Officer_Appeared","text",r.Officer_Appeared):""}
- ${type==="cpla"?sel("Court","Court",[{v:"",t:"-- Select Court --"},"Branch Registry","Lahore","Supreme Court of Pakistan","Islamabad"],r.Court):""}
+ ${type==="cpla"?sel("Court","Court",[{v:"",t:"-- Select Court --"},"Branch Registry, Lahore","Supreme Court of Pakistan,Islamabad"],r.Court):""}
  ${area(type==="appeal"?"Court Proceedings":"Decision","hearing_text",r.hearing_text,"full")}
  ${type==="appeal"?area("Crux of Judgement","crux_of_Judgement",r.crux_of_Judgement,"full"):""}
  <div class="actions full"><button class="green" onclick="saveHearing('${type}')">💾 Save</button><button class="gray" onclick="closeM()">✖ Cancel</button></div></div>`)
