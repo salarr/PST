@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PST Appeal Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--nav:#5b2a86;--accent:#0f766e;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#ddd6fe;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#7c3aed}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Roboto','Segoe UI',Arial,sans-serif}
 header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:25px}.head small{color:#ede9fe}
 .wrap{max-width:1500px;margin:20px auto;padding:0 16px}.toolbar,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b}.toolbar{padding:13px;display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:260px}
 input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff;font:inherit}textarea{min-height:85px;resize:vertical}
@@ -188,7 +191,7 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
 <style id="appeal-register-one-row-fix">
 #appeals .tablewrap{overflow-x:auto}
 #appeals table{min-width:1180px;table-layout:auto}
-#appeals th,#appeals td{padding:7px 8px;white-space:nowrap;font-size:12px;vertical-align:middle}
+#appeals th,#appeals td{padding:7px 8px;white-space:nowrap;vertical-align:middle}
 #appeals td:nth-child(1){min-width:36px;text-align:center}
 #appeals td:nth-child(4){white-space:normal;min-width:180px}
 #appeals td:last-child{white-space:nowrap;min-width:190px}
@@ -198,6 +201,9 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
 
 <style id="mobile-responsive-fixes">
 html,body{overflow-x:hidden}
+#toolbarBurgerBtn{display:none}
+.toolbar-menu{display:none}
+.toolbar-menu.open{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:8px}
 @media(max-width:768px){
   .head{flex-wrap:wrap;gap:10px}
   .head h1{font-size:18px}
@@ -208,7 +214,8 @@ html,body{overflow-x:hidden}
   .toolbar{flex-direction:column;align-items:stretch}
   .toolbar .search{flex-direction:column}
   .toolbar input,.toolbar .search select{min-width:0;width:100%}
-  .toolbar>button{width:100%}
+  .toolbar>button.primary,.toolbar>button.light:not(#toolbarBurgerBtn){display:none}
+  #toolbarBurgerBtn{display:inline-flex!important;align-items:center;justify-content:center;width:100%;font-size:16px;padding:10px}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
   .stat{padding:12px}
   .stat b{font-size:20px}
@@ -264,6 +271,10 @@ html,body{overflow-x:hidden}
 .hearings-link:hover{color:#0b544e;text-decoration:none}
 .actionbuttons{align-items:center!important}
 .tab:not(.active):hover{background:#0f766e!important;color:#fff!important;border-color:#0f766e!important}
+body,button,input,select,textarea,.badge,.tab,.headbtn{font-family:'Roboto','Segoe UI',Arial,sans-serif!important}
+body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-webkit-text-fill-color:currentColor}
+body{font-weight:400;color:var(--text)}
+td,th,label,input,select,button,.field label{font-weight:500}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
 </style>
 </head>
@@ -280,7 +291,7 @@ html,body{overflow-x:hidden}
 <div id="appRoot" style="display:none">
 <header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:13px"></span><button class="light headbtn" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light headbtn" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light headbtn" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light headbtn" onclick="syncFromServer()">↻ Refresh</button><button class="light headbtn" onclick="logout()">🚪 Logout</button></div></div></header>
 <div class="wrap">
-<div class="toolbar"><div class="search"><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><button class="primary" type="button" onclick="openAppealEntryModal()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button></div>
+<div class="toolbar"><div class="search"><select id="searchType" onchange="searchAppeals()" style="max-width:150px"><option value="all">All</option><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option><option value="appellant">Appellant Name</option></select><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><button class="primary" type="button" onclick="openAppealEntryModal()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button><button class="light" type="button" id="toolbarBurgerBtn" onclick="toggleToolbarMenu()" title="More Actions">☰</button><div class="toolbar-menu" id="toolbarMenu"><button class="primary" type="button" onclick="openAppealEntryModal();closeToolbarMenu()">➕ Add Appeal</button><button class="light" type="button" onclick="openBreakdownModal();closeToolbarMenu()">📊 Breakdown</button></div></div>
 
 <div class="tabs">
 <button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
@@ -294,12 +305,20 @@ html,body{overflow-x:hidden}
 <div class="title"><h2>🖨️ Custom Report — Print Setup</h2></div>
 <div class="body">
 <div class="grid" style="margin-bottom:6px">
-  <div class="field"><label>Case Type</label><select id="rep_type" onchange="repFilterChanged()"><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option></select></div>
+  <div class="field"><label>Case Type</label><select id="rep_type" onchange="onRepTypeChanged()"><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option></select></div>
   <div class="field"><label>Status</label><select id="rep_status" onchange="repStatusChanged()"><option value="pending">Pending</option><option value="decided">Decided</option></select></div>
   <div class="field" id="rep_yearWrap" style="display:none"><label>Decided Year</label><select id="rep_year" onchange="repFilterChanged()"><option value="">All Years</option></select></div>
   <div class="field" id="rep_monthWrap" style="display:none"><label>Decided Month</label><select id="rep_month" onchange="repFilterChanged()"><option value="">All Months</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
   <div class="field" id="rep_fromWrap" style="display:none"><label>From Date</label><input type="date" id="rep_fromDate" onchange="repFilterChanged()"></div>
   <div class="field" id="rep_toWrap" style="display:none"><label>To Date</label><input type="date" id="rep_toDate" onchange="repFilterChanged()"></div>
+</div>
+<div class="field full" style="margin-bottom:10px">
+  <label>Report mein kaunse fields print karne hain?</label>
+  <div id="rep_fieldsCheckboxes" style="display:flex;flex-wrap:wrap;gap:5px 16px;padding:10px;background:#faf9fb;border:1px solid var(--line);border-radius:8px"></div>
+  <div style="margin-top:6px;display:flex;gap:14px">
+    <span style="font-size:12px;color:#0f766e;cursor:pointer;text-decoration:underline" onclick="repSelectAllFields(true)">Select All</span>
+    <span style="font-size:12px;color:#e11d48;cursor:pointer;text-decoration:underline" onclick="repSelectAllFields(false)">Clear All</span>
+  </div>
 </div>
 <p style="color:var(--muted);font-size:12.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
 <div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button></div>
@@ -308,12 +327,14 @@ html,body{overflow-x:hidden}
 </div>
 
 <div class="mobile-bottom-actions" id="mobileBottomActions">
-<div class="mbtitle">Account &amp; Settings</div>
+<div class="mbtitle" onclick="toggleMobileSettings()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center">Account &amp; Settings <span id="mobileSettingsChevron">▸</span></div>
+<div id="mobileSettingsBody" style="display:none;flex-direction:column;gap:10px">
 <button class="light" id="usersBtnMobile" style="display:none" onclick="openUsersModal()">👤 Users</button>
 <button class="light" id="activityBtnMobile" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button>
 <button class="light" onclick="openChangePasswordModal()">🔑 Change Password</button>
 <button class="light" onclick="syncFromServer()">↻ Refresh</button>
 <button class="light" onclick="logout()">🚪 Logout</button>
+</div>
 </div>
 
 </div>
@@ -628,7 +649,17 @@ function saveRespPicker(){const sel=$(respPickerTarget);if(sel){Array.from(sel.o
 function tab(x,b){document.querySelectorAll(".panel").forEach(e=>e.classList.remove("active"));$(x).classList.add("active");document.querySelectorAll(".tab").forEach(e=>e.classList.remove("active"));b.classList.add("active")}
 function closeM(){$("modal").classList.remove("show");editId=null}
 function modal(title,html){$("mtitle").textContent=title;$("mbody").innerHTML=html;$("modal").classList.add("show")}
-function fld(label,id,type="text",v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><input id="${id}" type="${type}" value="${esc(v)}"></div>`}
+function isoDateOnly(value){
+  if(value===undefined||value===null||value==="")return "";
+  const s=String(value).trim();
+  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return `${m[1]}-${m[2]}-${m[3]}`;
+  const d=new Date(s);
+  if(isNaN(d))return "";
+  const yyyy=d.getFullYear(),mm=String(d.getMonth()+1).padStart(2,"0"),dd=String(d.getDate()).padStart(2,"0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+function fld(label,id,type="text",v="",cl=""){const val=type==="date"?isoDateOnly(v):v;return `<div class="field ${cl}"><label>${label}</label><input id="${id}" type="${type}" value="${esc(val)}"></div>`}
 function area(label,id,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><textarea id="${id}">${esc(v)}</textarea></div>`}
 function sel(label,id,arr,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><select id="${id}">${arr.map(o=>`<option value="${esc(o.v??o)}" ${(o.v??o)==v?"selected":""}>${esc(o.t??o)}</option>`).join("")}</select></div>`}
 function appealEntryFormHtml(){return `<div class="grid">
@@ -725,7 +756,7 @@ function hearingForm(type,eid=null){
  <div id="hearingMatches" style="border:1px solid #e5e7eb;border-radius:8px;margin-top:5px;overflow:hidden;max-height:180px;overflow-y:auto"></div></div>
  ${fld("Date of Hearing","Date_of_Hearing","date",r.Date_of_Hearing)}
  ${type==="cpla"?fld("Officer Appeared","Officer_Appeared","text",r.Officer_Appeared):""}
- ${type==="cpla"?sel("Court","Court",[{v:"",t:"-- Select Court --"},"Branch Registry, Lahore","Supreme Court of Pakistan,Islamabad"],r.Court):""}
+ ${type==="cpla"?sel("Court","Court",[{v:"",t:"-- Select Court --"},"Branch Registry, Lahore","Supreme Court of Pakistan, Islamabad"],r.Court):""}
  ${area(type==="appeal"?"Court Proceedings":"Decision","hearing_text",r.hearing_text,"full")}
  ${type==="appeal"?area("Crux of Judgement","crux_of_Judgement",r.crux_of_Judgement,"full"):""}
  <div class="actions full"><button class="green" onclick="saveHearing('${type}')">💾 Save</button><button class="gray" onclick="closeM()">✖ Cancel</button></div></div>`)
@@ -787,6 +818,25 @@ function renderUpcomingHearings(){
  }).join(""):empty(7);
 }
 const APPEALS_PER_PAGE=10;let appealsPage=1;let appealsCurrentList=[];
+function pageNumbersToShow(current,total){
+  const s=new Set();
+  for(let i=1;i<=Math.min(3,total);i++)s.add(i);
+  for(let i=Math.max(1,total-2);i<=total;i++)s.add(i);
+  for(let i=Math.max(1,current-1);i<=Math.min(total,current+1);i++)s.add(i);
+  return Array.from(s).sort((a,b)=>a-b);
+}
+function pageButtonsHtml(current,total,goFn){
+  if(total<=1)return"";
+  const nums=pageNumbersToShow(current,total);
+  let html="",prev=0;
+  nums.forEach(p=>{
+    if(p-prev>1)html+=`<span style="padding:0 4px;color:var(--muted)">…</span>`;
+    const active=p===current;
+    html+=`<button class="light" type="button" onclick="${goFn}(${p})" style="min-width:34px;padding:6px 8px${active?';background:#0f766e;color:#fff;border-color:#0f766e;font-weight:700':''}">${p}</button>`;
+    prev=p;
+  });
+  return html;
+}
 function renderAppealsList(list){
  appealsCurrentList=list;
  const totalPages=Math.max(1,Math.ceil(list.length/APPEALS_PER_PAGE));
@@ -800,7 +850,7 @@ function renderAppealsList(list){
 function renderAppealsPagination(total,totalPages){
  const el=$("appealsPagination"); if(!el)return;
  if(total<=APPEALS_PER_PAGE){el.innerHTML="";return}
- el.innerHTML=`<button class="light" type="button" onclick="appealsGoPage(${appealsPage-1})" ${appealsPage<=1?"disabled":""}>‹ Prev</button><span>Page ${appealsPage} of ${totalPages} (${total} appeals)</span><button class="light" type="button" onclick="appealsGoPage(${appealsPage+1})" ${appealsPage>=totalPages?"disabled":""}>Next ›</button>`;
+ el.innerHTML=`<button class="light" type="button" onclick="appealsGoPage(1)" ${appealsPage<=1?"disabled":""}>« First</button><button class="light" type="button" onclick="appealsGoPage(${appealsPage-1})" ${appealsPage<=1?"disabled":""}>‹ Prev</button>${pageButtonsHtml(appealsPage,totalPages,"appealsGoPage")}<button class="light" type="button" onclick="appealsGoPage(${appealsPage+1})" ${appealsPage>=totalPages?"disabled":""}>Next ›</button><button class="light" type="button" onclick="appealsGoPage(${totalPages})" ${appealsPage>=totalPages?"disabled":""}>Last »</button><span style="margin-left:6px;color:var(--muted);font-size:13px;white-space:nowrap">(${total} appeals)</span>`;
 }
 function appealsGoPage(p){appealsPage=p;renderAppealsList(appealsCurrentList);}
 function render(){
@@ -808,7 +858,7 @@ renderAppealsList(db.appeals);
 $("cmRows").innerHTML=db.cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
 $("cplaRows").innerHTML=db.cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
 renderUpcomingHearings();
-if($("rep_type"))populateReportYears();
+if($("rep_type")){populateReportYears();if(!$("rep_fieldsCheckboxes").children.length)populateReportFields();}
 }
 function empty(n){return `<tr><td colspan="${n}" style="text-align:center;padding:30px;color:#718096">No records found</td></tr>`}
 function searchAppeals(){
@@ -817,14 +867,15 @@ function searchAppeals(){
  if(!q){appealsPage=1;render();return}
  const match=(r)=>Object.values(r||{}).join(" ").toLowerCase().includes(q);
  let appeals=[], cms=[], cplas=[];
- if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
+ if(type==="appellant"){appeals=db.appeals.filter(r=>String(r.Name_of_Appellant||"").toLowerCase().includes(q))}
+ else if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
  if(type==="all"||type==="cm"){cms=db.cms.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
  if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
  appealsPage=1;
  renderAppealsList(appeals);
  $("cmRows").innerHTML=cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
  $("cplaRows").innerHTML=cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
- // Keep the main Appeals register visible for All/Appeal; show the matching register for CM/CPLA.
+ // Keep the main Appeals register visible for All/Appeal/Appellant; show the matching register for CM/CPLA.
  if(type==="cm") tab("cm",document.querySelector('.tab:nth-child(2)'));
  else if(type==="cpla") tab("cpla",document.querySelector('.tab:nth-child(3)'));
  else tab("appeals",document.querySelector('.tab:nth-child(1)'));
@@ -976,6 +1027,16 @@ function reportPreviousHearingDate(type,eid){ // hearing before the latest one
   const arr=reportHearingDates(type,eid);
   return arr.length>=2?arr[arr.length-2]:null;
 }
+function reportLastHearingRecord(type,eid){
+  let hs;
+  if(type==="appeal")hs=db.appealHearings.filter(h=>h.parent_id===eid);
+  else if(type==="cm")hs=db.cmHearings.filter(h=>h.parent_id===eid);
+  else hs=db.cplaHearings.filter(h=>h.parent_id===eid);
+  if(!hs||!hs.length)return null;
+  const withDates=hs.filter(h=>h.Date_of_Hearing);
+  if(withDates.length)return withDates.slice().sort((a,b)=>new Date(a.Date_of_Hearing)-new Date(b.Date_of_Hearing)).pop();
+  return hs[hs.length-1];
+}
 function reportIsDecided(type,r){
   if(type==="appeal")return String(r.Status||"").trim().toLowerCase()==="decided";
   if(type==="cm")return String(r.CM_Status||"").trim().toLowerCase().includes("decid");
@@ -997,6 +1058,65 @@ function populateReportYears(){
   if(sorted.includes(Number(cur)))sel.value=cur;
 }
 function repFilterChanged(){customReportPage=1}
+function onRepTypeChanged(){populateReportYears();populateReportFields();customReportPage=1}
+// ===== Field definitions (checkbox list) per report type =====
+const REPORT_FIELD_DEFS={
+  appeal:[
+    {key:"Appeal_Num",label:"Appeal No.",get:(r)=>esc(r.Appeal_Num)},
+    {key:"Appeal_Year",label:"Appeal Year",get:(r)=>esc(r.Appeal_Year)},
+    {key:"Name_of_Appellant",label:"Appellant Name",get:(r)=>esc(r.Name_of_Appellant)},
+    {key:"File_No",label:"File No.",get:(r)=>esc(r.File_No)},
+    {key:"Respondents",label:"Respondents",get:(r)=>esc(r.Respondents)},
+    {key:"Member",label:"Member",get:(r)=>esc(r.Member)},
+    {key:"Status",label:"Status",get:(r)=>esc(r.Status)},
+    {key:"Bench",label:"Bench",get:(r)=>esc(r.Bench)},
+    {key:"Prayer",label:"Prayer",get:(r)=>esc(r.Prayer)},
+    {key:"PrevHearing",label:"Previous Date of Hearing",get:(r,ctx)=>dateOnly(reportPreviousHearingDate("appeal",ctx.eid))},
+    {key:"NextHearing",label:"Next Date of Hearing",get:(r,ctx)=>dateOnly(reportDecisionDate("appeal",ctx.eid))}
+  ],
+  cm:[
+    {key:"CM_No",label:"CM No.",get:(r)=>esc(r.CM_No)},
+    {key:"CM_Year",label:"CM Year",get:(r)=>esc(r.CM_Year)},
+    {key:"AppealNo",label:"Appeal No.",get:(r,ctx)=>esc(ctx.appeal?.Appeal_Num||"-")},
+    {key:"AppealYear",label:"Appeal Year",get:(r,ctx)=>esc(ctx.appeal?.Appeal_Year||"-")},
+    {key:"CM_File",label:"File",get:(r)=>esc(r.CM_File)},
+    {key:"AppellantName",label:"Name of Appellant",get:(r,ctx)=>esc(ctx.appeal?.Name_of_Appellant||"-")},
+    {key:"CM_Members",label:"Members",get:(r)=>esc(r.CM_Members)},
+    {key:"CM_Respondents",label:"Respondents",get:(r)=>esc(r.CM_Respondents)},
+    {key:"CM_Status",label:"Status",get:(r)=>esc(r.CM_Status)},
+    {key:"PrevHearing",label:"Previous Date of Hearing",get:(r,ctx)=>dateOnly(reportPreviousHearingDate("cm",ctx.eid))},
+    {key:"NextHearing",label:"Next Date of Hearing",get:(r,ctx)=>dateOnly(reportDecisionDate("cm",ctx.eid))}
+  ],
+  cpla:[
+    {key:"CPLA_No",label:"CPLA No.",get:(r)=>esc(r.CPLA_No)},
+    {key:"CPLA_Year",label:"CPLA Year",get:(r)=>esc(r.CPLA_Year)},
+    {key:"AppealNo",label:"Appeal No.",get:(r,ctx)=>esc(ctx.appeal?.Appeal_Num||"-")},
+    {key:"AppealYear",label:"Appeal Year",get:(r,ctx)=>esc(ctx.appeal?.Appeal_Year||"-")},
+    {key:"AppellantName",label:"Name of Appellant",get:(r,ctx)=>esc(ctx.appeal?.Name_of_Appellant||"-")},
+    {key:"LastCourt",label:"Court",get:(r,ctx)=>esc(reportLastHearingRecord("cpla",ctx.eid)?.Court||"-")},
+    {key:"LastOfficer",label:"Officer Appeared",get:(r,ctx)=>esc(reportLastHearingRecord("cpla",ctx.eid)?.Officer_Appeared||"-")},
+    {key:"LastDecision",label:"Decision",get:(r,ctx)=>esc(reportLastHearingRecord("cpla",ctx.eid)?.hearing_text||"-")},
+    {key:"LastHearingDate",label:"Date of Hearing",get:(r,ctx)=>dateOnly(reportLastHearingRecord("cpla",ctx.eid)?.Date_of_Hearing)}
+  ]
+};
+function populateReportFields(){
+  const wrap=$("rep_fieldsCheckboxes");if(!wrap)return;
+  const type=$("rep_type").value;
+  const defs=REPORT_FIELD_DEFS[type];
+  wrap.innerHTML=defs.map(d=>`<label style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500;cursor:pointer"><input type="checkbox" value="${d.key}" checked onchange="repFilterChanged()"> ${esc(d.label)}</label>`).join("");
+}
+function repSelectAllFields(state){
+  document.querySelectorAll('#rep_fieldsCheckboxes input[type=checkbox]').forEach(b=>b.checked=state);
+  customReportPage=1;
+}
+function getSelectedReportFields(){
+  const type=$("rep_type").value;
+  const defs=REPORT_FIELD_DEFS[type];
+  const boxes=document.querySelectorAll('#rep_fieldsCheckboxes input[type=checkbox]');
+  const checked=Array.from(boxes).filter(b=>b.checked).map(b=>b.value);
+  if(!checked.length)return defs; // avoid an empty report if user unchecked everything
+  return defs.filter(d=>checked.includes(d.key));
+}
 function getReportCriteria(){
   return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||""}
 }
@@ -1022,26 +1142,14 @@ function filterReportData(){
   }
   return{criteria:c,rows:list};
 }
-function reportHeaders(type){
-  if(type==="appeal")return["Sr.#","Appeal No.","Appeal Year","Appellant Name","File No.","Respondents","Member","Prayer","Previous Date of Hearing","Next Date of Hearing"];
-  if(type==="cm")return["Sr.#","CM No.","CM Year","Appeal No.","Appeal Year","File","Name of Appellant","Previous Date of Hearing","Next Date of Hearing"];
-  return["Sr.#","CPLA No.","Year","Appeal No.","Title","Status","Implemented","Next / Decided Hearing Date"];
-}
+function reportHeaders(type){return["Sr.#",...getSelectedReportFields().map(f=>f.label)]}
 function reportRowHtml(type,r,idx){
   const eid=reportEntityId(type,r);
-  if(type==="appeal"){
-    const prev=dateOnly(reportPreviousHearingDate(type,eid));
-    const next=dateOnly(reportDecisionDate(type,eid));
-    return`<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${esc(r.File_No)}</td><td>${esc(r.Respondents)}</td><td>${esc(r.Member)}</td><td>${esc(r.Prayer)}</td><td>${prev}</td><td>${next}</td></tr>`;
-  }
-  const a=getAppeal(r.appeal_id);
-  if(type==="cm"){
-    const prev=dateOnly(reportPreviousHearingDate(type,eid));
-    const next=dateOnly(reportDecisionDate(type,eid));
-    return`<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${esc(a?.Appeal_Num||"-")}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(r.CM_File)}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${prev}</td><td>${next}</td></tr>`;
-  }
-  const dd=dateOnly(reportDecisionDate(type,eid));
-  return`<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${esc(a?.Appeal_Num||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${esc(r.CPLA_Status)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${dd}</td></tr>`;
+  const appeal=type!=="appeal"?getAppeal(r.appeal_id):null;
+  const ctx={eid,appeal};
+  const fields=getSelectedReportFields();
+  const cells=fields.map(f=>`<td>${f.get(r,ctx)}</td>`).join("");
+  return`<tr><td>${idx}</td>${cells}</tr>`;
 }
 function reportSubtitle(c){
   const typeLabel=c.type==="appeal"?"Appeal":c.type==="cm"?"CM":"CPLA";
@@ -1067,6 +1175,7 @@ function changeReportPage(delta){
   customReportPage=Math.min(totalPages,Math.max(1,customReportPage+delta));
   renderReportPreview();
 }
+function customReportGoPage(p){customReportPage=p;renderReportPreview()}
 function renderReportPreview(){
   const{criteria,rows}=filterReportData();
   const headers=reportHeaders(criteria.type);
@@ -1076,10 +1185,12 @@ function renderReportPreview(){
   const start=(customReportPage-1)*REPORT_PAGE_SIZE;
   const pageRows=rows.slice(start,start+REPORT_PAGE_SIZE);
   const bodyRows=pageRows.map((r,i)=>reportRowHtml(criteria.type,r,start+i+1)).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px;color:#718096">کوئی ریکارڈ نہیں ملا</td></tr>`;
-  const pager=rows.length>REPORT_PAGE_SIZE?`<div style="display:flex;align-items:center;gap:10px;margin-top:12px;justify-content:center">
-    <button type="button" class="gray mini" onclick="changeReportPage(-1)" ${customReportPage<=1?"disabled":""}>◀ Prev</button>
-    <span style="font-size:13px;color:var(--muted)">Page ${customReportPage} of ${totalPages}</span>
-    <button type="button" class="gray mini" onclick="changeReportPage(1)" ${customReportPage>=totalPages?"disabled":""}>Next ▶</button>
+  const pager=rows.length>REPORT_PAGE_SIZE?`<div style="display:flex;align-items:center;gap:6px;margin-top:12px;justify-content:center;flex-wrap:wrap">
+    <button type="button" class="light" onclick="customReportGoPage(1)" ${customReportPage<=1?"disabled":""}>« First</button>
+    <button type="button" class="light" onclick="customReportGoPage(${customReportPage-1})" ${customReportPage<=1?"disabled":""}>‹ Prev</button>
+    ${pageButtonsHtml(customReportPage,totalPages,"customReportGoPage")}
+    <button type="button" class="light" onclick="customReportGoPage(${customReportPage+1})" ${customReportPage>=totalPages?"disabled":""}>Next ›</button>
+    <button type="button" class="light" onclick="customReportGoPage(${totalPages})" ${customReportPage>=totalPages?"disabled":""}>Last »</button>
   </div>`:"";
   $("customReportPreview").innerHTML=`<div style="margin-bottom:8px;color:var(--muted);font-size:13px">${esc(reportSubtitle(criteria))}</div><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><div style="margin-top:10px;font-weight:bold;color:var(--nav)">Total Records: ${rows.length}</div>${pager}`;
 }
@@ -1094,6 +1205,14 @@ function printCustomReport(){
   setTimeout(()=>w.print(),400);
 }
 function backup(){let b=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="PST_Appeal_Backup.json";a.click()}
+function toggleToolbarMenu(){$("toolbarMenu").classList.toggle("open")}
+function closeToolbarMenu(){$("toolbarMenu").classList.remove("open")}
+function toggleMobileSettings(){
+  const b=$("mobileSettingsBody");
+  const isOpen=b.style.display==="flex";
+  b.style.display=isOpen?"none":"flex";
+  $("mobileSettingsChevron").textContent=isOpen?"▸":"▾";
+}
 // App loads data only after successful login (see doLogin()). On page load, try to restore an existing session (survives refresh) unless it went inactive for 5+ minutes.
 tryRestoreSession();
 </script>
