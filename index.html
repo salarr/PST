@@ -278,6 +278,7 @@ body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-we
 .repfield-row:hover{border-color:#0f766e;background:#f2faf8}
 .repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:#0f766e;cursor:pointer;flex:0 0 auto}
 .repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table td,table th{border:1px solid var(--line)!important}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
@@ -1192,7 +1193,7 @@ function reportRowHtml(type,r,idx){
 function reportSubtitle(c){
   const typeLabel=c.type==="appeal"?"Appeal":c.type==="cm"?"CM":"CPLA";
   const statusLabel=c.status==="decided"?"Decided":"Pending";
-  let s=`${typeLabel} Register — ${statusLabel} Cases`;
+  let s=`${typeLabel} - ${statusLabel} Cases`;
   if(c.status==="decided"){
     const parts=[];
     if(c.year)parts.push("Year: "+c.year);
@@ -1238,7 +1239,7 @@ function printCustomReport(){
   const bodyRows=rows.map((r,i)=>reportRowHtml(criteria.type,r,i+1)).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px">کوئی ریکارڈ نہیں ملا</td></tr>`;
   const subtitle=reportSubtitle(criteria);
   const w=open("","_blank");
-  w.document.write(`<html><head><title>${subtitle}</title><style>body{font-family:Arial;margin:20mm}h1{text-align:center;text-decoration:underline;font-size:16pt}h2{text-align:center;font-weight:normal;font-size:13pt;margin-top:6px;color:#333}p.meta{text-align:center;color:#666;font-size:10.5pt}table{width:100%;border-collapse:collapse;margin-top:16px}th,td{border:1px solid #777;padding:6px;text-align:left;font-size:10.5pt}th{background:#f3e8ff}p.total{margin-top:12px;font-size:11pt}</style></head><body><h1>PST Appeal Management — Custom Report</h1><h2>${esc(subtitle)}</h2><p class="meta">Generated: ${new Date().toLocaleString()}</p><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><p class="total"><b>Total Records:</b> ${rows.length}</p></body></html>`);
+  w.document.write(`<html><head><title>${subtitle}</title><style>body{font-family:Arial;margin:20mm}h1{text-align:center;text-decoration:underline;font-size:16pt;margin-bottom:4px}p.meta{text-align:center;color:#666;font-size:10.5pt;margin-top:0}table{width:100%;border-collapse:collapse;margin-top:16px}th,td{border:1px solid #777;padding:6px;text-align:left;font-size:10.5pt}th{background:#f3e8ff}p.total{margin-top:12px;font-size:11pt}</style></head><body><h1>${esc(subtitle)}</h1><p class="meta">Generated: ${dateOnly(new Date())}</p><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><p class="total"><b>Total Records:</b> ${rows.length}</p></body></html>`);
   w.document.close();
   setTimeout(()=>w.print(),400);
 }
