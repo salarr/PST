@@ -273,6 +273,11 @@ html,body{overflow-x:hidden}
 .tab:not(.active):hover{background:#0f766e!important;color:#fff!important;border-color:#0f766e!important}
 body,button,input,select,textarea,.badge,.tab,.headbtn{font-family:'Roboto','Segoe UI',Arial,sans-serif!important}
 body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-webkit-text-fill-color:currentColor}
+.repfield-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px;max-height:52vh;overflow:auto;padding:6px;border:1px solid var(--line);border-radius:10px;background:#fafafd}
+.repfield-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;font-size:13.5px;font-weight:500;color:var(--text);background:#fff;border:1px solid #ece8f5;border-radius:8px;cursor:pointer;transition:.12s}
+.repfield-row:hover{border-color:#0f766e;background:#f2faf8}
+.repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:#0f766e;cursor:pointer;flex:0 0 auto}
+.repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
@@ -313,12 +318,7 @@ td,th,label,input,select,button,.field label{font-weight:500}
   <div class="field" id="rep_toWrap" style="display:none"><label>To Date</label><input type="date" id="rep_toDate" onchange="repFilterChanged()"></div>
 </div>
 <div class="field full" style="margin-bottom:10px">
-  <label>Report mein kaunse fields print karne hain?</label>
-  <div id="rep_fieldsCheckboxes" style="display:flex;flex-wrap:wrap;gap:5px 16px;padding:10px;background:#faf9fb;border:1px solid var(--line);border-radius:8px"></div>
-  <div style="margin-top:6px;display:flex;gap:14px">
-    <span style="font-size:12px;color:#0f766e;cursor:pointer;text-decoration:underline" onclick="repSelectAllFields(true)">Select All</span>
-    <span style="font-size:12px;color:#e11d48;cursor:pointer;text-decoration:underline" onclick="repSelectAllFields(false)">Clear All</span>
-  </div>
+  <button class="light" type="button" id="rep_fieldsBtn" onclick="openReportFieldsModal()">🧾 Report mein kaunse fields print karne hain?</button>
 </div>
 <p style="color:var(--muted);font-size:12.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
 <div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button></div>
@@ -858,7 +858,7 @@ renderAppealsList(db.appeals);
 $("cmRows").innerHTML=db.cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
 $("cplaRows").innerHTML=db.cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
 renderUpcomingHearings();
-if($("rep_type")){populateReportYears();if(!$("rep_fieldsCheckboxes").children.length)populateReportFields();}
+if($("rep_type")){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();}
 }
 function empty(n){return `<tr><td colspan="${n}" style="text-align:center;padding:30px;color:#718096">No records found</td></tr>`}
 function searchAppeals(){
@@ -1058,7 +1058,7 @@ function populateReportYears(){
   if(sorted.includes(Number(cur)))sel.value=cur;
 }
 function repFilterChanged(){customReportPage=1}
-function onRepTypeChanged(){populateReportYears();populateReportFields();customReportPage=1}
+function onRepTypeChanged(){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();customReportPage=1}
 // ===== Field definitions (checkbox list) per report type =====
 const REPORT_FIELD_DEFS={
   appeal:[
@@ -1099,23 +1099,53 @@ const REPORT_FIELD_DEFS={
     {key:"LastHearingDate",label:"Date of Hearing",get:(r,ctx)=>dateOnly(reportLastHearingRecord("cpla",ctx.eid)?.Date_of_Hearing)}
   ]
 };
-function populateReportFields(){
-  const wrap=$("rep_fieldsCheckboxes");if(!wrap)return;
+let reportFieldSelection={};
+function initReportFieldSelectionDefaults(){
+  const type=$("rep_type")?.value;
+  if(type && !reportFieldSelection[type]) reportFieldSelection[type]=REPORT_FIELD_DEFS[type].map(d=>d.key);
+}
+function updateReportFieldsButtonLabel(){
+  const btn=$("rep_fieldsBtn");if(!btn)return;
   const type=$("rep_type").value;
   const defs=REPORT_FIELD_DEFS[type];
-  wrap.innerHTML=defs.map(d=>`<label style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500;cursor:pointer"><input type="checkbox" value="${d.key}" checked onchange="repFilterChanged()"> ${esc(d.label)}</label>`).join("");
+  const sel=reportFieldSelection[type]||defs.map(d=>d.key);
+  btn.textContent=`🧾 Report mein kaunse fields print karne hain? (${sel.length}/${defs.length} selected)`;
 }
-function repSelectAllFields(state){
-  document.querySelectorAll('#rep_fieldsCheckboxes input[type=checkbox]').forEach(b=>b.checked=state);
+function openReportFieldsModal(){
+  const type=$("rep_type").value;
+  const defs=REPORT_FIELD_DEFS[type];
+  const selected=new Set(reportFieldSelection[type]||defs.map(d=>d.key));
+  const typeLabel=type==="appeal"?"Appeal":type==="cm"?"CM":"CPLA";
+  const boxesHtml=defs.map(d=>`<label class="repfield-row"><span>${esc(d.label)}</span><input type="checkbox" value="${d.key}" ${selected.has(d.key)?"checked":""}></label>`).join("");
+  modal(`🧾 ${typeLabel} Report — Select Fields`,`
+    <div style="display:flex;gap:14px;margin-bottom:10px">
+      <span style="font-size:12px;color:#0f766e;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(true)">Select All</span>
+      <span style="font-size:12px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(false)">Clear All</span>
+    </div>
+    <div id="reportFieldsModalList" class="repfield-grid">${boxesHtml}</div>
+    <div class="actions" style="margin-top:16px">
+      <button class="green" type="button" onclick="saveReportFieldsSelection()">OK</button>
+      <button class="gray" type="button" onclick="closeM()">Close</button>
+    </div>`);
+}
+function reportFieldsModalSelectAll(state){
+  document.querySelectorAll('#reportFieldsModalList input[type=checkbox]').forEach(b=>b.checked=state);
+}
+function saveReportFieldsSelection(){
+  const type=$("rep_type").value;
+  const boxes=document.querySelectorAll('#reportFieldsModalList input[type=checkbox]');
+  const checked=Array.from(boxes).filter(b=>b.checked).map(b=>b.value);
+  reportFieldSelection[type]=checked.length?checked:REPORT_FIELD_DEFS[type].map(d=>d.key);
   customReportPage=1;
+  closeM();
+  updateReportFieldsButtonLabel();
 }
 function getSelectedReportFields(){
   const type=$("rep_type").value;
   const defs=REPORT_FIELD_DEFS[type];
-  const boxes=document.querySelectorAll('#rep_fieldsCheckboxes input[type=checkbox]');
-  const checked=Array.from(boxes).filter(b=>b.checked).map(b=>b.value);
-  if(!checked.length)return defs; // avoid an empty report if user unchecked everything
-  return defs.filter(d=>checked.includes(d.key));
+  const sel=reportFieldSelection[type];
+  if(!sel||!sel.length)return defs;
+  return defs.filter(d=>sel.includes(d.key));
 }
 function getReportCriteria(){
   return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||""}
@@ -1139,6 +1169,14 @@ function filterReportData(){
         return true;
       });
     }
+    // Decided cases: order date-wise, oldest (lowest) to newest (highest)
+    list=list.slice().sort((a,b)=>{
+      const da=reportDecisionDate(c.type,reportEntityId(c.type,a));
+      const db_=reportDecisionDate(c.type,reportEntityId(c.type,b));
+      const ta=da?new Date(da).getTime():Infinity;
+      const tb=db_?new Date(db_).getTime():Infinity;
+      return ta-tb;
+    });
   }
   return{criteria:c,rows:list};
 }
