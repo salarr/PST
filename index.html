@@ -374,7 +374,7 @@ function resetInactivityTimer(){
   if(!authToken)return;
   touchSession();
   if(inactivityTimer)clearTimeout(inactivityTimer);
-  inactivityTimer=setTimeout(()=>{alert("5 منٹ تک کوئی activity نہیں ہوئی، اس لیے آپ خودکار طور پر logout ہو گئے ہیں۔");logout()},INACTIVITY_LIMIT_MS);
+  inactivityTimer=setTimeout(()=>{logout()},INACTIVITY_LIMIT_MS);
 }
 function startInactivityWatcher(){
   ["mousemove","keydown","click","scroll","touchstart"].forEach(evt=>document.addEventListener(evt,resetInactivityTimer,{passive:true}));
