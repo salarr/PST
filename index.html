@@ -286,6 +286,26 @@ td,th,label,input,select,button,.field label{font-weight:500}
 .sort-menu{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:30;min-width:170px;margin-top:4px;overflow:hidden}
 .sort-menu div{padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .sort-menu div:hover{background:#f2faf8;color:#0f766e}
+/* Appeal Register only: distinct action icon colors + round brown Hearings button */
+#appealRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#appealRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
+#appealRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
+#appealRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+#appealRows .hearings-link:hover{background:#78350f;color:#fff!important}
+/* CM Register: same action icon colors + round brown Hearings button */
+#cmRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#cmRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
+#cmRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
+#cmRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+#cmRows .hearings-link:hover{background:#78350f;color:#fff!important}
+#cmRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
+#cmRows .actionbuttons span.hearings-link{flex:0 0 auto}
+/* CPLA Register: same action icon colors + round brown Hearings button */
+#cplaRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#cplaRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
+#cplaRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
+#cplaRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+#cplaRows .hearings-link:hover{background:#78350f;color:#fff!important}
 #cplaRows td:nth-child(5){white-space:normal;min-width:180px;max-width:280px}
 #cplaRows td:last-child{white-space:nowrap;min-width:150px}
 #cplaRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
@@ -320,7 +340,7 @@ td,th,label,input,select,button,.field label{font-weight:500}
 <div class="body">
 <div class="grid" style="margin-bottom:6px">
   <div class="field"><label>Case Type</label><select id="rep_type" onchange="onRepTypeChanged()"><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option></select></div>
-  <div class="field"><label>Status</label><select id="rep_status" onchange="repStatusChanged()"><option value="pending">Pending</option><option value="decided">Decided</option></select></div>
+  <div class="field"><label>Status</label><select id="rep_status" onchange="repStatusChanged()"><option value="pending">Pending</option><option value="decided">Decided</option><option value="all">All</option></select></div>
   <div class="field" id="rep_yearWrap" style="display:none"><label>Decided Year</label><select id="rep_year" onchange="repFilterChanged()"><option value="">All Years</option></select></div>
   <div class="field" id="rep_monthWrap" style="display:none"><label>Decided Month</label><select id="rep_month" onchange="repFilterChanged()"><option value="">All Months</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
   <div class="field" id="rep_fromWrap" style="display:none"><label>From Date</label><input type="date" id="rep_fromDate" onchange="repFilterChanged()"></div>
@@ -329,8 +349,18 @@ td,th,label,input,select,button,.field label{font-weight:500}
 <div class="field full" style="margin-bottom:10px">
   <button class="light" type="button" id="rep_fieldsBtn" onclick="openReportFieldsModal()">🧾 Report mein kaunse fields print karne hain?</button>
 </div>
+<div class="field full" style="margin-bottom:10px">
+  <label>🔎 Search (Appeal No. / Appellant Name / CM No. / CPLA No.)</label>
+  <input id="rep_search" type="text" placeholder="Type to filter the records below..." oninput="repSearchChanged()">
+</div>
 <p style="color:var(--muted);font-size:12.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
 <div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button></div>
+<div id="rep_selectionBar" style="display:none;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;padding:9px 12px;background:#f2faf8;border:1px solid #c9e4d8;border-radius:8px">
+  <span style="font-size:12.5px;color:#0f766e;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(true)">☑ Select All</span>
+  <span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(false)">☐ Unselect All</span>
+  <span id="rep_selectionCount" style="font-size:12.5px;color:var(--muted);font-weight:600"></span>
+  <span style="font-size:12px;color:var(--muted)">Print sirf selected records ka hoga (kuch bhi select na ho to poori list print hogi).</span>
+</div>
 <div class="tablewrap"><div id="customReportPreview" style="color:var(--muted);padding:10px 2px">Preview دیکھنے کے لیے فلٹرز سیٹ کریں اور "Preview" دبائیں۔</div></div>
 </div>
 </div>
@@ -825,7 +855,7 @@ function registerInlineUpdate(regKey,eid,field,value){
   showToast("✅ Record updated");
 }
 function acts(key,eid,fn){return `<button class="light actionbtn icon-only" title="Edit Record" aria-label="Edit Record" onclick="${fn}('${eid}')">${ICON_EDIT}</button><button class="red actionbtn icon-only" title="Delete Record" aria-label="Delete Record" onclick="del('${key}','${eid}')">${ICON_TRASH}</button>`}
-function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members)}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td>${acts("cms",r.id,"cmForm")} <span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings</span></td></tr>`}
+function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members,"color:#2563eb;font-weight:700")}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td><div class="actionbuttons">${acts("cms",r.id,"cmForm")}<span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings</span></div></td></tr>`}
 function cplaRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings</span></div></td></tr>`}
 const ICON_EYE=`<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>`;
 function renderUpcomingHearings(){
@@ -944,7 +974,7 @@ function dateOnly(value){
   return d.toLocaleDateString("en-GB");
 }
 function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
-function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member)}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench)}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings</span></div></td></tr>`}
+function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#2563eb;font-weight:700")}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#92400e;font-weight:700")}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings</span></div></td></tr>`}
 
 function normalize(v){return v===undefined||v===null?"":v}
 function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
@@ -1057,13 +1087,16 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
 // ===== CUSTOM REPORT (Pending / Decided — Year / Month / Date-range) =====
 const monthNames=["","January","February","March","April","May","June","July","August","September","October","November","December"];
 let customReportPage=1;
+let repSelectedIds=new Set();
 const REPORT_PAGE_SIZE=25;
 function repStatusChanged(){
   const decided=$("rep_status").value==="decided";
   ["rep_yearWrap","rep_monthWrap","rep_fromWrap","rep_toWrap"].forEach(w=>{const el=$(w);if(el)el.style.display=decided?"":"none"});
   populateReportYears();
   customReportPage=1;
+  repSelectedIds.clear();
 }
+function repSearchChanged(){customReportPage=1;if($("customReportPreview")?.querySelector("table"))renderReportPreview()}
 function reportEntityId(type,r){return type==="appeal"?String(r.id??r.ID??r.Appeal_ID??""):String(r.id??"")}
 function reportHearingDates(type,eid){
   let hs;
@@ -1111,7 +1144,7 @@ function populateReportYears(){
   if(sorted.includes(Number(cur)))sel.value=cur;
 }
 function repFilterChanged(){customReportPage=1}
-function onRepTypeChanged(){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();customReportPage=1}
+function onRepTypeChanged(){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();customReportPage=1;repSelectedIds.clear()}
 // ===== Field definitions (checkbox list) per report type =====
 const REPORT_FIELD_DEFS={
   appeal:[
@@ -1120,9 +1153,9 @@ const REPORT_FIELD_DEFS={
     {key:"Name_of_Appellant",label:"Appellant Name",get:(r)=>esc(r.Name_of_Appellant)},
     {key:"File_No",label:"File No.",get:(r)=>esc(r.File_No)},
     {key:"Respondents",label:"Respondents",get:(r)=>esc(r.Respondents)},
-    {key:"Member",label:"Member",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Member):reportInlineSelect(r.id,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member)},
+    {key:"Member",label:"Member",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Member):reportInlineSelect(r.id,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#2563eb;font-weight:700")},
     {key:"Status",label:"Status",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Status):reportInlineSelect(r.id,"Status",["Pending","Decided"],r.Status)},
-    {key:"Bench",label:"Bench",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Bench):reportInlineSelect(r.id,"Bench",["Faisalabad","Lahore"],r.Bench)},
+    {key:"Bench",label:"Bench",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Bench):reportInlineSelect(r.id,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#92400e;font-weight:700")},
     {key:"Prayer",label:"Prayer",get:(r)=>esc(r.Prayer)},
     {key:"PrevHearing",label:"Previous Date of Hearing",get:(r,ctx)=>dateOnly(reportPreviousHearingDate("appeal",ctx.eid))},
     {key:"NextHearing",label:"Next Date of Hearing",get:(r,ctx)=>dateOnly(reportDecisionDate("appeal",ctx.eid))}
@@ -1201,12 +1234,22 @@ function getSelectedReportFields(){
   return defs.filter(d=>sel.includes(d.key));
 }
 function getReportCriteria(){
-  return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||""}
+  return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||"",search:($("rep_search")?.value||"").toLowerCase().trim()}
+}
+function reportSearchMatch(type,r,q){
+  if(!q)return true;
+  const a=type!=="appeal"?getAppeal(r.appeal_id):r;
+  const parts=[];
+  if(type==="appeal"){parts.push(r.Appeal_Num,r.Appeal_Year,r.Name_of_Appellant,r.File_No,r.Member,r.Bench,r.Status)}
+  else if(type==="cm"){parts.push(r.CM_No,r.CM_Year,r.CM_File,r.CM_Members,r.CM_Status,a?.Appeal_Num,a?.Appeal_Year,a?.Name_of_Appellant)}
+  else{parts.push(r.CPLA_No,r.CPLA_Year,r.CPLA_Title,r.CPLA_Status,a?.Appeal_Num,a?.Appeal_Year,a?.Name_of_Appellant)}
+  return parts.map(x=>String(x??"")).join(" ").toLowerCase().includes(q);
 }
 function filterReportData(){
   const c=getReportCriteria();
   let list=c.type==="appeal"?db.appeals:c.type==="cm"?db.cms:db.cplas;
-  list=list.filter(r=>reportIsDecided(c.type,r)===(c.status==="decided"));
+  if(c.status!=="all")list=list.filter(r=>reportIsDecided(c.type,r)===(c.status==="decided"));
+  if(c.search)list=list.filter(r=>reportSearchMatch(c.type,r,c.search));
   if(c.status==="decided"){
     const hasDateFilter=c.year||c.month||c.fromDate||c.toDate;
     if(hasDateFilter){
@@ -1242,9 +1285,9 @@ function reportRowHtml(type,r,idx,mode){
   const cells=fields.map(f=>`<td>${f.get(r,ctx)}</td>`).join("");
   return`<tr><td>${idx}</td>${cells}</tr>`;
 }
-function reportInlineSelect(appealId,field,options,value){
+function reportInlineSelect(appealId,field,options,value,extraStyle=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
-  return `<select onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;padding:5px 6px;font-size:13px">${opts}</select>`;
+  return `<select onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;padding:5px 6px;font-size:13px;${extraStyle}">${opts}</select>`;
 }
 function reportInlineUpdate(appealId,field,value){
   const a=db.appeals.find(x=>String(x.id??x.ID??x.Appeal_ID)===String(appealId));
@@ -1266,7 +1309,7 @@ function showToast(msg){
 }
 function reportSubtitle(c){
   const typeLabel=c.type==="appeal"?"Appeal":c.type==="cm"?"CM":"CPLA";
-  const statusLabel=c.status==="decided"?"Decided":"Pending";
+  const statusLabel=c.status==="decided"?"Decided":c.status==="all"?"All":"Pending";
   let s=`${typeLabel} - ${statusLabel} Cases`;
   if(c.status==="decided"){
     const parts=[];
@@ -1288,16 +1331,36 @@ function changeReportPage(delta){
   customReportPage=Math.min(totalPages,Math.max(1,customReportPage+delta));
   renderReportPreview();
 }
+function repToggleRecord(eid,checked){
+  if(checked)repSelectedIds.add(String(eid));else repSelectedIds.delete(String(eid));
+  updateRepSelectionCount();
+}
+function repSelectAllRecords(state){
+  const{criteria,rows}=filterReportData();
+  if(state)rows.forEach(r=>repSelectedIds.add(reportEntityId(criteria.type,r)));
+  else repSelectedIds.clear();
+  renderReportPreview();
+}
+function updateRepSelectionCount(){
+  const el=$("rep_selectionCount");if(!el)return;
+  el.textContent=repSelectedIds.size?`${repSelectedIds.size} record(s) selected`:"No record selected";
+}
 function customReportGoPage(p){customReportPage=p;renderReportPreview()}
 function renderReportPreview(){
   const{criteria,rows}=filterReportData();
-  const headers=reportHeaders(criteria.type);
+  const fieldHeaders=reportHeaders(criteria.type);
+  const headers=["✔",...fieldHeaders];
   const totalPages=Math.max(1,Math.ceil(rows.length/REPORT_PAGE_SIZE));
   if(customReportPage>totalPages)customReportPage=totalPages;
   if(customReportPage<1)customReportPage=1;
   const start=(customReportPage-1)*REPORT_PAGE_SIZE;
   const pageRows=rows.slice(start,start+REPORT_PAGE_SIZE);
-  const bodyRows=pageRows.map((r,i)=>reportRowHtml(criteria.type,r,start+i+1,"preview")).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px;color:#718096">کوئی ریکارڈ نہیں ملا</td></tr>`;
+  const bodyRows=pageRows.map((r,i)=>{
+    const eid=reportEntityId(criteria.type,r);
+    const checked=repSelectedIds.has(String(eid))?"checked":"";
+    const checkCell=`<td style="text-align:center"><input type="checkbox" ${checked} onchange="repToggleRecord('${eid}',this.checked)" style="width:16px;height:16px;accent-color:#0f766e;cursor:pointer"></td>`;
+    return reportRowHtml(criteria.type,r,start+i+1,"preview").replace("<tr>","<tr>"+checkCell);
+  }).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px;color:#718096">کوئی ریکارڈ نہیں ملا</td></tr>`;
   const pager=rows.length>REPORT_PAGE_SIZE?`<div style="display:flex;align-items:center;gap:6px;margin-top:12px;justify-content:center;flex-wrap:wrap">
     <button type="button" class="light" onclick="customReportGoPage(1)" ${customReportPage<=1?"disabled":""}>« First</button>
     <button type="button" class="light" onclick="customReportGoPage(${customReportPage-1})" ${customReportPage<=1?"disabled":""}>‹ Prev</button>
@@ -1306,9 +1369,13 @@ function renderReportPreview(){
     <button type="button" class="light" onclick="customReportGoPage(${totalPages})" ${customReportPage>=totalPages?"disabled":""}>Last »</button>
   </div>`:"";
   $("customReportPreview").innerHTML=`<div style="margin-bottom:8px;color:var(--muted);font-size:13px">${esc(reportSubtitle(criteria))}</div><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><div style="margin-top:10px;font-weight:bold;color:var(--nav)">Total Records: ${rows.length}</div>${pager}`;
+  const bar=$("rep_selectionBar");if(bar)bar.style.display=rows.length?"flex":"none";
+  updateRepSelectionCount();
 }
 function printCustomReport(){
-  const{criteria,rows}=filterReportData();
+  const{criteria,rows:allRows}=filterReportData();
+  // Print only the selected records; if nothing is selected, print the whole filtered list.
+  const rows=repSelectedIds.size?allRows.filter(r=>repSelectedIds.has(String(reportEntityId(criteria.type,r)))):allRows;
   const headers=reportHeaders(criteria.type);
   const bodyRows=rows.map((r,i)=>reportRowHtml(criteria.type,r,i+1,"print")).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px">کوئی ریکارڈ نہیں ملا</td></tr>`;
   const subtitle=reportSubtitle(criteria);
