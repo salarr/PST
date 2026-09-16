@@ -276,7 +276,7 @@ body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-we
 .repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:#0f766e;cursor:pointer;flex:0 0 auto}
 .repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 table td,table th{border:1px solid var(--line)!important}
-table th{font-size:14px!important;font-weight:700!important;color:#000!important;opacity:1!important}
+table th{font-size:14px!important;font-weight:700!important;color:#0f766e!important;opacity:1!important}
 table td{font-size:14px!important;color:#000!important;opacity:1!important}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
@@ -286,26 +286,27 @@ td,th,label,input,select,button,.field label{font-weight:500}
 .sort-menu{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:30;min-width:170px;margin-top:4px;overflow:hidden}
 .sort-menu div{padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .sort-menu div:hover{background:#f2faf8;color:#0f766e}
+.hearings-count{background:#fff;color:#0f766e!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
 /* Appeal Register only: distinct action icon colors + round brown Hearings button */
-#appealRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#appealRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #appealRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #appealRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#appealRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
-#appealRows .hearings-link:hover{background:#78350f;color:#fff!important}
+#appealRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+#appealRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
 /* CM Register: same action icon colors + round brown Hearings button */
-#cmRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#cmRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #cmRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #cmRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#cmRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
-#cmRows .hearings-link:hover{background:#78350f;color:#fff!important}
+#cmRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+#cmRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
 #cmRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
 #cmRows .actionbuttons span.hearings-link{flex:0 0 auto}
 /* CPLA Register: same action icon colors + round brown Hearings button */
-#cplaRows .actionbuttons .icon-only[title="Edit Record"]{color:#2563eb!important}
+#cplaRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #cplaRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #cplaRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#cplaRows .hearings-link{background:#92400e;color:#fff!important;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
-#cplaRows .hearings-link:hover{background:#78350f;color:#fff!important}
+#cplaRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+#cplaRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
 #cplaRows td:nth-child(5){white-space:normal;min-width:180px;max-width:280px}
 #cplaRows td:last-child{white-space:nowrap;min-width:150px}
 #cplaRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
@@ -331,8 +332,8 @@ td,th,label,input,select,button,.field label{font-weight:500}
 <button class="tab active" onclick="tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
 </div>
 <div id="appeals" class="panel active card"><div class="title"><h2>Appeal Register</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appeal No. <span style="font-size:11px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>CM</th><th>CPLA</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
-<div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>File</th><th>Members</th><th>Status</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
-<div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
+<div id="cm" class="panel card"><div class="title"><h2>CM Register</h2><button class="primary" onclick="cmForm()">Add CM</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th>Status</th><th>Next Date of Hearing</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
+<div id="cpla" class="panel card"><div class="title"><h2>CPLA Register</h2><button class="primary" onclick="cplaForm()">Add CPLA</button></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Hearings</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="title"><h2>📅 Upcoming Hearings — Next 7 Days</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th><th>Actions</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
 
 <div id="customReport" class="panel card">
@@ -504,7 +505,7 @@ async function loadActivityLog(all){
    const res=await api("getActivityLog",{date});
    if(!res.ok){list.innerHTML=`<div style="color:#b83b35">${esc(res.error)}</div>`;return}
    if(!res.logs.length){list.innerHTML=`<div style="padding:12px;color:#6b6578">کوئی activity نہیں ملی۔</div>`;return}
-   list.innerHTML=`<table class="t"><tr><th>Date</th><th>User</th><th>Action</th><th>Details</th></tr>${res.logs.map(l=>`<tr><td>${esc(new Date(l.Timestamp).toLocaleDateString("en-GB"))}</td><td>${esc(l.Username)}</td><td>${esc(l.Action)}</td><td>${esc(l.Details)}</td></tr>`).join("")}</table>`;
+   list.innerHTML=`<table class="t"><tr><th>Date</th><th>User</th><th>Action</th><th>Details</th></tr>${res.logs.map(l=>`<tr><td>${dateOnly(l.Timestamp)}</td><td>${esc(l.Username)}</td><td>${esc(l.Action)}</td><td>${esc(l.Details)}</td></tr>`).join("")}</table>`;
  }catch(e){list.innerHTML=`<div style="color:#b83b35">Error: ${esc(e.message)}</div>`}
 }
 function openUsersModal(){if(currentUser?.role!=="admin")return;renderUsersModal();$("usersModal").classList.add("show")}
@@ -835,9 +836,9 @@ function del(key,eid){
 }
 function statusSelectStyle(value){
   const v=String(value||"").trim().toLowerCase();
-  if(v==="decided")return "background:#e8f8ee;color:#15803d;border:1px solid #bbf7d0;font-weight:700";
-  if(v==="pending")return "background:#fff1e6;color:#c2410c;border:1px solid #fed7aa;font-weight:700";
-  return "";
+  if(v==="decided")return "background:#e8f8ee;color:#15803d;border:1px solid #0f766e;font-weight:700";
+  if(v==="pending")return "background:#fff1e6;color:#c2410c;border:1px solid #0f766e;font-weight:700";
+  return "border:1px solid #0f766e";
 }
 function registerInlineSelect(regKey,eid,field,options,value,extraStyle=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
@@ -855,8 +856,8 @@ function registerInlineUpdate(regKey,eid,field,value){
   showToast("✅ Record updated");
 }
 function acts(key,eid,fn){return `<button class="light actionbtn icon-only" title="Edit Record" aria-label="Edit Record" onclick="${fn}('${eid}')">${ICON_EDIT}</button><button class="red actionbtn icon-only" title="Delete Record" aria-label="Delete Record" onclick="del('${key}','${eid}')">${ICON_TRASH}</button>`}
-function cmRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members,"color:#2563eb;font-weight:700")}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${db.cmHearings.filter(x=>x.parent_id===r.id).length}</td><td><div class="actionbuttons">${acts("cms",r.id,"cmForm")}<span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings</span></div></td></tr>`}
-function cplaRow(r,idx){return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${getAppeal(r.appeal_id)?.Appeal_Num||"-"}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${db.cplaHearings.filter(x=>x.parent_id===r.id).length}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings</span></div></td></tr>`}
+function cmRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cmHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members,"color:#000;font-weight:700;border:1px solid #0f766e")}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${nextCMHearingDate(r.id)}</td><td>${hCount}</td><td><div class="actionbuttons">${acts("cms",r.id,"cmForm")}<span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
+function cplaRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cplaHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td>${hCount}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 const ICON_EYE=`<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>`;
 function renderUpcomingHearings(){
  const today=new Date();today.setHours(0,0,0,0);
@@ -876,7 +877,7 @@ function renderUpcomingHearings(){
    const isTomorrow=x.date.getTime()===tomorrow.getTime();
    const dateStyle=isTomorrow?' class="tomorrow-date"':'';
    const aid=String(x.a.id??x.a.ID??x.a.Appeal_ID??"");
-   return `<tr><td${dateStyle}>${x.date.toLocaleDateString("en-GB")}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td><td><button class="light actionbtn icon-only" title="View Full Details" aria-label="View Full Details" onclick="appealDetails('${aid}')">${ICON_EYE}</button></td></tr>`;
+   return `<tr><td${dateStyle}>${dateOnly(x.date)}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td><td><button class="light actionbtn icon-only" title="View Full Details" aria-label="View Full Details" onclick="appealDetails('${aid}')">${ICON_EYE}</button></td></tr>`;
  }).join(""):empty(8);
 }
 const APPEALS_PER_PAGE=10;let appealsPage=1;let appealsCurrentList=[];let appealsSortMode="default";
@@ -938,8 +939,8 @@ function renderAppealsPagination(total,totalPages){
 function appealsGoPage(p){appealsPage=p;renderAppealsList(appealsCurrentList);}
 function render(){
 renderAppealsList(db.appeals);
-$("cmRows").innerHTML=db.cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
-$("cplaRows").innerHTML=db.cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
+$("cmRows").innerHTML=db.cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(11);
+$("cplaRows").innerHTML=db.cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(12);
 renderUpcomingHearings();
 if($("rep_type")){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();}
 }
@@ -956,8 +957,8 @@ function searchAppeals(){
  if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
  appealsPage=1;
  renderAppealsList(appeals);
- $("cmRows").innerHTML=cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(9);
- $("cplaRows").innerHTML=cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(10);
+ $("cmRows").innerHTML=cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(11);
+ $("cplaRows").innerHTML=cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(12);
  // Keep the main Appeals register visible for All/Appeal/Appellant; show the matching register for CM/CPLA.
  if(type==="cm") tab("cm",document.querySelector('.tab:nth-child(2)'));
  else if(type==="cpla") tab("cpla",document.querySelector('.tab:nth-child(3)'));
@@ -968,13 +969,15 @@ function dateOnly(value){
   const s=String(value).trim();
   // Google Sheets may return an ISO timestamp; keep only the calendar date.
   const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if(m)return `${m[3]}/${m[2]}/${m[1]}`;
+  if(m)return `${m[3]}-${m[2]}-${m[1]}`;
   const d=new Date(s);
   if(isNaN(d))return esc(s.split(/[T ]/)[0]);
-  return d.toLocaleDateString("en-GB");
+  const dd=String(d.getDate()).padStart(2,"0"),mm=String(d.getMonth()+1).padStart(2,"0"),yyyy=d.getFullYear();
+  return `${dd}-${mm}-${yyyy}`;
 }
 function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
-function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#2563eb;font-weight:700")}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#92400e;font-weight:700")}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings</span></div></td></tr>`}
+function nextCMHearingDate(cmId){const hs=db.cmHearings.filter(h=>h.parent_id===cmId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
+function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");const hCount=db.appealHearings.filter(x=>x.parent_id===rid).length;return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#000;font-weight:700;border:1px solid #0f766e")}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#000;font-weight:700;border:1px solid #0f766e")}</td><td>${nextHearingDate(rid)}</td><td>${db.cms.filter(x=>String(x.appeal_id)===rid).length}</td><td>${db.cplas.filter(x=>String(x.appeal_id)===rid).length}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 
 function normalize(v){return v===undefined||v===null?"":v}
 function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
@@ -1029,10 +1032,11 @@ function addHearingFor(type,parentId){
   hearingForm(type,null);
   setTimeout(()=>selectHearingParent(type,parentId),0);
 }
-function appealDetails(aid){let a=getAppeal(aid),hs=db.appealHearings.filter(x=>x.parent_id===aid);modal(`Appeal ${esc(a.Appeal_Num)} — Details / Appeal Hearings`,`<div style="padding:10px"><b>Appellant:</b> ${esc(a.Name_of_Appellant)} &nbsp; <b>Status:</b> ${esc(a.Status)} &nbsp; <b>Member:</b> ${esc(a.Member)}</div><div class="actions"><button class="green" onclick="addHearingFor('appeal','${aid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Proceedings</th><th>Judgement</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td><td><button class="light mini" onclick="hearingForm('appeal','${h.id}')">✏️</button><button class="red mini" onclick="del('appealHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="4">No hearings</td></tr>'}</tbody></table></div>`)}
-function cmDetails(cid){let c=db.cms.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=db.cmHearings.filter(x=>x.parent_id===cid);modal(`CM ${esc(c?.CM_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CM_Year)} &nbsp; <b>Status:</b> ${esc(c?.CM_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cm','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cm','${h.id}')">✏️</button><button class="red mini" onclick="del('cmHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="3">No hearings</td></tr>'}</tbody></table></div>`)}
-function cplaDetails(cid){let c=db.cplas.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=db.cplaHearings.filter(x=>x.parent_id===cid);modal(`CPLA ${esc(c?.CPLA_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CPLA_Year)} &nbsp; <b>Status:</b> ${esc(c?.CPLA_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cpla','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Officer Appeared</th><th>Court</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.Officer_Appeared)}</td><td>${esc(h.Court)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cpla','${h.id}')">✏️</button><button class="red mini" onclick="del('cplaHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="5">No hearings</td></tr>'}</tbody></table></div>`)}
-function report(aid){let a=getAppeal(aid);let cms=db.cms.filter(x=>x.appeal_id===aid),cplas=db.cplas.filter(x=>x.appeal_id===aid),hs=db.appealHearings.filter(x=>x.parent_id===aid);let w=open("","_blank");w.document.write(`<html><head><title>Appeal Report</title><style>body{margin:0}.report{width:210mm;min-height:297mm;padding:18mm;font:12pt Arial}.report h1{text-align:center;font-size:16pt;text-decoration:underline}.report h2{text-align:center;text-decoration:underline}.report p{line-height:1.5}.t{width:100%;border-collapse:collapse}.t th,.t td{border:1px solid #777;padding:6px}<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}</style></style>
+function sortHearingsAsc(hs){return hs.slice().sort((a,b)=>new Date(a.Date_of_Hearing||0)-new Date(b.Date_of_Hearing||0))}
+function appealDetails(aid){let a=getAppeal(aid),hs=sortHearingsAsc(db.appealHearings.filter(x=>x.parent_id===aid));modal(`Appeal ${esc(a.Appeal_Num)} — Details / Appeal Hearings`,`<div style="padding:10px"><b>Appellant:</b> ${esc(a.Name_of_Appellant)} &nbsp; <b>Status:</b> ${esc(a.Status)} &nbsp; <b>Member:</b> ${esc(a.Member)}</div><div class="actions"><button class="green" onclick="addHearingFor('appeal','${aid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Proceedings</th><th>Judgement</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td><td><button class="light mini" onclick="hearingForm('appeal','${h.id}')">✏️</button><button class="red mini" onclick="del('appealHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="4">No hearings</td></tr>'}</tbody></table></div>`)}
+function cmDetails(cid){let c=db.cms.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=sortHearingsAsc(db.cmHearings.filter(x=>x.parent_id===cid));modal(`CM ${esc(c?.CM_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CM_Year)} &nbsp; <b>Status:</b> ${esc(c?.CM_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cm','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cm','${h.id}')">✏️</button><button class="red mini" onclick="del('cmHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="3">No hearings</td></tr>'}</tbody></table></div>`)}
+function cplaDetails(cid){let c=db.cplas.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=sortHearingsAsc(db.cplaHearings.filter(x=>x.parent_id===cid));modal(`CPLA ${esc(c?.CPLA_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CPLA_Year)} &nbsp; <b>Status:</b> ${esc(c?.CPLA_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cpla','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Officer Appeared</th><th>Court</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.Officer_Appeared)}</td><td>${esc(h.Court)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cpla','${h.id}')">✏️</button><button class="red mini" onclick="del('cplaHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="5">No hearings</td></tr>'}</tbody></table></div>`)}
+function report(aid){let a=getAppeal(aid);let cms=db.cms.filter(x=>x.appeal_id===aid),cplas=db.cplas.filter(x=>x.appeal_id===aid),hs=sortHearingsAsc(db.appealHearings.filter(x=>x.parent_id===aid));let w=open("","_blank");w.document.write(`<html><head><title>Appeal Report</title><style>body{margin:0}.report{width:210mm;min-height:297mm;padding:18mm;font:12pt Arial}.report h1{text-align:center;font-size:16pt;text-decoration:underline}.report h2{text-align:center;text-decoration:underline}.report p{line-height:1.5}.t{width:100%;border-collapse:collapse}.t th,.t td{border:1px solid #777;padding:6px}<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}</style></style>
 <style id="final-color-theme">
 :root{--nav:#1f2937;--accent:#0f766e;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#0f766e}
 body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
@@ -1083,7 +1087,7 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
   margin-right:3px !important;
 }
 </style>
-</head><body><div class="report"><h1>APPEAL CASE REPORT</h1><h2>Appeal No. ${esc(a.Appeal_Num)} / ${esc(a.Appeal_Year)}</h2><p><b>Name of Appellant:</b> ${esc(a.Name_of_Appellant)}</p><p><b>Name Urdu:</b> ${esc(a.Name_Urdu)}</p><p><b>Respondents:</b> ${esc(a.Respondents)}</p><p><b>Member:</b> ${esc(a.Member)} &nbsp; <b>Bench:</b> ${esc(a.Bench)}</p><p><b>File No:</b> ${esc(a.File_No)} &nbsp; <b>Status:</b> ${esc(a.Status)}</p><p><b>Prayer:</b> ${esc(a.Prayer)}</p><h3>Appeal Hearings</h3><table class="t"><tr><th>Date</th><th>Court Proceedings</th><th>Crux of Judgement</th></tr>${hs.map(h=>`<tr><td>${esc(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td></tr>`).join("")}</table><h3>CMs</h3><table class="t"><tr><th>CM No.</th><th>Year</th><th>Status</th><th>Members</th></tr>${cms.map(c=>`<tr><td>${esc(c.CM_No)}</td><td>${esc(c.CM_Year)}</td><td>${esc(c.CM_Status)}</td><td>${esc(c.CM_Members)}</td></tr>`).join("")}</table><h3>CPLAs</h3><table class="t"><tr><th>CPLA No.</th><th>Year</th><th>Status</th><th>Implemented</th></tr>${cplas.map(c=>`<tr><td>${esc(c.CPLA_No)}</td><td>${esc(c.CPLA_Year)}</td><td>${esc(c.CPLA_Status)}</td><td>${esc(c.Judgement_Implemented_or_Not)}</td></tr>`).join("")}</table></div></body></html>`);w.document.close();setTimeout(()=>w.print(),400)}
+</head><body><div class="report"><h1>APPEAL CASE REPORT</h1><h2>Appeal No. ${esc(a.Appeal_Num)} / ${esc(a.Appeal_Year)}</h2><p><b>Name of Appellant:</b> ${esc(a.Name_of_Appellant)}</p><p><b>Name Urdu:</b> ${esc(a.Name_Urdu)}</p><p><b>Respondents:</b> ${esc(a.Respondents)}</p><p><b>Member:</b> ${esc(a.Member)} &nbsp; <b>Bench:</b> ${esc(a.Bench)}</p><p><b>File No:</b> ${esc(a.File_No)} &nbsp; <b>Status:</b> ${esc(a.Status)}</p><p><b>Prayer:</b> ${esc(a.Prayer)}</p><h3>Appeal Hearings</h3><table class="t"><tr><th>Date</th><th>Court Proceedings</th><th>Crux of Judgement</th></tr>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td></tr>`).join("")}</table><h3>CMs</h3><table class="t"><tr><th>CM No.</th><th>Year</th><th>Status</th><th>Members</th></tr>${cms.map(c=>`<tr><td>${esc(c.CM_No)}</td><td>${esc(c.CM_Year)}</td><td>${esc(c.CM_Status)}</td><td>${esc(c.CM_Members)}</td></tr>`).join("")}</table><h3>CPLAs</h3><table class="t"><tr><th>CPLA No.</th><th>Year</th><th>Status</th><th>Implemented</th></tr>${cplas.map(c=>`<tr><td>${esc(c.CPLA_No)}</td><td>${esc(c.CPLA_Year)}</td><td>${esc(c.CPLA_Status)}</td><td>${esc(c.Judgement_Implemented_or_Not)}</td></tr>`).join("")}</table></div></body></html>`);w.document.close();setTimeout(()=>w.print(),400)}
 // ===== CUSTOM REPORT (Pending / Decided — Year / Month / Date-range) =====
 const monthNames=["","January","February","March","April","May","June","July","August","September","October","November","December"];
 let customReportPage=1;
@@ -1153,9 +1157,9 @@ const REPORT_FIELD_DEFS={
     {key:"Name_of_Appellant",label:"Appellant Name",get:(r)=>esc(r.Name_of_Appellant)},
     {key:"File_No",label:"File No.",get:(r)=>esc(r.File_No)},
     {key:"Respondents",label:"Respondents",get:(r)=>esc(r.Respondents)},
-    {key:"Member",label:"Member",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Member):reportInlineSelect(r.id,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#2563eb;font-weight:700")},
+    {key:"Member",label:"Member",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Member):reportInlineSelect(r.id,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,"color:#000;font-weight:700;border:1px solid #0f766e")},
     {key:"Status",label:"Status",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Status):reportInlineSelect(r.id,"Status",["Pending","Decided"],r.Status)},
-    {key:"Bench",label:"Bench",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Bench):reportInlineSelect(r.id,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#92400e;font-weight:700")},
+    {key:"Bench",label:"Bench",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Bench):reportInlineSelect(r.id,"Bench",["Faisalabad","Lahore"],r.Bench,"color:#000;font-weight:700;border:1px solid #0f766e")},
     {key:"Prayer",label:"Prayer",get:(r)=>esc(r.Prayer)},
     {key:"PrevHearing",label:"Previous Date of Hearing",get:(r,ctx)=>dateOnly(reportPreviousHearingDate("appeal",ctx.eid))},
     {key:"NextHearing",label:"Next Date of Hearing",get:(r,ctx)=>dateOnly(reportDecisionDate("appeal",ctx.eid))}
