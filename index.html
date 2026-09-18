@@ -276,7 +276,7 @@ body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-we
 .repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:#0f766e;cursor:pointer;flex:0 0 auto}
 .repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 table td,table th{border:1px solid var(--line)!important}
-table th{font-size:14px!important;font-weight:700!important;color:#0f766e!important;opacity:1!important}
+table th{font-size:14px!important;font-weight:700!important;color:#0f766e!important;opacity:1!important;text-align:center!important}
 table td{font-size:14px!important;color:#000!important;opacity:1!important}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
@@ -290,28 +290,33 @@ td,th,label,input,select,button,.field label{font-weight:500}
 .add-menu div{padding:10px 14px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .add-menu div:hover{background:#f2faf8;color:#0f766e}
 select option{color:#000!important;background:#fff!important}
-.count-pill{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;cursor:default}
-.hearings-count{background:#fff;color:#0f766e!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
-/* Appeal Register only: distinct action icon colors + round brown Hearings button */
+/* Shared pill/dropdown teal-outline theme (white bg + teal text, hover swaps) */
+.select-teal-outline{background:#fff!important;color:#0f766e!important;border:1px solid #0f766e!important;font-weight:700!important;border-radius:999px!important;padding:7px 16px!important;min-width:110px;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.select-teal-outline:hover{background:#0f766e!important;color:#fff!important}
+.select-teal-outline option{color:#000!important;background:#fff!important}
+#appealRows .hearings-link,#appealRows .count-pill,#cplaRows .hearings-link{background:#fff!important;color:#0f766e!important;border:1px solid #0f766e!important}
+#appealRows .hearings-link:hover,#appealRows .count-pill:hover,#cplaRows .hearings-link:hover{background:#0f766e!important;color:#fff!important}
+#appealRows .hearings-link .hearings-count,#appealRows .count-pill .hearings-count,#cplaRows .hearings-link .hearings-count{background:#0f766e!important;color:#fff!important}
+#appealRows .hearings-link:hover .hearings-count,#appealRows .count-pill:hover .hearings-count,#cplaRows .hearings-link:hover .hearings-count{background:#fff!important;color:#0f766e!important}
+.count-pill{background:#fff;color:#0f766e!important;border:1px solid #0f766e;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;cursor:default;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.hearings-link{background:#fff;color:#0f766e!important;border:1px solid #0f766e;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.hearings-link:hover{background:#0f766e;color:#fff!important}
+.hearings-count{background:#0f766e;color:#fff!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
+.hearings-link:hover .hearings-count{background:#fff;color:#0f766e!important}
+/* Appeal Register only: distinct action icon colors */
 #appealRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #appealRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #appealRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#appealRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-#appealRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
-/* CM Register: same action icon colors + round brown Hearings button */
+/* CM Register: same action icon colors */
 #cmRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #cmRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #cmRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#cmRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-#cmRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
 #cmRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
 #cmRows .actionbuttons span.hearings-link{flex:0 0 auto}
-/* CPLA Register: same action icon colors + round brown Hearings button */
+/* CPLA Register: same action icon colors */
 #cplaRows .actionbuttons .icon-only[title="Edit Record"]{color:#0f766e!important}
 #cplaRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
 #cplaRows .actionbuttons .icon-only[title="Delete Record"]{color:#e11d48!important}
-#cplaRows .hearings-link{background:#0f766e;color:#fff!important;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-#cplaRows .hearings-link:hover{background:#0b5c53;color:#fff!important}
 #cplaRows td:nth-child(5){white-space:normal;min-width:180px;max-width:280px}
 #cplaRows td:last-child{white-space:nowrap;min-width:150px}
 #cplaRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
@@ -334,15 +339,14 @@ select option{color:#000!important;background:#fff!important}
 <div class="toolbar"><div class="search"><select id="searchType" onchange="searchAppeals()" style="max-width:150px"><option value="all">All</option><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option><option value="appellant">Appellant Name</option></select><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><div style="position:relative"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><div class="add-menu" id="addMenu"><div onclick="closeAddMenu();openAppealEntryModal()">⚖️ Appeal</div><div onclick="closeAddMenu();cmForm()">📁 CM</div><div onclick="closeAddMenu();cplaForm()">📜 CPLA</div></div></div><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button><button class="light" type="button" id="toolbarBurgerBtn" onclick="toggleToolbarMenu()" title="More Actions">☰</button><div class="toolbar-menu" id="toolbarMenu"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><button class="light" type="button" onclick="openBreakdownModal();closeToolbarMenu()">📊 Breakdown</button></div></div>
 
 <div class="tabs">
-<button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
+<button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals</button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM</button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA</button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings — Next 7 Days</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
 </div>
-<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appeal No. <span style="font-size:11px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Date of Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
-<div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th>Status</th><th>Next Date of Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
+<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:11px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th>Year</th><th>Appellant</th><th>Member</th><th>Status</th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
+<div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th>Year</th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th>Status</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
 <div id="cpla" class="panel card"><div class="body"><div id="cplaFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th>Year</th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th>Status</th><th>Judgement</th><th>Implemented</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
-<div id="upcoming" class="panel card"><div class="title"><h2>📅 Upcoming Hearings — Next 7 Days</h2></div><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th><th>Actions</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
+<div id="upcoming" class="panel card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th><th>Actions</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
 
 <div id="customReport" class="panel card">
-<div class="title"><h2>🖨️ Custom Report — Print Setup</h2></div>
 <div class="body">
 <div class="grid" style="margin-bottom:6px">
   <div class="field"><label>Case Type</label><select id="rep_type" onchange="onRepTypeChanged()"><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option></select></div>
@@ -839,16 +843,12 @@ function del(key,eid){
  persist();
  logActivity("Delete "+key,logDetail);
 }
-function statusSelectStyle(value){
-  return "background:linear-gradient(135deg,#20262e,#374151);color:#fff;border:1px solid #20262e;font-weight:700;border-radius:999px;padding:7px 16px";
-}
-function benchSelectStyle(value){
-  return "background:linear-gradient(135deg,#20262e,#374151);color:#fff;border:1px solid #20262e;font-weight:700;border-radius:999px;padding:7px 16px";
-}
-function memberSelectStyle(){return "background:linear-gradient(135deg,#20262e,#374151);color:#fff;border:1px solid #20262e;font-weight:700;border-radius:999px;padding:7px 16px";}
-function registerInlineSelect(regKey,eid,field,options,value,extraStyle=""){
+function statusSelectStyle(value){return "select-teal-outline";}
+function benchSelectStyle(value){return "select-teal-outline";}
+function memberSelectStyle(){return "select-teal-outline";}
+function registerInlineSelect(regKey,eid,field,options,value,extraClass=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
-  return `<select onchange="registerInlineUpdate('${regKey}','${eid}','${field}',this.value)" style="min-width:110px;padding:5px 6px;font-size:13px;${extraStyle}">${opts}</select>`;
+  return `<select class="${extraClass}" onchange="registerInlineUpdate('${regKey}','${eid}','${field}',this.value)" style="min-width:110px;font-size:13px">${opts}</select>`;
 }
 function registerInlineUpdate(regKey,eid,field,value){
   const list=db[regKey];
@@ -863,7 +863,7 @@ function registerInlineUpdate(regKey,eid,field,value){
 }
 function acts(key,eid,fn){return `<button class="light actionbtn icon-only" title="Edit Record" aria-label="Edit Record" onclick="${fn}('${eid}')">${ICON_EDIT}</button><button class="red actionbtn icon-only" title="Delete Record" aria-label="Delete Record" onclick="del('${key}','${eid}')">${ICON_TRASH}</button>`}
 function cmRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cmHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members,memberSelectStyle())}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${nextCMHearingDate(r.id)}</td><td><div class="actionbuttons">${acts("cms",r.id,"cmForm")}<span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
-function cplaRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cplaHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${statusBadge(r.CPLA_Status)}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
+function cplaRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cplaHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${registerInlineSelect("cplas",r.id,"CPLA_Status",["Pending","Decided"],r.CPLA_Status,"select-teal-outline")}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 const ICON_EYE=`<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>`;
 function renderUpcomingHearings(){
  const today=new Date();today.setHours(0,0,0,0);
@@ -1297,9 +1297,9 @@ function reportRowHtml(type,r,idx,mode){
   const cells=fields.map(f=>`<td>${f.get(r,ctx)}</td>`).join("");
   return`<tr><td>${idx}</td>${cells}</tr>`;
 }
-function reportInlineSelect(appealId,field,options,value,extraStyle=""){
+function reportInlineSelect(appealId,field,options,value,extraClass=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
-  return `<select onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;padding:5px 6px;font-size:13px;${extraStyle}">${opts}</select>`;
+  return `<select class="${extraClass}" onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;font-size:13px">${opts}</select>`;
 }
 function reportInlineUpdate(appealId,field,value){
   const a=db.appeals.find(x=>String(x.id??x.ID??x.Appeal_ID)===String(appealId));
