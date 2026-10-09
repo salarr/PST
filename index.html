@@ -144,7 +144,7 @@ header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px 
 .primary{background:linear-gradient(135deg,#0f766e,#159a86);color:#fff}
 .green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
 .light{background:#e8f5ef;color:#116149;border:1px solid #c9e4d8}
-.tab{background:#fff;color:#000;border-color:#d8e2dc}.tab.active{background:#0f766e;color:#000;border-color:#0f766e}
+.tab{background:#fff;color:#000;border-color:#d8e2dc}.tab.active{background:#0f766e;color:#fff;border-color:#0f766e}
 .title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
 th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
 .stat b{color:#0f766e}
@@ -306,15 +306,16 @@ button,input,select,textarea,.hearings-link,.count-pill,.badge,.tab-count{font-s
 .select-teal-outline option{color:#000!important;background:#fff!important}
 #appealRows .hearings-link,#appealRows .count-pill,#cplaRows .hearings-link{background:#fff!important;color:#000!important;border:1px solid #0f766e!important}
 #appealRows .hearings-link:hover,#appealRows .count-pill:hover,#cplaRows .hearings-link:hover{background:#0f766e!important;color:#fff!important}
-#appealRows .hearings-link .hearings-count,#appealRows .count-pill .hearings-count,#cplaRows .hearings-link .hearings-count{background:#0f766e!important;color:#000!important}
+#appealRows .hearings-link .hearings-count,#appealRows .count-pill .hearings-count,#cplaRows .hearings-link .hearings-count{background:#0f766e!important;color:#fff!important}
 #appealRows .hearings-link:hover .hearings-count,#appealRows .count-pill:hover .hearings-count,#cplaRows .hearings-link:hover .hearings-count{background:#fff!important;color:#000!important}
 .count-pill{background:#fff;color:#000!important;border:1px solid #0f766e;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;cursor:default;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .hearings-link{background:#fff;color:#000!important;border:1px solid #0f766e;border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .hearings-link:hover{background:#0f766e;color:#fff!important}
-.hearings-count{background:#0f766e;color:#000!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
+.hearings-count{background:#0f766e;color:#fff!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
 .hearings-link:hover .hearings-count{background:#fff;color:#000!important}
-.tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0f766e;color:#000;font-size:11px;font-weight:700;margin-left:4px;vertical-align:middle}
-.tab.active .tab-count{background:#fff;color:#000}
+table td.uh-section{background:#f2faf8!important;text-align:left!important;color:#000!important}
+.tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0f766e;color:#fff;font-size:11px;font-weight:700;margin-left:4px;vertical-align:middle}
+.tab.active .tab-count{background:#0f766e;color:#fff}
 .status-filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .status-filter-bar label{font-size:13px;font-weight:700;color:var(--muted)}
 .status-filter-bar select{width:auto;min-width:130px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);font-size:13px;font-weight:700}
@@ -361,8 +362,11 @@ button,input,select,textarea,.hearings-link,.count-pill,.badge,.tab-count{font-s
 <div id="cpla" class="panel card"><div class="body"><div id="cplaFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cplaYearMenu','cplaYearFilter',db.cplas,'CPLA_Year')">Year <span style="font-size:11px">▾</span><div id="cplaYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cplaStatusMenu')">Status <span style="font-size:11px">▾</span><div id="cplaStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cplaStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','decided',event)">Decided</div></div></th><th>Judgement</th><th>Implemented</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="body">
 <div class="uh-controls" style="display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:16px">
-  <div class="field" style="max-width:180px"><label>Pick a Date</label><input type="date" id="uh_datePicker" onchange="filterUpcomingByDate()"></div>
-  <div class="field" style="max-width:180px"><label>Or Pick a Week</label><select id="uh_weekFilter" onchange="filterUpcomingByWeek()"><option value="">-- Select Week --</option><option value="this">This Week</option><option value="next">Next Week</option></select></div>
+  <div class="field" style="max-width:170px"><label>Pick a Date</label><input type="date" id="uh_datePicker" onchange="uhSelect('date')"></div>
+  <div class="field" style="max-width:170px"><label>From Date</label><input type="date" id="uh_fromDate" onchange="uhSelect('range')"></div>
+  <div class="field" style="max-width:170px"><label>To Date</label><input type="date" id="uh_toDate" onchange="uhSelect('range')"></div>
+  <div class="field" style="max-width:170px"><label>Week</label><select id="uh_weekFilter" onchange="uhSelect('week')"><option value="">-- Select Week --</option><option value="this">This Week</option><option value="next">Next Week</option></select></div>
+  <div class="field" style="max-width:170px"><label>Month</label><select id="uh_monthFilter" onchange="uhSelect('month')"><option value="">-- Select Month --</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
   <div class="actions" style="margin:0"><button class="primary" type="button" onclick="previewUpcoming()">🔍 Preview</button><button class="green" type="button" onclick="printUpcomingHearings()">🖨️ Print</button></div>
 </div>
 <div class="tablewrap"><table><thead><tr><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th><th>Actions</th></tr></thead><tbody id="upcomingRows"></tbody></table></div></div></div>
@@ -886,19 +890,31 @@ function acts(key,eid,fn){return `<button class="light actionbtn icon-only" titl
 function cmRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cmHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CM_No)}</td><td>${esc(r.CM_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CM_File)}</td><td>${registerInlineSelect("cms",r.id,"CM_Members",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.CM_Members,memberSelectStyle())}</td><td>${registerInlineSelect("cms",r.id,"CM_Status",["Pending","Decided"],r.CM_Status,statusSelectStyle(r.CM_Status))}</td><td>${nextCMHearingDate(r.id)}</td><td><div class="actionbuttons">${acts("cms",r.id,"cmForm")}<span class="hearings-link" onclick="cmDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 function cplaRow(r,idx){const a=getAppeal(r.appeal_id);const hCount=db.cplaHearings.filter(x=>x.parent_id===r.id).length;return `<tr><td>${idx}</td><td>${esc(r.CPLA_No)}</td><td>${esc(r.CPLA_Year)}</td><td>${a?.Appeal_Num||"-"}</td><td>${esc(a?.Appeal_Year||"-")}</td><td>${esc(a?.Name_of_Appellant||"-")}</td><td>${esc(r.CPLA_Title)}</td><td>${registerInlineSelect("cplas",r.id,"CPLA_Status",["Pending","Decided"],r.CPLA_Status,"select-teal-outline")}</td><td>${dateOnly(r.CPLA_filed_against_the_Judgement)}</td><td>${esc(r.Judgement_Implemented_or_Not)}</td><td><div class="actionbuttons">${acts("cplas",r.id,"cplaForm")}<span class="hearings-link" onclick="cplaDetails('${r.id}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 const ICON_EYE=`<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>`;
+function uhNum(v){const n=parseFloat(String(v??"").replace(/[^0-9.]/g,""));return isNaN(n)?Infinity:n}
+function uhCmp(a,b){return a<b?-1:a>b?1:0}
+// Pending Appeal hearings first (date, then Appeal No. small->big), then pending CM hearings (date, then CM No.)
 function getPendingHearingsInRange(startDate,endDate){
- const rows=[];
- db.appealHearings.forEach(h=>{
-   if(!h.Date_of_Hearing)return;
-   const d=new Date(h.Date_of_Hearing);if(isNaN(d))return;
+ const inRange=h=>{
+   if(!h.Date_of_Hearing)return null;
+   const d=new Date(h.Date_of_Hearing);if(isNaN(d))return null;
    d.setHours(0,0,0,0);
-   if(d>=startDate&&d<=endDate){
-     const a=getAppeal(h.parent_id);
-     if(a&&String(a.Status||"").trim().toLowerCase()==="pending")rows.push({date:d,a});
-   }
+   return (d>=startDate&&d<=endDate)?d:null;
+ };
+ const isPending=s=>String(s||"").trim().toLowerCase()==="pending";
+ const appealRows=[],cmRows=[];
+ db.appealHearings.forEach(h=>{
+   const d=inRange(h);if(!d)return;
+   const a=getAppeal(h.parent_id);
+   if(a&&isPending(a.Status))appealRows.push({type:"appeal",date:d,a});
  });
- rows.sort((x,y)=>x.date-y.date);
- return rows;
+ db.cmHearings.forEach(h=>{
+   const d=inRange(h);if(!d)return;
+   const cm=db.cms.find(c=>c.id===h.parent_id);
+   if(cm&&isPending(cm.CM_Status))cmRows.push({type:"cm",date:d,a:getAppeal(cm.appeal_id)||{},cm});
+ });
+ appealRows.sort((x,y)=>uhCmp(x.date,y.date)||uhCmp(uhNum(x.a.Appeal_Num),uhNum(y.a.Appeal_Num))||uhCmp(uhNum(x.a.Appeal_Year),uhNum(y.a.Appeal_Year)));
+ cmRows.sort((x,y)=>uhCmp(x.date,y.date)||uhCmp(uhNum(x.cm.CM_No),uhNum(y.cm.CM_No))||uhCmp(uhNum(x.cm.CM_Year),uhNum(y.cm.CM_Year)));
+ return appealRows.concat(cmRows);
 }
 function getUpcomingPendingHearings(){
  const today=new Date();today.setHours(0,0,0,0);
@@ -906,66 +922,101 @@ function getUpcomingPendingHearings(){
  return getPendingHearingsInRange(today,endDate);
 }
 let upcomingCurrentList=[];
+function uhRowCells(x){
+ if(x.type==="cm")return {no:`CM ${x.cm.CM_No} (Appeal ${x.a.Appeal_Num||"-"}/${x.a.Appeal_Year||"-"})`,year:x.cm.CM_Year,appellant:x.a.Name_of_Appellant||"-",bench:x.a.Bench||"-",member:x.cm.CM_Members||"-"};
+ return {no:x.a.Appeal_Num,year:x.a.Appeal_Year,appellant:x.a.Name_of_Appellant,bench:x.a.Bench,member:x.a.Member};
+}
+function uhDetailsButton(x){
+ const fn=x.type==="cm"?`cmDetails('${x.cm.id}')`:`appealDetails('${String(x.a.id??x.a.ID??x.a.Appeal_ID??"")}')`;
+ return `<button class="light actionbtn icon-only" title="View Full Details" aria-label="View Full Details" onclick="${fn}">${ICON_EYE}</button>`;
+}
 function renderUpcomingRows(rows){
  const today=new Date();today.setHours(0,0,0,0);
  const tomorrow=new Date(today);tomorrow.setDate(tomorrow.getDate()+1);
  const dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
  upcomingCurrentList=rows;
  const el=$("upcomingRows");if(!el)return;
- el.innerHTML=rows.length?rows.map(x=>{
-   const isTomorrow=x.date.getTime()===tomorrow.getTime();
-   const dateStyle=isTomorrow?' class="tomorrow-date"':'';
-   const aid=String(x.a.id??x.a.ID??x.a.Appeal_ID??"");
-   return `<tr><td${dateStyle}>${dateOnly(x.date)}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td><td><button class="light actionbtn icon-only" title="View Full Details" aria-label="View Full Details" onclick="appealDetails('${aid}')">${ICON_EYE}</button></td></tr>`;
- }).join(""):empty(8);
+ const hasCM=rows.some(x=>x.type==="cm");
+ let out="",lastType=null;
+ rows.forEach(x=>{
+   if(hasCM&&x.type!==lastType){out+=`<tr><td colspan="8" class="uh-section">${x.type==="cm"?"CM Hearings":"Appeal Hearings"}</td></tr>`;lastType=x.type}
+   const c=uhRowCells(x);
+   const dateStyle=x.date.getTime()===tomorrow.getTime()?' class="tomorrow-date"':'';
+   out+=`<tr><td${dateStyle}>${dateOnly(x.date)}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(c.no)}</td><td>${esc(c.year)}</td><td>${esc(c.appellant)}</td><td>${esc(c.bench)}</td><td>${esc(c.member)}</td><td>${uhDetailsButton(x)}</td></tr>`;
+ });
+ el.innerHTML=rows.length?out:empty(8);
 }
 function renderUpcomingHearings(){
- upcomingCurrentList=[];
+ upcomingCurrentList=[];upcomingTitleLabel="";
  const el=$("upcomingRows");if(!el)return;
- el.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:30px;color:#718096">Date select karein ya Week choose karein, phir Preview dabayein</td></tr>`;
+ el.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:30px;color:#718096">Date, Date Range, Week ya Month select karein, phir Preview dabayein</td></tr>`;
+}
+let upcomingTitleLabel="";
+function uhSelect(group){
+ const groups={date:["uh_datePicker"],range:["uh_fromDate","uh_toDate"],week:["uh_weekFilter"],month:["uh_monthFilter"]};
+ Object.keys(groups).forEach(g=>{if(g!==group)groups[g].forEach(id=>{const el=$(id);if(el)el.value=""})});
+ previewUpcoming();
 }
 function previewUpcoming(){
- const dateVal=$("uh_datePicker")?.value;
- const weekVal=$("uh_weekFilter")?.value;
- if(dateVal){
-   const d=new Date(dateVal+"T00:00:00");d.setHours(0,0,0,0);
-   renderUpcomingRows(getPendingHearingsInRange(d,d));
- }else if(weekVal){
+ const val=id=>$(id)?.value||"";
+ const dateVal=val("uh_datePicker"),from=val("uh_fromDate"),to=val("uh_toDate"),week=val("uh_weekFilter"),month=val("uh_monthFilter");
+ let start=null,end=null,label="";
+ if(from||to){
+   if(!from||!to){
+     upcomingCurrentList=[];upcomingTitleLabel="";
+     $("upcomingRows").innerHTML=`<tr><td colspan="8" style="text-align:center;padding:30px;color:#718096">From aur To dono dates select karein</td></tr>`;
+     return;
+   }
+   start=new Date(from+"T00:00:00");end=new Date(to+"T00:00:00");
+   if(start>end){const t=start;start=end;end=t}
+   label=`${dateOnly(start)} to ${dateOnly(end)}`;
+ }else if(dateVal){
+   start=new Date(dateVal+"T00:00:00");end=new Date(start);
+   label=dateOnly(start);
+ }else if(week){
    const today=new Date();today.setHours(0,0,0,0);
    const day=today.getDay();
    const diffToMonday=day===0?-6:1-day; // Monday of this week
-   const start=new Date(today);start.setDate(today.getDate()+diffToMonday+(weekVal==="next"?7:0));
-   const end=new Date(start);end.setDate(start.getDate()+5); // Monday..Saturday
-   renderUpcomingRows(getPendingHearingsInRange(start,end));
+   start=new Date(today);start.setDate(today.getDate()+diffToMonday+(week==="next"?7:0));
+   end=new Date(start);end.setDate(start.getDate()+5); // Monday..Saturday
+   label=`${week==="next"?"Next":"This"} Week (${dateOnly(start)} to ${dateOnly(end)})`;
+ }else if(month){
+   const y=new Date().getFullYear();
+   start=new Date(y,Number(month)-1,1);end=new Date(y,Number(month),0);
+   label=`${monthNames[Number(month)]} ${y}`;
  }else{
    renderUpcomingHearings();
+   return;
  }
-}
-function filterUpcomingByDate(){
- const v=$("uh_datePicker").value;
- if(!v)return;
- $("uh_weekFilter").value="";
- previewUpcoming();
-}
-function filterUpcomingByWeek(){
- const v=$("uh_weekFilter").value;
- if(!v)return;
- $("uh_datePicker").value="";
- previewUpcoming();
+ start.setHours(0,0,0,0);end.setHours(0,0,0,0);
+ upcomingTitleLabel=label;
+ renderUpcomingRows(getPendingHearingsInRange(start,end));
 }
 function printUpcomingHearings(){
  if(!upcomingCurrentList.length){alert("Print karne ke liye koi hearings list mein nahi hain.");return}
  const dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
- const body=upcomingCurrentList.map((x,i)=>`<tr><td>${i+1}</td><td>${dateOnly(x.date)}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td></td></tr>`).join("");
+ const hasCM=upcomingCurrentList.some(x=>x.type==="cm");
+ let body="",lastType=null;
+ upcomingCurrentList.forEach((x,i)=>{
+   if(hasCM&&x.type!==lastType){body+=`<tr><td colspan="7" class="sec">${x.type==="cm"?"CM Hearings":"Appeal Hearings"}</td></tr>`;lastType=x.type}
+   const c=uhRowCells(x);
+   body+=`<tr><td>${i+1}</td><td>${dateOnly(x.date)}</td><td>${dayNames[x.date.getDay()]}</td><td>${esc(c.no).replace(" (","<br>(")}</td><td>${esc(c.year)}</td><td>${esc(c.appellant)}</td><td>${esc(c.member)}</td></tr>`;
+ });
  const w=open("","_blank");
- w.document.write(`<html><head><title>Upcoming Hearings</title><style>body{font-family:Arial;margin:20mm}h1{text-align:center;text-decoration:underline;font-size:16pt;margin-bottom:4px}p.meta{text-align:center;color:#666;font-size:10.5pt;margin-top:0}table{width:100%;border-collapse:collapse;margin-top:16px}th,td{border-bottom:1px solid #777;padding:7px 6px;text-align:left;font-size:10.5pt}th{font-weight:bold}</style></head><body><h1>Upcoming Hearings</h1><p class="meta">Generated: ${dateOnly(new Date())}</p><table><thead><tr><th>Sr. #</th><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Remarks</th></tr></thead><tbody>${body}</tbody></table></body></html>`);
+ w.document.write(`<html><head><title>Upcoming Hearings</title><style>@page{margin:0 12mm 12mm 12mm}body{font-family:Arial;margin:0;padding-top:3mm}h1{text-align:center;text-decoration:underline;font-size:16pt;margin:0 0 4px}p.meta{text-align:center;color:#666;font-size:10.5pt;margin-top:0}table{width:100%;border-collapse:collapse;margin-top:16px}th,td{border-bottom:1px solid #777;padding:7px 6px;text-align:left;font-size:10.5pt}th{font-weight:normal}td.sec{background:#eee}th:nth-child(4),td:nth-child(4){width:1%;white-space:nowrap}</style></head><body><h1>Upcoming Hearings</h1><p class="meta">${esc(upcomingTitleLabel)}${upcomingTitleLabel?" | ":""}Generated: ${dateOnly(new Date())}</p><table><thead><tr><th>Sr. #</th><th>Date</th><th>Day</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Member</th></tr></thead><tbody>${body}</tbody></table></body></html>`);
  w.document.close();
  setTimeout(()=>w.print(),400);
 }
 function showUpcomingHearingsLoginPopup(){
  const rows=getUpcomingPendingHearings();
  if(!rows.length)return;
- const body=rows.map((x,i)=>`<tr><td>${i+1}</td><td>${dateOnly(x.date)}</td><td>${esc(x.a.Appeal_Num)}</td><td>${esc(x.a.Appeal_Year)}</td><td>${esc(x.a.Name_of_Appellant)}</td><td>${esc(x.a.Bench)}</td><td>${esc(x.a.Member)}</td></tr>`).join("");
+ const hasCM=rows.some(x=>x.type==="cm");
+ let body="",lastType=null;
+ rows.forEach((x,i)=>{
+   if(hasCM&&x.type!==lastType){body+=`<tr><td colspan="7" class="uh-section">${x.type==="cm"?"CM Hearings":"Appeal Hearings"}</td></tr>`;lastType=x.type}
+   const c=uhRowCells(x);
+   body+=`<tr><td>${i+1}</td><td>${dateOnly(x.date)}</td><td>${esc(c.no)}</td><td>${esc(c.year)}</td><td>${esc(c.appellant)}</td><td>${esc(c.bench)}</td><td>${esc(c.member)}</td></tr>`;
+ });
  modal("📅 Upcoming Hearings (Pending)",`<div class="tablewrap"><table><thead><tr><th>Sr. No.</th><th>Date</th><th>Appeal No.</th><th>Year</th><th>Appellant</th><th>Bench</th><th>Member</th></tr></thead><tbody>${body}</tbody></table></div><div class="actions full"><button class="gray" type="button" onclick="closeM()">✖ Close</button></div>`);
 }
 const APPEALS_PER_PAGE=10;let appealsPage=1;let appealsCurrentList=[];let appealsSortMode="default";
@@ -1080,17 +1131,11 @@ function setRegisterYearFilter(filterKey,value,e){
 }
 document.addEventListener("click",()=>{closeAllStatusMenus();closeAllYearMenus();});
 function applyRegisterStatusFilters(){
-  const q=$("search")?.value.trim();
-  if(q){searchAppeals();return}
   appealsPage=1;
-  renderAppealsList(applyAllFilters(db.appeals,"appealsStatusFilter","appealsYearFilter","Appeal_Year",isPendingAppeal));
-  $("cmRows").innerHTML=applyAllFilters(db.cms,"cmStatusFilter","cmYearFilter","CM_Year",isPendingCM).map((r,i)=>cmRow(r,i+1)).join("")||empty(10);
-  $("cplaRows").innerHTML=applyAllFilters(db.cplas,"cplaStatusFilter","cplaYearFilter","CPLA_Year",isPendingCPLA).map((r,i)=>cplaRow(r,i+1)).join("")||empty(11);
+  applySearchAndFilters();
 }
 function render(){
-renderAppealsList(applyAllFilters(db.appeals,"appealsStatusFilter","appealsYearFilter","Appeal_Year",isPendingAppeal));
-$("cmRows").innerHTML=applyAllFilters(db.cms,"cmStatusFilter","cmYearFilter","CM_Year",isPendingCM).map((r,i)=>cmRow(r,i+1)).join("")||empty(10);
-$("cplaRows").innerHTML=applyAllFilters(db.cplas,"cplaStatusFilter","cplaYearFilter","CPLA_Year",isPendingCPLA).map((r,i)=>cplaRow(r,i+1)).join("")||empty(11);
+applySearchAndFilters();
 const cmBar=$("cmFilterBar");if(cmBar){cmBar.style.display="none";cmBar.innerHTML="";}
 const cplaBar=$("cplaFilterBar");if(cplaBar){cplaBar.style.display="none";cplaBar.innerHTML="";}
 if($("appealsTabCount"))$("appealsTabCount").textContent=pendingAppeals().length;
@@ -1100,27 +1145,43 @@ renderUpcomingHearings();
 if($("rep_type")){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();}
 }
 function empty(n){return `<tr><td colspan="${n}" style="text-align:center;padding:30px;color:#718096">No records found</td></tr>`}
-function searchAppeals(){
- const q=$("search").value.toLowerCase().trim();
+function applySearchAndFilters(){
+ const q=($("search")?.value||"").toLowerCase().trim();
  const type=$("searchType")?.value||"all";
- if(!q){appealsPage=1;render();return}
- const match=(r)=>Object.values(r||{}).join(" ").toLowerCase().includes(q);
- let appeals=[], cms=[], cplas=[];
- if(type==="appellant"){appeals=db.appeals.filter(r=>String(r.Name_of_Appellant||"").toLowerCase().includes(q))}
- else if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
- if(type==="all"||type==="cm"){cms=db.cms.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
- if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
+ let appeals=db.appeals,cms=db.cms,cplas=db.cplas;
+ if(q){
+   const match=(r)=>Object.values(r||{}).join(" ").toLowerCase().includes(q);
+   appeals=[];cms=[];cplas=[];
+   if(type==="appellant"){appeals=db.appeals.filter(r=>String(r.Name_of_Appellant||"").toLowerCase().includes(q))}
+   else if(type==="all"||type==="appeal"){appeals=db.appeals.filter(match)}
+   if(type==="all"||type==="cm"){cms=db.cms.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
+   if(type==="all"||type==="cpla"){cplas=db.cplas.filter(r=>{const a=getAppeal(r.appeal_id);return match(r)||(a&&match(a))})}
+ }
  appeals=applyAllFilters(appeals,"appealsStatusFilter","appealsYearFilter","Appeal_Year",isPendingAppeal);
  cms=applyAllFilters(cms,"cmStatusFilter","cmYearFilter","CM_Year",isPendingCM);
  cplas=applyAllFilters(cplas,"cplaStatusFilter","cplaYearFilter","CPLA_Year",isPendingCPLA);
- appealsPage=1;
  renderAppealsList(appeals);
  $("cmRows").innerHTML=cms.map((r,i)=>cmRow(r,i+1)).join("")||empty(10);
  $("cplaRows").innerHTML=cplas.map((r,i)=>cplaRow(r,i+1)).join("")||empty(11);
- // Keep the main Appeals register visible for All/Appeal/Appellant; show the matching register for CM/CPLA.
- if(type==="cm") tab("cm",document.querySelector('.tab:nth-child(2)'));
- else if(type==="cpla") tab("cpla",document.querySelector('.tab:nth-child(3)'));
- else tab("appeals",document.querySelector('.tab:nth-child(1)'));
+ const cmBar=$("cmFilterBar");if(cmBar){cmBar.style.display="none";cmBar.innerHTML="";}
+ const cplaBar=$("cplaFilterBar");if(cplaBar){cplaBar.style.display="none";cplaBar.innerHTML="";}
+ return {q,type,appeals,cms,cplas};
+}
+// Runs only when the user types in the search box / changes the search type:
+// filters the registers and jumps to the tab that actually has results.
+function searchAppeals(){
+ appealsPage=1;
+ const {q,type,appeals,cms,cplas}=applySearchAndFilters();
+ if(!q)return;
+ const goTab=(panel,n)=>tab(panel,document.querySelector('.tab:nth-child('+n+')'));
+ if(type==="cm")goTab("cm",2);
+ else if(type==="cpla")goTab("cpla",3);
+ else if(type==="appeal"||type==="appellant")goTab("appeals",1);
+ else{ // All: first register (Appeals -> CM -> CPLA) that has a result becomes active
+   if(appeals.length)goTab("appeals",1);
+   else if(cms.length)goTab("cm",2);
+   else if(cplas.length)goTab("cpla",3);
+ }
 }
 function dateOnly(value){
   if(value===undefined||value===null||value==="")return "-";
@@ -1561,10 +1622,7 @@ function showCMsForAppeal(appealId){
   bar.innerHTML=`<span style="font-size:13px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CMs</span><span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCMFilter()">✖ Clear Filter</span>`;
   tab("cm",document.querySelector(".tab:nth-child(2)"));
 }
-function clearCMFilter(){
-  const bar=$("cmFilterBar");if(bar){bar.style.display="none";bar.innerHTML="";}
-  $("cmRows").innerHTML=applyAllFilters(db.cms,"cmStatusFilter","cmYearFilter","CM_Year",isPendingCM).map((r,i)=>cmRow(r,i+1)).join("")||empty(10);
-}
+function clearCMFilter(){applySearchAndFilters()} // hides the drill-down bar and re-renders honouring search + status/year filters
 function showCPLAsForAppeal(appealId){
   const a=getAppeal(appealId);
   const list=db.cplas.filter(x=>String(x.appeal_id)===String(appealId));
@@ -1575,10 +1633,7 @@ function showCPLAsForAppeal(appealId){
   bar.innerHTML=`<span style="font-size:13px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CPLAs</span><span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCPLAFilter()">✖ Clear Filter</span>`;
   tab("cpla",document.querySelector(".tab:nth-child(3)"));
 }
-function clearCPLAFilter(){
-  const bar=$("cplaFilterBar");if(bar){bar.style.display="none";bar.innerHTML="";}
-  $("cplaRows").innerHTML=applyAllFilters(db.cplas,"cplaStatusFilter","cplaYearFilter","CPLA_Year",isPendingCPLA).map((r,i)=>cplaRow(r,i+1)).join("")||empty(11);
-}
+function clearCPLAFilter(){applySearchAndFilters()} // hides the drill-down bar and re-renders honouring search + status/year filters
 function closeToolbarMenu(){$("toolbarMenu").classList.remove("open")}
 function toggleMobileSettings(){
   const b=$("mobileSettingsBody");
