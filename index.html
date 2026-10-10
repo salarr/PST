@@ -315,7 +315,14 @@ button,input,select,textarea,.hearings-link,.count-pill,.badge,.tab-count{font-s
 .hearings-link:hover .hearings-count{background:#fff;color:#000!important}
 table td.uh-section{background:#f2faf8!important;text-align:left!important;color:#000!important}
 .tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#0f766e;color:#fff;font-size:11px;font-weight:700;margin-left:4px;vertical-align:middle}
-.tab.active .tab-count{background:#0f766e;color:#fff}
+.tab.active .tab-count,.tab:hover .tab-count{background:#fff;color:#000}
+/* Tab labels: 4 sizes bigger than the 13px base, and bold (explicit exception to the no-bold rule) */
+.tabs .tab{font-size:17px!important;font-weight:700!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+/* Toolbar: Add, Breakdown and the search-type dropdown get the same +4 / bold treatment as the tabs */
+.toolbar button,#searchType{font-size:17px!important;font-weight:700!important}
+/* Header row buttons (Users, Activity Log, Change Password, Refresh, Logout): +4 and bold */
+header .head-actions button{font-size:17px!important;font-weight:700!important}
+#searchType{max-width:210px!important}
 .status-filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .status-filter-bar label{font-size:13px;font-weight:700;color:var(--muted)}
 .status-filter-bar select{width:auto;min-width:130px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);font-size:13px;font-weight:700}
