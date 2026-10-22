@@ -7,7 +7,7 @@
 <style>
 :root{--nav:#5b2a86;--accent:#1d4ed8;--accent-2:#2563eb;--accent-dark:#1e40af;--accent-tint:#eff6ff;--accent-tint-border:#bfdbfe;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#ddd6fe;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#7c3aed}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Aptos Display','Aptos','Segoe UI',system-ui,-apple-system,Arial,sans-serif}
-header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:25px}.head small{color:#ede9fe}
+header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:22px}.head small{color:#ede9fe}
 .wrap{max-width:1500px;margin:20px auto;padding:0 16px}.toolbar,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b}.toolbar{padding:13px;display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:260px}
 input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff;font:inherit}textarea{min-height:85px;resize:vertical}
 button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--nav);color:#fff}.green{background:var(--green);color:#fff}.red{background:var(--red);color:#fff}.gray{background:#657386;color:#fff}.light{background:#ede9fe;color:#5b2a86}
@@ -20,7 +20,7 @@ table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;bor
 .report{width:210mm;min-height:297mm;background:white;margin:auto;padding:18mm;font-family:Arial}.report h1{text-align:center;font-size:16pt;margin:0;text-decoration:underline}.report h2{text-align:center;font-size:14pt;margin:25px 0;text-decoration:underline}.report p{line-height:1.5}.rtable{min-width:0;border-collapse:collapse}.rtable th,.rtable td{border:1px solid #777}.printbar{position:fixed;right:15px;top:15px}@media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media print{body{background:white}.printbar{display:none}.report{margin:0}}
 
 /* Attractive UI additions */
-.icon{font-size:17px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.icon{font-size:14px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .filebox{display:flex;align-items:center;gap:8px;background:#fff7ed;border:1px dashed #c4b5fd;border-radius:10px;padding:6px 8px}
 .filebox input{display:none}.filebox label{cursor:pointer;font-weight:700;color:#6d28d9;padding:6px 9px}
 .btnexcel{background:#287a58!important;color:#fff!important}.btnexport{background:#c96f32!important;color:#fff!important}
@@ -276,8 +276,8 @@ body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-we
 .repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex:0 0 auto}
 .repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 table td,table th{border:1px solid var(--line)!important}
-table th{font-size:14px!important;font-weight:400!important;color:#000!important;opacity:1!important;text-align:center!important}
-table td{font-size:14px!important;color:#000!important;opacity:1!important}
+table th{font-size:15px!important;font-weight:400!important;color:#000!important;opacity:1!important;text-align:center!important}
+table td{font-size:15px!important;color:#000!important;opacity:1!important}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
@@ -287,13 +287,18 @@ td,th,label,input,select,button,.field label{font-weight:500}
 .sort-menu div{padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .sort-menu div:hover{background:var(--accent-tint);color:#000}
 .add-menu{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:40;min-width:150px;margin-top:4px;overflow:hidden}
-.add-menu div{padding:10px 14px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
+.add-menu div{padding:10px 14px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .add-menu div:hover{background:var(--accent-tint);color:#000}
 select option{color:#000!important;background:#fff!important}
 /* No bold anywhere in the app */
 *{font-weight:400!important}
 /* Same font-size everywhere across tabs (tables already forced to 14px above) */
-button,input,select,textarea,.hearings-link,.count-pill,.badge,.tab-count{font-size:13px!important}
+button,input,select,textarea,.hearings-link,.count-pill,.badge{font-size:13px!important}
+.tab-count{font-size:10px!important}
+/* Tab content: +1 point */
+.panel button,.panel input,.panel select,.panel textarea,.panel .hearings-link,.panel .count-pill,.panel .badge,.panel .case-link,.panel .status-filter-bar label,.pagination span{font-size:14px!important}
+.panel .hearings-count{font-size:12px!important}
+.panel .sort-menu div{font-size:13.5px!important}
 /* Match column widths for same-named columns across Appeals / CM / CPLA registers */
 #appealRows td:nth-child(1),#appealRows th:nth-child(1),#cmRows td:nth-child(1),#cmRows th:nth-child(1),#cplaRows td:nth-child(1),#cplaRows th:nth-child(1){width:50px;min-width:50px}
 #appealRows td:nth-child(3),#appealRows th:nth-child(3),#cmRows td:nth-child(3),#cmRows th:nth-child(3),#cplaRows td:nth-child(3),#cplaRows th:nth-child(3){width:70px;min-width:70px}
@@ -317,17 +322,18 @@ table td.uh-section{background:var(--accent-tint)!important;text-align:left!impo
 .tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;margin-left:4px;vertical-align:middle}
 .tab.active .tab-count,.tab:hover .tab-count{background:#fff;color:#000}
 /* Tab labels: 4 sizes bigger than the 13px base, and bold (explicit exception to the no-bold rule) */
-.tabs .tab{font-size:17px!important;font-weight:700!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.tabs .tab{font-size:14px!important;font-weight:700!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 /* Toolbar: Add, Breakdown and the search-type dropdown get the same +4 / bold treatment as the tabs */
-.toolbar button,#searchType{font-size:17px!important;font-weight:700!important}
+.toolbar button,#searchType{font-size:14px!important;font-weight:700!important}
 /* Header row buttons (Users, Activity Log, Change Password, Refresh, Logout): +4 and bold */
-header .head-actions button{font-size:17px!important;font-weight:700!important}
+header .head-actions button{font-size:14px!important;font-weight:700!important}
 /* Header row: no dark band (same background as the page), buttons styled like the tabs */
 header{background:transparent!important;color:var(--text)!important;box-shadow:none!important}
-header .head-actions button{background:none!important;color:var(--accent)!important;border:0!important;border-radius:0!important;padding:4px 6px!important;box-shadow:none!important;text-decoration:underline}
-header .head-actions button:hover{background:none!important;color:var(--accent-dark)!important;text-decoration:underline}
+header .head-actions button{background:none!important;color:#000!important;border:0!important;border-radius:0!important;padding:4px 6px!important;box-shadow:none!important;text-decoration:none!important}
+header .head-actions button:hover{background:none!important;color:#000!important;text-decoration:none!important;opacity:.65}
 .case-link{color:var(--accent);font-weight:700;font-size:13px;text-decoration:underline;cursor:pointer;margin-right:10px;white-space:nowrap}.case-link:hover{color:var(--accent-dark)}
-header .head h1{font-weight:700!important;color:var(--accent)!important}
+header .head h1{font-weight:700!important;color:#000!important}
+header #whoami{font-size:10px!important;color:#000!important}
 /* Search box + "All" dropdown: pill shaped */
 #search,#searchType{border-radius:999px!important}
 #search{padding:10px 20px!important}
@@ -337,8 +343,8 @@ header .head h1{font-weight:700!important;color:var(--accent)!important}
 /* Decided status = red text (dropdowns keep white text while hovered) */
 select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 #searchType{max-width:210px!important}
-#search{font-size:17px!important}
-#search::placeholder{font-size:17px}
+#search{font-size:14px!important}
+#search::placeholder{font-size:14px}
 /* Add, Breakdown (and the mobile menu buttons): pill, same look and hover as the tabs / header buttons */
 .toolbar button{background:#fff!important;color:#000!important;border:1px solid var(--line)!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .toolbar button:hover{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
