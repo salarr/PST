@@ -408,6 +408,7 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 <div class="grid" style="margin-bottom:6px">
   <div class="field"><label>Case Type</label><select id="rep_type" onchange="onRepTypeChanged()"><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option></select></div>
   <div class="field"><label>Status</label><select id="rep_status" onchange="repStatusChanged()"><option value="pending">Pending</option><option value="decided">Decided</option><option value="all">All</option></select></div>
+  <div class="field" id="rep_caseYearWrap"><label>Year (Appeal / CM / CPLA Year)</label><select id="rep_caseYear" onchange="repExtraChanged()"><option value="">All Years</option></select></div>
   <div class="field" id="rep_yearWrap" style="display:none"><label>Decided Year</label><select id="rep_year" onchange="repFilterChanged()"><option value="">All Years</option></select></div>
   <div class="field" id="rep_monthWrap" style="display:none"><label>Decided Month</label><select id="rep_month" onchange="repFilterChanged()"><option value="">All Months</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
   <div class="field" id="rep_fromWrap" style="display:none"><label>From Date</label><input type="date" id="rep_fromDate" onchange="repFilterChanged()"></div>
@@ -420,13 +421,19 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
   <label>🔎 Search (Appeal No. / Appellant Name / CM No. / CPLA No.)</label>
   <input id="rep_search" type="text" placeholder="Type to filter the records below..." oninput="repSearchChanged()">
 </div>
+<div class="field full" style="margin-bottom:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fafafd">
+  <label>🏷️ Appellant Name Filter (Rank / Words) — comma se alag karein, e.g. ASI, T/ASI, SI, IP, Inspector</label>
+  <input id="rep_nameKeys" type="text" placeholder="Jin names mein ye words hon, unhi ki list banegi..." oninput="repExtraChanged()">
+  <div id="rep_nameChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
+  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;cursor:pointer;font-size:13px"><input type="checkbox" id="rep_nameWhole" checked onchange="repExtraChanged()" style="width:auto"> Poora word match karein (SI likhne par "Hussain" match na ho; ASI aur T/ASI alag rahen)</label>
+</div>
 <p style="color:var(--muted);font-size:12.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
-<div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button></div>
+<div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button><button class="green" type="button" onclick="exportCustomReportExcel()">📥 Export Excel</button></div>
 <div id="rep_selectionBar" style="display:none;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;padding:9px 12px;background:var(--accent-tint);border:1px solid var(--accent-tint-border);border-radius:8px">
   <span style="font-size:12.5px;color:#000;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(true)">☑ Select All</span>
   <span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(false)">☐ Unselect All</span>
   <span id="rep_selectionCount" style="font-size:12.5px;color:var(--muted);font-weight:600"></span>
-  <span style="font-size:12px;color:var(--muted)">Print sirf selected records ka hoga (kuch bhi select na ho to poori list print hogi).</span>
+  <span style="font-size:12px;color:var(--muted)">Print / Excel sirf selected records ka hoga (kuch bhi select na ho to poori list jayegi).</span>
 </div>
 <div class="tablewrap"><div id="customReportPreview" style="color:var(--muted);padding:10px 2px">Preview دیکھنے کے لیے فلٹرز سیٹ کریں اور "Preview" دبائیں۔</div></div>
 </div>
@@ -1353,6 +1360,67 @@ function repStatusChanged(){
   customReportPage=1;
   repSelectedIds.clear();
 }
+
+// ===== Year / Appellant-name keyword filter + Excel export =====
+const REPORT_NAME_CHIPS=["ASI","T/ASI","SI","T/SI","IP","Inspector","HC","Constable","DSP","SP","AIG"];
+function reportCaseYear(type,r){return type==="appeal"?r.Appeal_Year:type==="cm"?r.CM_Year:r.CPLA_Year}
+function reportAppellantName(type,r){return type==="appeal"?r.Name_of_Appellant:(getAppeal(r.appeal_id)?.Name_of_Appellant||"")}
+function buildNameKeyRegex(keys,whole){
+  const parts=keys.map(k=>k.toUpperCase().replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+  const body=parts.join("|");
+  return whole?new RegExp("(?<![A-Z0-9/])(?:"+body+")(?![A-Z0-9])"):new RegExp(body);
+}
+function populateCaseYears(){
+  const sel=$("rep_caseYear");if(!sel)return;
+  const cur=sel.value,type=$("rep_type")?.value||"appeal";
+  const list=type==="appeal"?db.appeals:type==="cm"?db.cms:db.cplas;
+  const ys=Array.from(new Set(list.map(r=>String(reportCaseYear(type,r)||"").trim()).filter(Boolean))).sort((a,b)=>b-a);
+  sel.innerHTML=`<option value="">All Years</option>`+ys.map(y=>`<option value="${esc(y)}">${esc(y)}</option>`).join("");
+  if(ys.includes(cur))sel.value=cur;
+}
+function renderNameChips(){
+  const box=$("rep_nameChips");if(!box)return;
+  const active=new Set(($("rep_nameKeys")?.value||"").split(/[,،\n]+/).map(x=>x.trim().toUpperCase()).filter(Boolean));
+  box.innerHTML=REPORT_NAME_CHIPS.map(k=>{const on=active.has(k.toUpperCase());return `<button type="button" class="light" style="padding:5px 12px;font-size:13px!important;border-radius:999px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}" onclick="toggleNameChip('${k}')">${esc(k)}</button>`}).join("")+`<button type="button" class="light" style="padding:5px 12px;font-size:13px!important;border-radius:999px;color:#e11d48" onclick="clearNameKeys()">✖ Clear</button>`;
+}
+function toggleNameChip(k){
+  const inp=$("rep_nameKeys");if(!inp)return;
+  const arr=inp.value.split(/[,،\n]+/).map(x=>x.trim()).filter(Boolean);
+  const i=arr.findIndex(x=>x.toUpperCase()===k.toUpperCase());
+  if(i>=0)arr.splice(i,1);else arr.push(k);
+  inp.value=arr.join(", ");
+  repExtraChanged();
+}
+function clearNameKeys(){const inp=$("rep_nameKeys");if(inp)inp.value="";repExtraChanged()}
+function repExtraChanged(){
+  customReportPage=1;repSelectedIds.clear();renderNameChips();
+  if($("customReportPreview")?.querySelector("table"))renderReportPreview();
+}
+function plainText(html){const d=document.createElement("div");d.innerHTML=String(html??"");return (d.textContent||"").trim()}
+function exportCustomReportExcel(){
+  if(typeof XLSX==="undefined"){alert("Excel library load نہیں ہوئی۔ Internet connection check کریں۔");return}
+  const{criteria,rows:allRows}=filterReportData();
+  const rows=repSelectedIds.size?allRows.filter(r=>repSelectedIds.has(String(reportEntityId(criteria.type,r)))):allRows;
+  if(!rows.length){alert("Export karne ke liye koi record nahi mila.");return}
+  const fields=getSelectedReportFields();
+  const data=rows.map((r,i)=>{
+    const eid=reportEntityId(criteria.type,r);
+    const ctx={eid,appeal:criteria.type!=="appeal"?getAppeal(r.appeal_id):null,mode:"print"};
+    const o={"Sr.#":i+1};
+    fields.forEach(f=>{o[f.label]=plainText(f.get(r,ctx))});
+    return o;
+  });
+  const headers=["Sr.#",...fields.map(f=>f.label)];
+  const ws=XLSX.utils.json_to_sheet(data,{header:headers});
+  ws["!cols"]=headers.map(h=>{const w=Math.max(h.length,...data.map(d=>String(d[h]??"").length));return{wch:Math.min(60,Math.max(8,w+2))}});
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Report");
+  const stamp=new Date().toISOString().slice(0,10);
+  const label=criteria.type.toUpperCase()+"_"+criteria.status;
+  XLSX.writeFile(wb,`PST_${label}_Report_${stamp}.xlsx`);
+  logActivity("Export Excel",`${reportSubtitle(criteria)} - ${rows.length} records`);
+  showToast("✅ Excel export ho gayi ("+rows.length+" records)");
+}
 function repSearchChanged(){customReportPage=1;if($("customReportPreview")?.querySelector("table"))renderReportPreview()}
 function reportEntityId(type,r){return type==="appeal"?String(r.id??r.ID??r.Appeal_ID??""):String(r.id??"")}
 function reportHearingDates(type,eid){
@@ -1385,7 +1453,7 @@ function reportIsDecided(type,r){
   if(type==="cm")return String(r.CM_Status||"").trim().toLowerCase().includes("decid");
   return String(r.CPLA_Status||"").trim().toLowerCase().includes("decid");
 }
-function populateReportYears(){
+function populateReportYears(){populateCaseYears();
   const sel=$("rep_year");if(!sel)return;
   const cur=sel.value;
   const type=$("rep_type").value;
@@ -1401,7 +1469,7 @@ function populateReportYears(){
   if(sorted.includes(Number(cur)))sel.value=cur;
 }
 function repFilterChanged(){customReportPage=1}
-function onRepTypeChanged(){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();customReportPage=1;repSelectedIds.clear()}
+function onRepTypeChanged(){if($("rep_caseYear"))$("rep_caseYear").value="";populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();customReportPage=1;repSelectedIds.clear()}
 // ===== Field definitions (checkbox list) per report type =====
 const REPORT_FIELD_DEFS={
   appeal:[
@@ -1491,7 +1559,7 @@ function getSelectedReportFields(){
   return defs.filter(d=>sel.includes(d.key));
 }
 function getReportCriteria(){
-  return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||"",search:($("rep_search")?.value||"").toLowerCase().trim()}
+  return{type:$("rep_type").value,status:$("rep_status").value,year:$("rep_year")?.value||"",month:$("rep_month")?.value||"",fromDate:$("rep_fromDate")?.value||"",toDate:$("rep_toDate")?.value||"",search:($("rep_search")?.value||"").toLowerCase().trim(),caseYear:$("rep_caseYear")?.value||"",nameKeys:($("rep_nameKeys")?.value||"").split(/[,،\n]+/).map(x=>x.trim()).filter(Boolean),nameWhole:$("rep_nameWhole")?$("rep_nameWhole").checked:true}
 }
 function reportSearchMatch(type,r,q){
   if(!q)return true;
@@ -1507,6 +1575,8 @@ function filterReportData(){
   let list=c.type==="appeal"?db.appeals:c.type==="cm"?db.cms:db.cplas;
   if(c.status!=="all")list=list.filter(r=>reportIsDecided(c.type,r)===(c.status==="decided"));
   if(c.search)list=list.filter(r=>reportSearchMatch(c.type,r,c.search));
+  if(c.caseYear)list=list.filter(r=>String(reportCaseYear(c.type,r)).trim()===String(c.caseYear));
+  if(c.nameKeys.length){const rx=buildNameKeyRegex(c.nameKeys,c.nameWhole);list=list.filter(r=>rx.test(String(reportAppellantName(c.type,r)||"").toUpperCase()))}
   if(c.status==="decided"){
     const hasDateFilter=c.year||c.month||c.fromDate||c.toDate;
     if(hasDateFilter){
@@ -1568,6 +1638,8 @@ function reportSubtitle(c){
   const typeLabel=c.type==="appeal"?"Appeal":c.type==="cm"?"CM":"CPLA";
   const statusLabel=c.status==="decided"?"Decided":c.status==="all"?"All":"Pending";
   let s=`${typeLabel} - ${statusLabel} Cases`;
+  if(c.caseYear)s+=` - Year ${c.caseYear}`;
+  if(c.nameKeys&&c.nameKeys.length)s+=` - Name: ${c.nameKeys.join(", ")}`;
   if(c.status==="decided"){
     const parts=[];
     if(c.year)parts.push("Year: "+c.year);
@@ -1676,6 +1748,7 @@ function toggleMobileSettings(){
   $("mobileSettingsChevron").textContent=isOpen?"▸":"▾";
 }
 // App loads data only after successful login (see doLogin()). On page load, try to restore an existing session (survives refresh) unless it went inactive for 5+ minutes.
+renderNameChips();
 tryRestoreSession();
 </script>
 </body>
