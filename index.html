@@ -7,27 +7,27 @@
 <style>
 :root{--nav:#5b2a86;--accent:#1d4ed8;--accent-2:#2563eb;--accent-dark:#1e40af;--accent-tint:#eff6ff;--accent-tint-border:#bfdbfe;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#ddd6fe;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#7c3aed}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Aptos Display','Aptos','Segoe UI',system-ui,-apple-system,Arial,sans-serif}
-header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:22px}.head small{color:#ede9fe}
+header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:24px}.head small{color:#ede9fe}
 .wrap{max-width:1500px;margin:20px auto;padding:0 16px}.toolbar,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b}.toolbar{padding:13px;display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:260px}
 input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff;font:inherit}textarea{min-height:85px;resize:vertical}
 button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--nav);color:#fff}.green{background:var(--green);color:#fff}.red{background:var(--red);color:#fff}.gray{background:#657386;color:#fff}.light{background:#ede9fe;color:#5b2a86}
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.stat{padding:15px}.stat b{font-size:24px;color:var(--nav)}.stat small{display:block;color:var(--muted);margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.stat{padding:15px}.stat b{font-size:26px;color:var(--nav)}.stat small{display:block;color:var(--muted);margin-top:4px}
 .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tab{background:white;color:#536273;border:1px solid var(--line)}.tab.active{background:var(--nav);color:#fff}
-.panel{display:none}.panel.active{display:block}.title{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.title h2{margin:0;font-size:18px}.body{padding:16px}.tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f3e8ff;font-size:12px;color:#5b21b6}tr:hover td{background:#faf5ff}.badge{padding:4px 8px;border-radius:20px;background:#e8f4ed;color:#17613d;font-size:11px;font-weight:bold}
-.modal-bg{display:none;position:fixed;inset:0;background:#0007;z-index:50;padding:20px;align-items:center;justify-content:center}.modal-bg.show{display:flex}.modal{width:min(1050px,100%);max-height:92vh;overflow:auto;background:white;border-radius:15px}.mh{background:var(--nav);color:#fff;padding:14px 18px;display:flex;justify-content:space-between}.mh h3{margin:0}.close{background:none;color:#fff;font-size:25px;padding:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{font-size:12px;font-weight:bold;color:#536273;display:block;margin-bottom:4px}.full{grid-column:1/-1}.actions{display:flex;gap:8px;margin-top:12px}
+.panel{display:none}.panel.active{display:block}.title{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.title h2{margin:0;font-size:20px}.body{padding:16px}.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f3e8ff;font-size:14px;color:#5b21b6}tr:hover td{background:#faf5ff}.badge{padding:4px 8px;border-radius:20px;background:#e8f4ed;color:#17613d;font-size:13px;font-weight:bold}
+.modal-bg{display:none;position:fixed;inset:0;background:#0007;z-index:50;padding:20px;align-items:center;justify-content:center}.modal-bg.show{display:flex}.modal{width:min(1050px,100%);max-height:92vh;overflow:auto;background:white;border-radius:15px}.mh{background:var(--nav);color:#fff;padding:14px 18px;display:flex;justify-content:space-between}.mh h3{margin:0}.close{background:none;color:#fff;font-size:25px;padding:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{font-size:14px;font-weight:bold;color:#536273;display:block;margin-bottom:4px}.full{grid-column:1/-1}.actions{display:flex;gap:8px;margin-top:12px}
 .search{display:flex;gap:8px;flex:1}.search select{max-width:150px}
 .report{width:210mm;min-height:297mm;background:white;margin:auto;padding:18mm;font-family:Arial}.report h1{text-align:center;font-size:16pt;margin:0;text-decoration:underline}.report h2{text-align:center;font-size:14pt;margin:25px 0;text-decoration:underline}.report p{line-height:1.5}.rtable{min-width:0;border-collapse:collapse}.rtable th,.rtable td{border:1px solid #777}.printbar{position:fixed;right:15px;top:15px}@media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media print{body{background:white}.printbar{display:none}.report{margin:0}}
 
 /* Attractive UI additions */
-.icon{font-size:14px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.icon{font-size:16px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .filebox{display:flex;align-items:center;gap:8px;background:#fff7ed;border:1px dashed #c4b5fd;border-radius:10px;padding:6px 8px}
 .filebox input{display:none}.filebox label{cursor:pointer;font-weight:700;color:#6d28d9;padding:6px 9px}
 .btnexcel{background:#287a58!important;color:#fff!important}.btnexport{background:#c96f32!important;color:#fff!important}
 .toolbar{background:linear-gradient(135deg,#ffffff,#f5f3ff)}.stat:nth-child(1){border-top:4px solid #c96f32}.stat:nth-child(2){border-top:4px solid #287a58}.stat:nth-child(3){border-top:4px solid #72539a}.stat:nth-child(4){border-top:4px solid #d6a84f}.stat:nth-child(5){border-top:4px solid #b85b72}.stat:nth-child(6){border-top:4px solid #8b6a54}
 .title{background:linear-gradient(90deg,#fff9f5,#fff)}.tab{transition:.15s}.tab:hover{transform:translateY(-1px);box-shadow:0 3px 10px #5b2a8618}
 button{transition:.15s}button:hover{transform:translateY(-1px)}
-<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}.searchmatches{position:relative;z-index:20;margin-top:4px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;max-height:190px;overflow:auto}.match{padding:9px 11px;border-bottom:1px solid #f0e6df;cursor:pointer}.match:hover{background:#fff7ed}.match.muted{color:#777;cursor:default}.picked{margin-top:6px;padding:8px 10px;background:#eef8f0;border:1px solid #c9e7d0;border-radius:8px}.mini{padding:3px 8px;font-size:12px;margin-left:8px}</style></style>
+<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:14px}.searchmatches{position:relative;z-index:20;margin-top:4px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;max-height:190px;overflow:auto}.match{padding:9px 11px;border-bottom:1px solid #f0e6df;cursor:pointer}.match:hover{background:#fff7ed}.match.muted{color:#777;cursor:default}.picked{margin-top:6px;padding:8px 10px;background:#eef8f0;border:1px solid #c9e7d0;border-radius:8px}.mini{padding:3px 8px;font-size:14px;margin-left:8px}</style></style>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 
@@ -118,10 +118,10 @@ button[title="Report"]::before,button[aria-label="Report"]::before{content:"📄
 .status-pending{color:#b91c1c;font-weight:800}.status-decided{color:#15803d;font-weight:800}.resp-table{width:100%;border-collapse:collapse}.resp-table th,.resp-table td{padding:10px;border-bottom:1px solid var(--line)}
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5b2a86,#7c3aed);padding:16px}
 .login-card{background:#fff;padding:32px;border-radius:16px;width:min(380px,100%);box-shadow:0 10px 40px #0004}
-.login-card h1{font-size:20px;margin:0 0 6px;color:#25213a}.login-card p{margin:0 0 18px;color:#6b6578}
+.login-card h1{font-size:22px;margin:0 0 6px;color:#25213a}.login-card p{margin:0 0 18px;color:#6b6578}
 .login-card .field{margin-bottom:12px}
 table.t{width:100%;border-collapse:collapse}
-table.t th,table.t td{border:1px solid #d1d5db;padding:7px;text-align:left;font-size:13px}
+table.t th,table.t td{border:1px solid #d1d5db;padding:7px;text-align:left;font-size:15px}
 table.t th{background:#f3e8ff}
 </style>
 
@@ -174,12 +174,12 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
   padding:5px 9px !important;
   margin:0 !important;
   border-radius:7px !important;
-  font-size:12px !important;
+  font-size:14px !important;
   line-height:20px !important;
 }
 #appealRows .actionbuttons .actionbtn::before,
 #appealRows .actionbuttons button[title="Report"]::before{
-  font-size:15px !important;
+  font-size:17px !important;
   line-height:1 !important;
   margin-right:3px !important;
 }
@@ -203,23 +203,23 @@ html,body{overflow-x:hidden}
 .toolbar-menu.open{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:8px}
 @media(max-width:768px){
   .head{flex-wrap:wrap;gap:10px}
-  .head h1{font-size:18px}
+  .head h1{font-size:20px}
   header{padding:14px 16px}
   .head-actions{width:100%;justify-content:flex-start}
-  .head-actions button{font-size:12px;padding:8px 10px}
+  .head-actions button{font-size:14px;padding:8px 10px}
   .wrap{margin:14px auto;padding:0 10px}
   .toolbar{flex-direction:column;align-items:stretch}
   .toolbar .search{flex-direction:column}
   .toolbar input,.toolbar .search select{min-width:0;width:100%}
   .toolbar>button.primary,.toolbar>button.light:not(#toolbarBurgerBtn){display:none}
-  #toolbarBurgerBtn{display:inline-flex!important;align-items:center;justify-content:center;width:100%;font-size:16px;padding:10px}
+  #toolbarBurgerBtn{display:inline-flex!important;align-items:center;justify-content:center;width:100%;font-size:18px;padding:10px}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
   .stat{padding:12px}
-  .stat b{font-size:20px}
+  .stat b{font-size:22px}
   .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;margin-bottom:10px}
   .tabs .tab{flex:0 0 auto;white-space:nowrap}
   .title{flex-wrap:wrap;gap:8px;padding:12px}
-  .title h2{font-size:15px}
+  .title h2{font-size:17px}
   .body{padding:10px}
   .modal-bg{padding:0}
   .modal{width:100%;max-width:100%;height:100%;max-height:100%;border-radius:0}
@@ -233,23 +233,23 @@ html,body{overflow-x:hidden}
   .mobile-bottom-actions{display:flex!important}
 }
 .mobile-bottom-actions{display:none;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b;padding:16px;margin:20px auto 30px;max-width:1500px}
-.mobile-bottom-actions .mbtitle{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
-.mobile-bottom-actions button{width:100%;text-align:left;padding:12px 14px;font-size:14px}
+.mobile-bottom-actions .mbtitle{font-size:14px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.mobile-bottom-actions button{width:100%;text-align:left;padding:12px 14px;font-size:16px}
 .pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding:14px 0 4px;flex-wrap:wrap}
 .pagination button{padding:8px 16px}
 .pagination button:disabled{opacity:.45;cursor:not-allowed}
-.pagination span{font-size:13px;color:var(--muted);font-weight:600}
+.pagination span{font-size:15px;color:var(--muted);font-weight:600}
 @media(max-width:480px){
-  .head h1{font-size:15px}
-  .head small{font-size:11px}
+  .head h1{font-size:17px}
+  .head small{font-size:13px}
   .stats{grid-template-columns:repeat(2,1fr)}
-  .stat b{font-size:18px}
-  .stat small{font-size:11px}
-  th,td{font-size:11px;padding:6px}
+  .stat b{font-size:20px}
+  .stat small{font-size:13px}
+  th,td{font-size:13px;padding:6px}
   #appealRows .actionbuttons .actionbtn,
-  #appealRows .actionbuttons button[title="Report"]{height:30px!important;padding:4px 7px!important;font-size:11px!important}
+  #appealRows .actionbuttons button[title="Report"]{height:30px!important;padding:4px 7px!important;font-size:13px!important}
   .login-card{padding:20px}
-  .login-card h1{font-size:17px}
+  .login-card h1{font-size:19px}
 }
 </style>
 <style id="icon-and-badge-fixes">
@@ -264,41 +264,41 @@ html,body{overflow-x:hidden}
 }
 .badge-pending{background:#fff1e6!important;color:#c2410c!important;border:1px solid #fed7aa}
 .badge-decided{background:#e8f8ee!important;color:#15803d!important;border:1px solid #bbf7d0}
-.hearings-link{color:#000;text-decoration:none;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;align-self:center}
+.hearings-link{color:#000;text-decoration:none;cursor:pointer;font-weight:600;font-size:15px;white-space:nowrap;align-self:center}
 .hearings-link:hover{color:var(--accent-dark);text-decoration:none}
 .actionbuttons{align-items:center!important}
 .tab:not(.active):hover{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
 body,button,input,select,textarea,.badge,.tab,.headbtn{font-family:'Aptos Display','Aptos','Segoe UI',system-ui,-apple-system,Arial,sans-serif!important}
 body,td,th,label,p,span,div,input,select,textarea,button{opacity:1!important;-webkit-text-fill-color:currentColor}
 .repfield-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px;max-height:52vh;overflow:auto;padding:6px;border:1px solid var(--line);border-radius:10px;background:#fafafd}
-.repfield-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;font-size:13.5px;font-weight:500;color:var(--text);background:#fff;border:1px solid #ece8f5;border-radius:8px;cursor:pointer;transition:.12s}
+.repfield-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;font-size:15.5px;font-weight:500;color:var(--text);background:#fff;border:1px solid #ece8f5;border-radius:8px;cursor:pointer;transition:.12s}
 .repfield-row:hover{border-color:var(--accent);background:var(--accent-tint)}
 .repfield-row input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex:0 0 auto}
 .repfield-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 table td,table th{border:1px solid var(--line)!important}
-table th{font-size:15px!important;font-weight:400!important;color:#000!important;opacity:1!important;text-align:center!important}
-table td{font-size:15px!important;color:#000!important;opacity:1!important}
+table th{font-size:17px!important;font-weight:400!important;color:#000!important;opacity:1!important;text-align:center!important}
+table td{font-size:17px!important;color:#000!important;opacity:1!important}
 body{font-weight:400;color:var(--text)}
 td,th,label,input,select,button,.field label{font-weight:500}
 #appealRows td:first-child,#cmRows td:first-child,#cplaRows td:first-child{text-align:center;font-weight:600;color:var(--muted)}
-#appToast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1f2937;color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0!important;pointer-events:none;transition:.25s;z-index:9999}
+#appToast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1f2937;color:#fff;padding:12px 22px;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0!important;pointer-events:none;transition:.25s;z-index:9999}
 #appToast.show{opacity:1!important;transform:translateX(-50%) translateY(0)}
 .sort-menu{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:30;min-width:170px;margin-top:4px;overflow:hidden}
-.sort-menu div{padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
+.sort-menu div{padding:10px 14px;font-size:14.5px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .sort-menu div:hover{background:var(--accent-tint);color:#000}
 .add-menu{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:40;min-width:150px;margin-top:4px;overflow:hidden}
-.add-menu div{padding:10px 14px;font-size:10px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
+.add-menu div{padding:10px 14px;font-size:12px;font-weight:700;color:var(--text);cursor:pointer;white-space:nowrap}
 .add-menu div:hover{background:var(--accent-tint);color:#000}
 select option{color:#000!important;background:#fff!important}
 /* No bold anywhere in the app */
 *{font-weight:400!important}
 /* Same font-size everywhere across tabs (tables already forced to 14px above) */
-button,input,select,textarea,.hearings-link,.count-pill,.badge{font-size:13px!important}
-.tab-count{font-size:10px!important}
+button,input,select,textarea,.hearings-link,.count-pill,.badge{font-size:15px!important}
+.tab-count{font-size:12px!important}
 /* Tab content: +1 point */
-.panel button,.panel input,.panel select,.panel textarea,.panel .hearings-link,.panel .count-pill,.panel .badge,.panel .case-link,.panel .status-filter-bar label,.pagination span{font-size:14px!important}
-.panel .hearings-count{font-size:12px!important}
-.panel .sort-menu div{font-size:13.5px!important}
+.panel button,.panel input,.panel select,.panel textarea,.panel .hearings-link,.panel .count-pill,.panel .badge,.panel .case-link,.panel .status-filter-bar label,.pagination span{font-size:16px!important}
+.panel .hearings-count{font-size:14px!important}
+.panel .sort-menu div{font-size:15.5px!important}
 /* Match column widths for same-named columns across Appeals / CM / CPLA registers */
 #appealRows td:nth-child(1),#appealRows th:nth-child(1),#cmRows td:nth-child(1),#cmRows th:nth-child(1),#cplaRows td:nth-child(1),#cplaRows th:nth-child(1){width:50px;min-width:50px}
 #appealRows td:nth-child(3),#appealRows th:nth-child(3),#cmRows td:nth-child(3),#cmRows th:nth-child(3),#cplaRows td:nth-child(3),#cplaRows th:nth-child(3){width:70px;min-width:70px}
@@ -313,27 +313,27 @@ button,input,select,textarea,.hearings-link,.count-pill,.badge{font-size:13px!im
 #appealRows .hearings-link:hover,#appealRows .count-pill:hover,#cplaRows .hearings-link:hover{background:var(--accent)!important;color:#fff!important}
 #appealRows .hearings-link .hearings-count,#appealRows .count-pill .hearings-count,#cplaRows .hearings-link .hearings-count{background:var(--accent)!important;color:#fff!important}
 #appealRows .hearings-link:hover .hearings-count,#appealRows .count-pill:hover .hearings-count,#cplaRows .hearings-link:hover .hearings-count{background:#fff!important;color:#000!important}
-.count-pill{background:#fff;color:#000!important;border:1px solid var(--accent);border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;cursor:default;box-shadow:0 2px 4px rgba(0,0,0,.15)}
-.hearings-link{background:#fff;color:#000!important;border:1px solid var(--accent);border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.count-pill{background:#fff;color:#000!important;border:1px solid var(--accent);border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;cursor:default;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.hearings-link{background:#fff;color:#000!important;border:1px solid var(--accent);border-radius:999px;padding:6px 10px 6px 16px;font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .hearings-link:hover{background:var(--accent);color:#fff!important}
-.hearings-count{background:var(--accent);color:#fff!important;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
+.hearings-count{background:var(--accent);color:#fff!important;border-radius:999px;padding:1px 8px;font-size:13px;font-weight:700}
 .hearings-link:hover .hearings-count{background:#fff;color:#000!important}
 table td.uh-section{background:var(--accent-tint)!important;text-align:left!important;color:#000!important}
-.tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;margin-left:4px;vertical-align:middle}
+.tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#fff;font-size:13px;font-weight:700;margin-left:4px;vertical-align:middle}
 .tab.active .tab-count,.tab:hover .tab-count{background:#fff;color:#000}
 /* Tab labels: 4 sizes bigger than the 13px base, and bold (explicit exception to the no-bold rule) */
-.tabs .tab{font-size:14px!important;font-weight:700!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.tabs .tab{font-size:16px!important;font-weight:700!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 /* Toolbar: Add, Breakdown and the search-type dropdown get the same +4 / bold treatment as the tabs */
-.toolbar button,#searchType{font-size:14px!important;font-weight:700!important}
+.toolbar button,#searchType{font-size:16px!important;font-weight:700!important}
 /* Header row buttons (Users, Activity Log, Change Password, Refresh, Logout): +4 and bold */
-header .head-actions button{font-size:14px!important;font-weight:700!important}
+header .head-actions button{font-size:16px!important;font-weight:700!important}
 /* Header row: no dark band (same background as the page), buttons styled like the tabs */
 header{background:transparent!important;color:var(--text)!important;box-shadow:none!important}
 header .head-actions button{background:none!important;color:#000!important;border:0!important;border-radius:0!important;padding:4px 6px!important;box-shadow:none!important;text-decoration:none!important}
 header .head-actions button:hover{background:none!important;color:#000!important;text-decoration:none!important;opacity:.65}
-.case-link{color:var(--accent);font-weight:700;font-size:13px;text-decoration:underline;cursor:pointer;margin-right:10px;white-space:nowrap}.case-link:hover{color:var(--accent-dark)}
+.case-link{color:var(--accent);font-weight:700;font-size:15px;text-decoration:underline;cursor:pointer;margin-right:10px;white-space:nowrap}.case-link:hover{color:var(--accent-dark)}
 header .head h1{font-weight:700!important;color:#000!important}
-header #whoami{font-size:10px!important;color:#000!important}
+header #whoami{font-size:12px!important;color:#000!important}
 /* Search box + "All" dropdown: pill shaped */
 #search,#searchType{border-radius:999px!important}
 #search{padding:10px 20px!important}
@@ -343,14 +343,14 @@ header #whoami{font-size:10px!important;color:#000!important}
 /* Decided status = red text (dropdowns keep white text while hovered) */
 select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 #searchType{max-width:210px!important}
-#search{font-size:14px!important}
-#search::placeholder{font-size:14px}
+#search{font-size:16px!important}
+#search::placeholder{font-size:16px}
 /* Add, Breakdown (and the mobile menu buttons): pill, same look and hover as the tabs / header buttons */
 .toolbar button{background:#fff!important;color:#000!important;border:1px solid var(--line)!important;border-radius:999px!important;padding:9px 20px!important;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .toolbar button:hover{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
 .status-filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.status-filter-bar label{font-size:13px;font-weight:700;color:var(--muted)}
-.status-filter-bar select{width:auto;min-width:130px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);font-size:13px;font-weight:700}
+.status-filter-bar label{font-size:15px;font-weight:700;color:var(--muted)}
+.status-filter-bar select{width:auto;min-width:130px;padding:7px 12px;border-radius:8px;border:1px solid var(--line);font-size:15px;font-weight:700}
 /* Appeal Register only: distinct action icon colors */
 #appealRows .actionbuttons .icon-only[title="Edit Record"]{color:#000!important}
 #appealRows .actionbuttons .icon-only[title="Print Report"]{color:#000!important}
@@ -370,6 +370,32 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 #cplaRows .actionbuttons{flex-wrap:nowrap!important;gap:4px!important}
 #cplaRows .actionbuttons span.hearings-link{flex:0 0 auto}
 </style>
+<style id="resp-picker-style">
+body{font-size:18px}
+.rd-wrap{position:relative}
+.rd-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;background:#fff;color:var(--text);border:1px solid #d1d5db;border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;font-weight:500}
+.rd-menu{position:absolute;z-index:70;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #d1d5db;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.18);max-height:280px;overflow:auto}
+.rd-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+.rd-item:hover{background:#eff6ff}.rd-label{flex:1}.rd-add{color:#15803d;font-weight:700;border-bottom:0}
+.rd-del{background:none!important;border:0;color:#dc2626!important;padding:4px!important;border-radius:6px;display:inline-flex;cursor:pointer}.rd-del:hover{background:#fee2e2!important}
+.ico-users{flex:none;vertical-align:-3px}
+button.light[id$="RespondentsBtn"],button.light[id="RespondentsBtn"]{display:flex!important;align-items:center;gap:8px}
+.rp-row{display:block!important;padding:10px!important}
+.rp-head{display:flex;align-items:center;gap:10px}
+.rp-handle{cursor:grab;font-size:22px;line-height:1;color:#6b7280;user-select:none;padding:2px 6px;border-radius:6px}.rp-handle:hover{background:#eef2ff;color:#1d4ed8}.rp-handle:active{cursor:grabbing}
+.rp-num{min-width:28px;height:28px;border-radius:50%;background:#1d4ed8;color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.rp-name{flex:1;font-weight:700;word-break:break-word}
+.rp-arrows{display:inline-flex;gap:4px}.rp-mv{padding:2px 8px!important;min-width:30px}
+.rp-detail{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0 0 78px}
+.rp-detail textarea{width:100%;resize:vertical}
+.rp-over{outline:2px dashed #1d4ed8;outline-offset:-2px;background:#eff6ff}
+.rp-list{max-height:55vh!important}
+.dmy-wrap{position:relative;display:flex;gap:6px;align-items:center}
+.dmy-txt{flex:1;min-width:0}
+.dmy-btn{padding:6px 10px!important}
+.dmy-native{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+@media(max-width:600px){.rp-detail{margin-left:0}.rp-head{flex-wrap:wrap}}
+</style>
 </head>
 <body>
 <div id="loginScreen" class="login-wrap">
@@ -378,20 +404,20 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
     <div class="field" style="margin-top:18px"><label>Username</label><input id="li_username" type="text" placeholder="Username" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Password</label><input id="li_password" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="primary" type="button" style="width:100%" onclick="doLogin()">Login</button>
-    <div id="loginError" style="color:#b83b35;margin-top:10px;font-size:13px"></div>
+    <div id="loginError" style="color:#b83b35;margin-top:10px;font-size:15px"></div>
   </div>
 </div>
 <div id="appRoot" style="display:none">
-<header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:13px"></span><button class="light headbtn" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light headbtn" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light headbtn" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light headbtn" onclick="syncFromServer()">↻ Refresh</button><button class="light headbtn" onclick="logout()">🚪 Logout</button></div></div></header>
+<header><div class="head"><div><h1>PST Appeal Management System</h1></div><div class="head-actions"><span id="whoami" style="margin-right:8px;font-size:15px"></span><button class="light headbtn" id="usersBtn" style="display:none" onclick="openUsersModal()">👤 Users</button><button class="light headbtn" id="activityBtn" style="display:none" onclick="openActivityLogModal()">🗒️ Activity Log</button><button class="light headbtn" onclick="openChangePasswordModal()">🔑 Change Password</button><button class="light headbtn" onclick="syncFromServer()">↻ Refresh</button><button class="light headbtn" onclick="logout()">🚪 Logout</button></div></div></header>
 <div class="wrap">
 <div class="toolbar"><div class="search"><select id="searchType" onchange="searchAppeals()" style="max-width:150px"><option value="all">All</option><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option><option value="appellant">Appellant Name</option></select><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><div style="position:relative"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><div class="add-menu" id="addMenu"><div onclick="closeAddMenu();openAppealEntryModal()">⚖️ Appeal</div><div onclick="closeAddMenu();cmForm()">📁 CM</div><div onclick="closeAddMenu();cplaForm()">📜 CPLA</div></div></div><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button><button class="light" type="button" id="toolbarBurgerBtn" onclick="toggleToolbarMenu()" title="More Actions">☰</button><div class="toolbar-menu" id="toolbarMenu"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><button class="light" type="button" onclick="openBreakdownModal();closeToolbarMenu()">📊 Breakdown</button></div></div>
 
 <div class="tabs">
 <button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals <span class="tab-count" id="appealsTabCount">0</span></button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM <span class="tab-count" id="cmTabCount">0</span></button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA <span class="tab-count" id="cplaTabCount">0</span></button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
 </div>
-<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:11px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'appealsYearMenu','appealsYearFilter',db.appeals,'Appeal_Year')">Year <span style="font-size:11px">▾</span><div id="appealsYearMenu" class="sort-menu" style="display:none"></div></th><th>Appellant</th><th>Member</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'appealsStatusMenu')">Status <span style="font-size:11px">▾</span><div id="appealsStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('appealsStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','decided',event)">Decided</div></div></th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
-<div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cmYearMenu','cmYearFilter',db.cms,'CM_Year')">Year <span style="font-size:11px">▾</span><div id="cmYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cmStatusMenu')">Status <span style="font-size:11px">▾</span><div id="cmStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cmStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cmStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cmStatusFilter','decided',event)">Decided</div></div></th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
-<div id="cpla" class="panel card"><div class="body"><div id="cplaFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cplaYearMenu','cplaYearFilter',db.cplas,'CPLA_Year')">Year <span style="font-size:11px">▾</span><div id="cplaYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cplaStatusMenu')">Status <span style="font-size:11px">▾</span><div id="cplaStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cplaStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','decided',event)">Decided</div></div></th><th>Judgement</th><th>Implemented</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
+<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:13px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'appealsYearMenu','appealsYearFilter',db.appeals,'Appeal_Year')">Year <span style="font-size:13px">▾</span><div id="appealsYearMenu" class="sort-menu" style="display:none"></div></th><th>Appellant</th><th>Member</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'appealsStatusMenu')">Status <span style="font-size:13px">▾</span><div id="appealsStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('appealsStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','decided',event)">Decided</div></div></th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
+<div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cmYearMenu','cmYearFilter',db.cms,'CM_Year')">Year <span style="font-size:13px">▾</span><div id="cmYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cmStatusMenu')">Status <span style="font-size:13px">▾</span><div id="cmStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cmStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cmStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cmStatusFilter','decided',event)">Decided</div></div></th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
+<div id="cpla" class="panel card"><div class="body"><div id="cplaFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cplaYearMenu','cplaYearFilter',db.cplas,'CPLA_Year')">Year <span style="font-size:13px">▾</span><div id="cplaYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cplaStatusMenu')">Status <span style="font-size:13px">▾</span><div id="cplaStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cplaStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','decided',event)">Decided</div></div></th><th>Judgement</th><th>Implemented</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="body">
 <div class="uh-controls" style="display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:16px">
   <div class="field" style="max-width:170px"><label>Pick a Date</label><input type="date" id="uh_datePicker" onchange="uhSelect('date')"></div>
@@ -425,15 +451,15 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
   <label>🏷️ Appellant Name Filter (Rank / Words) — comma se alag karein, e.g. ASI, T/ASI, SI, IP, Inspector</label>
   <input id="rep_nameKeys" type="text" placeholder="Jin names mein ye words hon, unhi ki list banegi..." oninput="repExtraChanged()">
   <div id="rep_nameChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
-  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;cursor:pointer;font-size:13px"><input type="checkbox" id="rep_nameWhole" checked onchange="repExtraChanged()" style="width:auto"> Poora word match karein (SI likhne par "Hussain" match na ho; ASI aur T/ASI alag rahen)</label>
+  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;cursor:pointer;font-size:15px"><input type="checkbox" id="rep_nameWhole" checked onchange="repExtraChanged()" style="width:auto"> Poora word match karein (SI likhne par "Hussain" match na ho; ASI aur T/ASI alag rahen)</label>
 </div>
-<p style="color:var(--muted);font-size:12.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
+<p style="color:var(--muted);font-size:14.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
 <div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button><button class="green" type="button" onclick="exportCustomReportExcel()">📥 Export Excel</button></div>
 <div id="rep_selectionBar" style="display:none;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;padding:9px 12px;background:var(--accent-tint);border:1px solid var(--accent-tint-border);border-radius:8px">
-  <span style="font-size:12.5px;color:#000;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(true)">☑ Select All</span>
-  <span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(false)">☐ Unselect All</span>
-  <span id="rep_selectionCount" style="font-size:12.5px;color:var(--muted);font-weight:600"></span>
-  <span style="font-size:12px;color:var(--muted)">Print / Excel sirf selected records ka hoga (kuch bhi select na ho to poori list jayegi).</span>
+  <span style="font-size:14.5px;color:#000;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(true)">☑ Select All</span>
+  <span style="font-size:14.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(false)">☐ Unselect All</span>
+  <span id="rep_selectionCount" style="font-size:14.5px;color:var(--muted);font-weight:600"></span>
+  <span style="font-size:14px;color:var(--muted)">Print / Excel sirf selected records ka hoga (kuch bhi select na ho to poori list jayegi).</span>
 </div>
 <div class="tablewrap"><div id="customReportPreview" style="color:var(--muted);padding:10px 2px">Preview دیکھنے کے لیے فلٹرز سیٹ کریں اور "Preview" دبائیں۔</div></div>
 </div>
@@ -453,7 +479,7 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 </div>
 
 <div id="modal" class="modal-bg"><div class="modal"><div class="mh"><h3 id="mtitle"></h3><button class="close" onclick="closeM()">×</button></div><div class="body" id="mbody"></div></div></div>
-<div id="respModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(520px,100%)"><div class="mh"><h3>👥 Select Respondents</h3><button class="close" onclick="closeRespModal()">×</button></div><div class="body" id="respModalBody"></div></div></div>
+<div id="respModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(760px,100%);min-height:min(560px,92vh)"><div class="mh"><h3 style="display:flex;align-items:center;gap:8px"><svg class="ico-users" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Select Respondents</h3><button class="close" onclick="closeRespModal()">×</button></div><div class="body" id="respModalBody"></div></div></div>
 <div id="usersModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(560px,100%)"><div class="mh"><h3>👤 Users (Admin / Child Accounts)</h3><button class="close" onclick="closeUsersModal()">×</button></div><div class="body" id="usersModalBody"></div></div></div>
 <div id="activityModal" class="modal-bg" style="z-index:60"><div class="modal" style="width:min(760px,100%)"><div class="mh"><h3>🗒️ User Activity Log</h3><button class="close" onclick="closeActivityModal()">×</button></div><div class="body" id="activityModalBody"></div></div></div>
 </div>
@@ -461,7 +487,7 @@ select.status-decided:not(:hover),span.status-decided{color:#dc2626!important}
 // ===== GOOGLE SHEETS CONNECTION =====
 // Apps Script Web App URL یہاں paste کریں
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwzjemK3Hb3W5vtt37QlC-L3jwrQQ3NMW7DzbOdRFCRZQLi_2HqEzTTbi-kHtBnUhs/exec";
-let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:[],respondents:[]},editId=null;
+let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:[],respondents:[],appealRespondents:[]},editId=null;
 let authToken=null,currentUser=null;
 const $=x=>document.getElementById(x), id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -471,7 +497,7 @@ const ICON_TRASH=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" st
 const ICON_PRINT=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`;
 function statusBadge(status){const s=String(status||"").trim();const key=s.toLowerCase();const cls=key==="decided"?"badge badge-decided":key==="pending"?"badge badge-pending":"badge";return `<span class="${cls}">${esc(s||"-")}</span>`}
 async function api(action,payload={}){if(!WEB_APP_URL.startsWith("http"))throw new Error("Apps Script Web App URL ابھی set نہیں کی گئی");const r=await fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,payload,token:authToken})});return await r.json()}
-async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
+async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];db.appealRespondents=db.appealRespondents||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
 
 // ===== SESSION PERSISTENCE (survive page refresh) + INACTIVITY AUTO-LOGOUT =====
 const SESSION_KEY="pst_session_v1";
@@ -538,7 +564,7 @@ function openChangePasswordModal(){
     <div class="field full"><label>موجودہ Password</label><input id="cp_old" type="password" placeholder="Current Password"></div>
     <div class="field full"><label>نیا Password</label><input id="cp_new" type="password" placeholder="New Password"></div>
     <div class="field full"><label>نیا Password دوبارہ لکھیں</label><input id="cp_new2" type="password" placeholder="Confirm New Password"></div>
-    <div id="cpError" class="full" style="color:#b83b35;font-size:13px"></div>
+    <div id="cpError" class="full" style="color:#b83b35;font-size:15px"></div>
     <div class="actions full"><button class="green" type="button" onclick="submitChangePassword()">💾 Save</button><button class="gray" type="button" onclick="closeM()">✖ Cancel</button></div>
   </div>`);
 }
@@ -704,12 +730,12 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
   padding:5px 9px !important;
   margin:0 !important;
   border-radius:7px !important;
-  font-size:12px !important;
+  font-size:14px !important;
   line-height:20px !important;
 }
 #appealRows .actionbuttons .actionbtn::before,
 #appealRows .actionbuttons button[title="Report"]::before{
-  font-size:15px !important;
+  font-size:17px !important;
   line-height:1 !important;
   margin-right:3px !important;
 }
@@ -722,28 +748,95 @@ function seedDefaultRespondents(){if(!db.respondents||db.respondents.length===0)
 async function persist(){render();fillRespondentSelect();try{await api("saveAll",db)}catch(e){console.error(e);alert("Data local screen پر ہے لیکن Google Sheet save نہیں ہوئی: "+e.message)}}
 function refreshRespondentOptions(selectId,alsoSelect){const el=$(selectId);if(!el)return;const selected=Array.from(el.selectedOptions||[]).map(o=>o.value);if(alsoSelect&&!selected.includes(alsoSelect))selected.push(alsoSelect);el.innerHTML=(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}" ${selected.includes(r.Respondent)?"selected":""}>${esc(r.Respondent)}</option>`).join("")}
 function fillRespondentSelect(){refreshRespondentOptions("ae_Respondents");refreshRespondentOptions("Respondents");refreshRespondentOptions("CM_Respondents");updateRespondentsBtnLabel("ae_Respondents");updateRespondentsBtnLabel("Respondents");updateRespondentsBtnLabel("CM_Respondents")}
-function selectedRespondents(id){const e=$(id);return e?Array.from(e.selectedOptions).map(o=>o.value).join(", "):""}
-function updateRespondentsBtnLabel(selectId){const sel=$(selectId),btn=$(selectId+"Btn");if(!sel||!btn)return;const vals=Array.from(sel.selectedOptions).map(o=>o.value);btn.textContent=vals.length?`👥 Respondents (${vals.length}): ${vals.slice(0,2).join(", ")}${vals.length>2?"…":""}`:"👥 Select Respondents"}
-let respPickerTarget=null,respPickerSelected=new Set(),respPickerAddingNew=false;
-function openRespondentPicker(selectId){const sel=$(selectId);respPickerTarget=selectId;respPickerSelected=new Set(sel?Array.from(sel.selectedOptions).map(o=>o.value):[]);respPickerAddingNew=false;renderRespPicker();$("respModal").classList.add("show")}
-function closeRespModal(){$("respModal").classList.remove("show");respPickerTarget=null}
+function selectedRespondents(id){return respList(id).map(x=>x.name).join(", ")}
+const RESP_ICON=`<svg class="ico-users" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+function updateRespondentsBtnLabel(selectId){const btn=$(selectId+"Btn");if(!btn)return;const vals=respList(selectId).map(x=>x.name);btn.innerHTML=RESP_ICON+"<span>"+(vals.length?esc(`Respondents (${vals.length}): ${vals.slice(0,2).join(", ")}${vals.length>2?"…":""}`):"Select Respondents")+"</span>"}
+/* ===== Respondents: ordered list (+ optional Role / Decision for Appeals) ===== */
+const respStore={};
+const RESP_ROLES=["Punishing Authority","Appellate Authority","Revisional Authority"];
+const RESP_DETAIL_TARGETS=["ae_Respondents","Respondents"];
+let respDdOpen=false,respPickerTarget=null,respPickerSelected=[],respPickerAddingNew=false,respDragIdx=null;
+function respList(selectId){if(respStore[selectId])return respStore[selectId];const sel=$(selectId);return sel?Array.from(sel.selectedOptions).map(o=>({name:o.value,role:"",decision:""})):[]}
+function parseRespondentNames(text){
+ const toks=String(text||"").split(",").map(x=>x.trim()).filter(Boolean);
+ const known=new Map((db.respondents||[]).map(r=>[String(r.Respondent).toLowerCase(),r.Respondent]));
+ const out=[];let i=0;
+ while(i<toks.length){let hit=null,len=1;
+  for(let j=toks.length;j>i;j--){const cand=toks.slice(i,j).join(", ").toLowerCase();if(known.has(cand)){hit=known.get(cand);len=j-i;break}}
+  out.push(hit||toks[i]);i+=len}
+ return out;
+}
+function appealRespondentList(a){
+ if(!a)return [];
+ const rows=(db.appealRespondents||[]).filter(x=>String(x.appeal_id)===String(a.id)).sort((x,y)=>Number(x.Sort_Order||0)-Number(y.Sort_Order||0));
+ if(rows.length)return rows.map(x=>({name:x.Respondent,role:x.Role||"",decision:x.Decision||""}));
+ return parseRespondentNames(a.Respondents).map(n=>({name:n,role:"",decision:""}));
+}
+function setAppealRespondents(appealId,list){
+ db.appealRespondents=(db.appealRespondents||[]).filter(x=>String(x.appeal_id)!==String(appealId)).concat((list||[]).map((x,i)=>({id:id(),appeal_id:String(appealId),Respondent:x.name,Role:x.role||"",Decision:x.decision||"",Sort_Order:i+1})));
+}
+function respondentsReportHtml(a){
+ const list=appealRespondentList(a);
+ if(!list.length)return `<p><b>Respondents:</b> -</p>`;
+ return `<h3>Respondents</h3><table class="t"><tr><th style="width:30px">#</th><th>Respondent</th><th>Role</th><th>Decision / Punishment</th></tr>${list.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.name)}</td><td>${esc(x.role)}</td><td>${esc(x.decision)}</td></tr>`).join("")}</table>`;
+}
+function openRespondentPicker(selectId){respDdOpen=false;respPickerTarget=selectId;respPickerSelected=respList(selectId).map(x=>({...x}));respPickerAddingNew=false;renderRespPicker();$("respModal").classList.add("show")}
+function closeRespModal(){respDdOpen=false;$("respModal").classList.remove("show");respPickerTarget=null}
+function respHasDetail(){return RESP_DETAIL_TARGETS.includes(respPickerTarget)}
 function renderRespPicker(){
- const body=$("respModalBody");
- const dropdownOptions=(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}">${esc(r.Respondent)}</option>`).join("");
- const listHtml=respPickerSelected.size?Array.from(respPickerSelected).map(name=>{
-   const arg=JSON.stringify(name).replace(/</g,"\\u003c");
-   return `<div class="selected-resp-row"><span>${esc(name)}</span><button type="button" class="resp-x" title="Remove respondent" aria-label="Remove respondent" onclick='removeFromRespPickerList(${arg})'>×</button></div>`;
- }).join(""):`<div style="padding:12px;color:#6b6578">ابھی کوئی respondent select نہیں کیا گیا</div>`;
- body.innerHTML=`<div class="field full"><label>Respondent منتخب کریں</label><select id="respPickerDropdown" onchange="handleRespDropdownChange(this.value)"><option value="">-- Select Respondent --</option>${dropdownOptions}<option value="__add_new__">➕ Add New Respondent</option></select></div>
+ const body=$("respModalBody"),detail=respHasDetail();
+ const ddItems=(db.respondents||[]).map(r=>`<div class="rd-item" onclick="pickRespFromMenu('${r.id}')"><span class="rd-label">${esc(r.Respondent)}</span><button type="button" class="rd-del" title="Delete from list" aria-label="Delete from list" onclick="event.stopPropagation();deleteRespondentFromList('${r.id}')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div>`).join("");
+ const n=respPickerSelected.length;
+ const listHtml=n?respPickerSelected.map((x,i)=>{
+   const isOther=!!x.role&&!RESP_ROLES.includes(x.role);
+   const roleOpts=`<option value="">-- Role (optional) --</option>`+RESP_ROLES.map(r=>`<option value="${r}" ${x.role===r?"selected":""}>${r}</option>`).join("")+`<option value="__other__" ${isOther?"selected":""}>Other…</option>`;
+   return `<div class="selected-resp-row rp-row" data-i="${i}" ondragover="respDragOver(event,this)" ondragleave="this.classList.remove('rp-over')" ondrop="respDrop(event,${i})">
+    <div class="rp-head">
+     <span class="rp-handle" draggable="true" title="Drag to reorder" ondragstart="respDragStart(event,${i})" ondragend="respDragEnd()">⠿</span>
+     <span class="rp-num">${i+1}</span>
+     <b class="rp-name">${esc(x.name)}</b>
+     <span class="rp-arrows"><button type="button" class="light rp-mv" title="Move up" ${i===0?"disabled":""} onclick="respMove(${i},${i-1})">▲</button><button type="button" class="light rp-mv" title="Move down" ${i===n-1?"disabled":""} onclick="respMove(${i},${i+1})">▼</button></span>
+     <button type="button" class="resp-x" title="Remove respondent" aria-label="Remove respondent" onclick="removeFromRespPickerList(${i})">×</button>
+    </div>
+    ${detail?`<div class="rp-detail">
+     <select onchange="respRoleChange(${i},this)">${roleOpts}</select>
+     <input type="text" class="rp-other" placeholder="Role likhein" style="display:${isOther?"block":"none"}" value="${esc(isOther?x.role:"")}" oninput="respSet(${i},'role',this.value)">
+     <textarea rows="2" placeholder="Decision / Punishment (optional)" oninput="respSet(${i},'decision',this.value)">${esc(x.decision||"")}</textarea>
+    </div>`:""}
+   </div>`}).join(""):`<div style="padding:12px;color:#6b6578">ابھی کوئی respondent select نہیں کیا گیا</div>`;
+ body.innerHTML=`<div class="field full"><label>Respondent منتخب کریں</label><div class="rd-wrap"><button type="button" class="rd-toggle" onclick="toggleRespDropdown()"><span>-- Select Respondent --</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="rd-menu" id="respDdMenu" style="display:${respDdOpen?"block":"none"}">${ddItems}<div class="rd-item rd-add" onclick="handleRespDropdownChange('__add_new__')">➕ Add New Respondent</div></div></div></div>
  ${respPickerAddingNew?`<div class="field full" style="margin-top:8px"><label>نیا Respondent کا نام</label><div style="display:flex;gap:8px"><input id="respPickerNewInput" placeholder="e.g. IGP, Punjab, Lahore" onkeydown="if(event.key==='Enter'){event.preventDefault();confirmAddNewRespondent();}"><button type="button" class="green" onclick="confirmAddNewRespondent()">➕ Add</button><button type="button" class="gray" onclick="cancelAddNewRespondent()">✖</button></div></div>`:""}
- <div class="field full" style="margin-top:14px"><label>Selected Respondents (${respPickerSelected.size})</label><div class="selected-resp-list">${listHtml}</div></div>
+ <div class="field full" style="margin-top:14px"><label>Selected Respondents (${n})${n>1?" — drag ⠿ ya ▲▼ se order badlein":""}</label><div class="selected-resp-list rp-list">${listHtml}</div></div>
  <div class="actions full"><button class="green" type="button" onclick="saveRespPicker()">💾 Save</button><button class="gray" type="button" onclick="closeRespModal()">✖ Close</button></div>`;
  if(respPickerAddingNew)$("respPickerNewInput")?.focus();
 }
+function toggleRespDropdown(){respDdOpen=!respDdOpen;const m=$("respDdMenu");if(m)m.style.display=respDdOpen?"block":"none"}
+function pickRespFromMenu(rid){const r=(db.respondents||[]).find(x=>String(x.id)===String(rid));if(!r)return;respDdOpen=false;handleRespDropdownChange(r.Respondent)}
+async function deleteRespondentFromList(rid){
+ const r=(db.respondents||[]).find(x=>String(x.id)===String(rid));if(!r)return;
+ if(!confirm('"'+r.Respondent+'" ko respondents list se delete karein?\n\n(Pehle se save appeals mein ye naam wese hi rahega.)'))return;
+ db.respondents=db.respondents.filter(x=>String(x.id)!==String(rid));
+ respDdOpen=true;
+ await persist();
+ renderRespPicker();$("respModal").classList.add("show");
+}
+function respSet(i,k,v){if(respPickerSelected[i])respPickerSelected[i][k]=v}
+function respRoleChange(i,el){
+ const inp=el.parentNode.querySelector(".rp-other");
+ if(el.value==="__other__"){respSet(i,"role","");if(inp){inp.style.display="block";inp.value="";inp.focus()}}
+ else{respSet(i,"role",el.value);if(inp){inp.style.display="none";inp.value=""}}
+}
+function respMove(from,to){if(to<0||to>=respPickerSelected.length||from===to)return;const [it]=respPickerSelected.splice(from,1);respPickerSelected.splice(to,0,it);renderRespPicker()}
+function respDragStart(ev,i){respDragIdx=i;ev.dataTransfer.effectAllowed="move";try{ev.dataTransfer.setData("text/plain",String(i));const row=ev.target.closest(".rp-row");if(row)ev.dataTransfer.setDragImage(row,10,10)}catch(e){}}
+function respDragOver(ev,row){if(respDragIdx===null)return;ev.preventDefault();ev.dataTransfer.dropEffect="move";row.classList.add("rp-over")}
+function respDrop(ev,to){ev.preventDefault();const from=respDragIdx;respDragIdx=null;if(from===null)return;respMove(from,to);}
+function respDragEnd(){respDragIdx=null;document.querySelectorAll(".rp-over").forEach(e=>e.classList.remove("rp-over"))}
+function addToRespPicker(name){if(!respPickerSelected.some(x=>x.name.toLowerCase()===String(name).toLowerCase()))respPickerSelected.push({name:name,role:"",decision:""})}
 function handleRespDropdownChange(val){
  if(!val)return;
+ respDdOpen=false;
  if(val==="__add_new__"){respPickerAddingNew=true;renderRespPicker();return;}
- respPickerSelected.add(val);
+ addToRespPicker(val);
  respPickerAddingNew=false;
  renderRespPicker();
 }
@@ -751,13 +844,13 @@ function cancelAddNewRespondent(){respPickerAddingNew=false;renderRespPicker();}
 async function confirmAddNewRespondent(){
  const input=$("respPickerNewInput"),v=(input?.value||"").trim();if(!v)return;
  if(!(db.respondents||[]).some(r=>r.Respondent.toLowerCase()===v.toLowerCase())){db.respondents=db.respondents||[];db.respondents.push({id:id(),Respondent:v});await persist();}
- respPickerSelected.add(v);
+ addToRespPicker(v);
  respPickerAddingNew=false;
  renderRespPicker();
  $("respModal").classList.add("show");
 }
-function removeFromRespPickerList(name){respPickerSelected.delete(name);renderRespPicker();}
-function saveRespPicker(){const sel=$(respPickerTarget);if(sel){Array.from(sel.options).forEach(o=>{o.selected=respPickerSelected.has(o.value)})}updateRespondentsBtnLabel(respPickerTarget);closeRespModal();}
+function removeFromRespPickerList(i){respPickerSelected.splice(i,1);renderRespPicker();}
+function saveRespPicker(){const t=respPickerTarget;respStore[t]=respPickerSelected.map(x=>({...x}));const names=respStore[t].map(x=>x.name);const sel=$(t);if(sel){Array.from(sel.options).forEach(o=>{o.selected=names.includes(o.value)})}updateRespondentsBtnLabel(t);closeRespModal();}
 
 function tab(x,b){document.querySelectorAll(".panel").forEach(e=>e.classList.remove("active"));$(x).classList.add("active");document.querySelectorAll(".tab").forEach(e=>e.classList.remove("active"));b.classList.add("active")}
 function closeM(){$("modal").classList.remove("show");editId=null}
@@ -772,27 +865,47 @@ function isoDateOnly(value){
   const yyyy=d.getFullYear(),mm=String(d.getMonth()+1).padStart(2,"0"),dd=String(d.getDate()).padStart(2,"0");
   return `${yyyy}-${mm}-${dd}`;
 }
+function dmyFromIso(iso){const m=String(iso||"").match(/^(\d{4})-(\d{2})-(\d{2})/);return m?`${m[3]}/${m[2]}/${m[1]}`:""}
+function dateDmyField(label,id,v="",cl=""){
+ const iso=isoDateOnly(v);
+ return `<div class="field ${cl}"><label>${label}</label><div class="dmy-wrap"><input type="text" id="${id}_txt" class="dmy-txt" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric" autocomplete="off" value="${dmyFromIso(iso)}" oninput="dmyTyped('${id}')"><button type="button" class="light dmy-btn" title="Calendar" onclick="dmyOpen('${id}')">📅</button><input type="date" id="${id}" class="dmy-native" tabindex="-1" value="${iso}" onchange="dmyPicked('${id}')"></div></div>`;
+}
+function dmyTyped(id){
+ const t=$(id+"_txt"),n=$(id);let d=t.value.replace(/[^\d]/g,"").slice(0,8);
+ let out=d;if(d.length>4)out=d.slice(0,2)+"/"+d.slice(2,4)+"/"+d.slice(4);else if(d.length>2)out=d.slice(0,2)+"/"+d.slice(2);
+ t.value=out;
+ const m=out.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+ if(m){const dt=new Date(+m[3],+m[2]-1,+m[1]);const ok=dt.getFullYear()===+m[3]&&dt.getMonth()===+m[2]-1&&dt.getDate()===+m[1];n.value=ok?`${m[3]}-${m[2]}-${m[1]}`:"";t.style.borderColor=ok?"":"#dc2626"}
+ else{n.value="";t.style.borderColor=""}
+}
+function dmyPicked(id){$(id+"_txt").value=dmyFromIso($(id).value);$(id+"_txt").style.borderColor=""}
+function dmyOpen(id){const n=$(id);try{if(n.showPicker){n.showPicker();return}}catch(e){}n.focus();n.click()}
+function dmySet(id,iso){const n=$(id),t=$(id+"_txt");if(n)n.value=isoDateOnly(iso);if(t){t.value=dmyFromIso(isoDateOnly(iso));t.style.borderColor=""}}
 function fld(label,id,type="text",v="",cl=""){const val=type==="date"?isoDateOnly(v):v;return `<div class="field ${cl}"><label>${label}</label><input id="${id}" type="${type}" value="${esc(val)}"></div>`}
 function area(label,id,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><textarea id="${id}">${esc(v)}</textarea></div>`}
 function sel(label,id,arr,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><select id="${id}">${arr.map(o=>`<option value="${esc(o.v??o)}" ${(o.v??o)==v?"selected":""}>${esc(o.t??o)}</option>`).join("")}</select></div>`}
+const APPEAL_RANKS=["IP","SI","ASI","HC","Const","Other"];
+function rankFieldHtml(id,v){const cur=String(v||"");const other=cur&&!APPEAL_RANKS.includes(cur);return `<div class="field"><label>Rank</label><select id="${id}" onchange="toggleOtherLMS('${id}','${id}_OtherWrap')"><option value="">-- Select Rank --</option>${APPEAL_RANKS.map(r=>`<option value="${r}" ${(other?r==="Other":r===cur)?"selected":""}>${r}</option>`).join("")}</select><div id="${id}_OtherWrap" style="display:${other?"block":"none"};margin-top:6px"><input id="${id}_Other" type="text" placeholder="Enter Rank" value="${esc(other?cur:"")}"></div></div>`}
 function appealEntryFormHtml(){return `<div class="grid">
 <div class="field"><label>Appeal LMS</label><select id="ae_Appeal_LMS" onchange="toggleOtherLMS('ae_Appeal_LMS','ae_Appeal_LMS_OtherWrap')"><option value="Yes">Yes</option><option value="No">No</option><option value="Other">Other</option></select><div id="ae_Appeal_LMS_OtherWrap" style="display:none;margin-top:6px"><input id="ae_Appeal_LMS_Other" type="text" placeholder="Enter Other"></div></div>
 <div class="field"><label>Appeal No. <b>*</b></label><input id="ae_Appeal_Num" type="number" placeholder="Appeal No."></div>
 <div class="field"><label>Appeal Year</label><input id="ae_Appeal_Year" type="number" placeholder="Year"></div>
 <div class="field"><label>Name of Appellant <b>*</b></label><input id="ae_Name_of_Appellant" type="text" placeholder="Name of Appellant"></div>
 <div class="field"><label>Name Urdu</label><input id="ae_Name_Urdu" type="text" placeholder="Name Urdu"></div>
-<div class="field"><label>Respondents</label><button type="button" class="light" id="ae_RespondentsBtn" style="width:100%;text-align:left" onclick="openRespondentPicker('ae_Respondents')">👥 Select Respondents</button><select id="ae_Respondents" multiple style="display:none"></select></div>
+<div class="field"><label>Rank</label><select id="ae_Rank" onchange="toggleOtherLMS('ae_Rank','ae_Rank_OtherWrap')"><option value="">-- Select Rank --</option>${APPEAL_RANKS.map(r=>`<option value="${r}">${r}</option>`).join("")}</select><div id="ae_Rank_OtherWrap" style="display:none;margin-top:6px"><input id="ae_Rank_Other" type="text" placeholder="Enter Rank"></div></div>
+<div class="field"><label>Respondents</label><button type="button" class="light" id="ae_RespondentsBtn" style="width:100%;text-align:left" onclick="openRespondentPicker('ae_Respondents')"><svg class="ico-users" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Select Respondents</span></button><select id="ae_Respondents" multiple style="display:none"></select></div>
 <div class="field"><label>Member</label><select id="ae_Member"><option>Chairman</option><option>Member-I</option><option>Member-II</option><option>Member-III</option><option>Member-IV</option><option>Member-V</option><option>Member-VI</option></select></div>
-<div class="field"><label>File No.</label><input id="ae_File_No" type="text" placeholder="File No."></div>
+<div class="field"><label>Marking / Entry No.</label><input id="ae_File_No" type="text" placeholder="Marking / Entry No."></div>
+${dateDmyField("Marking / Entry Date","ae_Entry_Date","")}
 <div class="field"><label>Status</label><select id="ae_Status"><option value="Pending">Pending</option><option value="Decided">Decided</option></select></div>
 <div class="field"><label>Bench</label><select id="ae_Bench"><option>Faisalabad</option><option>Lahore</option></select></div>
 <div class="field full"><label>Prayer</label><textarea id="ae_Prayer" placeholder="Prayer"></textarea></div>
 <div class="actions full"><button class="green" type="button" onclick="saveAppealEntry()">➕ Add Appeal</button><button class="gray" type="button" onclick="clearAppealEntry()">↺ Clear</button></div>
 </div>`}
 function openAppealEntryModal(){modal("⚖️ Appeal Entry",appealEntryFormHtml());fillRespondentSelect();clearAppealEntry();}
-function clearAppealEntry(){["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Member","File_No","Status","Bench","Prayer"].forEach(k=>{const e=$("ae_"+k);if(e)e.value=k==="Appeal_LMS"?"Yes":"";});const rs=$("ae_Respondents");if(rs)Array.from(rs.options).forEach(o=>o.selected=false);updateRespondentsBtnLabel("ae_Respondents");const ow=$("ae_Appeal_LMS_OtherWrap");if(ow)ow.style.display="none";const oi=$("ae_Appeal_LMS_Other");if(oi)oi.value="";$("ae_Appeal_Num")?.focus();}
+function clearAppealEntry(){["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Rank","Member","File_No","Status","Bench","Prayer"].forEach(k=>{const e=$("ae_"+k);if(e)e.value=k==="Appeal_LMS"?"Yes":"";});dmySet("ae_Entry_Date","");{const ro=$("ae_Rank_OtherWrap");if(ro)ro.style.display="none";const ri=$("ae_Rank_Other");if(ri)ri.value=""}respStore["ae_Respondents"]=[];const rs=$("ae_Respondents");if(rs)Array.from(rs.options).forEach(o=>o.selected=false);updateRespondentsBtnLabel("ae_Respondents");const ow=$("ae_Appeal_LMS_OtherWrap");if(ow)ow.style.display="none";const oi=$("ae_Appeal_LMS_Other");if(oi)oi.value="";$("ae_Appeal_Num")?.focus();}
 function isDuplicateAppeal(num,year,excludeId){num=String(num||"").trim();year=String(year||"").trim();return db.appeals.some(x=>x.id!==excludeId && String(x.Appeal_Num||"").trim()===num && String(x.Appeal_Year||"").trim()===year)}
-function saveAppealEntry(){const keys=["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Respondents","Member","File_No","Status","Bench","Prayer"];let r={id:id()};keys.forEach(k=>{const e=$("ae_"+k);r[k]=e?e.value.trim():"";});if(r.Appeal_LMS==="Other"){r.Appeal_LMS=$("ae_Appeal_LMS_Other")?.value.trim()||"";if(!r.Appeal_LMS)return alert("Other کی detail لکھیں۔");}r.Respondents=selectedRespondents("ae_Respondents");if(!r.Appeal_Num)return alert("Appeal No. required");if(!r.Name_of_Appellant)return alert("Name of Appellant required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}db.appeals.push(r);r._modifiedAt=new Date().toISOString();persist();logActivity("Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);clearAppealEntry();alert("Appeal added successfully.");}
+function saveAppealEntry(){const keys=["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Rank","Respondents","Member","File_No","Entry_Date","Status","Bench","Prayer"];let r={id:id()};keys.forEach(k=>{const e=$("ae_"+k);r[k]=e?e.value.trim():"";});if(r.Appeal_LMS==="Other"){r.Appeal_LMS=$("ae_Appeal_LMS_Other")?.value.trim()||"";if(!r.Appeal_LMS)return alert("Other کی detail لکھیں۔");}if(r.Rank==="Other"){r.Rank=$("ae_Rank_Other")?.value.trim()||"";if(!r.Rank)return alert("Rank کی detail لکھیں۔");}r.Respondents=selectedRespondents("ae_Respondents");if(($("ae_Entry_Date_txt")?.value||"").trim()&&!r.Entry_Date)return alert("Marking / Entry Date درست نہیں۔ dd/mm/yyyy format استعمال کریں۔");if(!r.Appeal_Num)return alert("Appeal No. required");if(!r.Name_of_Appellant)return alert("Name of Appellant required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}db.appeals.push(r);setAppealRespondents(r.id,respList("ae_Respondents"));r._modifiedAt=new Date().toISOString();persist();logActivity("Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);clearAppealEntry();alert("Appeal added successfully.");}
 function appealRecordById(eid){return db.appeals.find(x=>String(x.id??x.ID??x.Appeal_ID)===String(eid))||null}
 function appealForm(eid=null){
  let r=eid?appealRecordById(eid):{};
@@ -803,16 +916,16 @@ function appealForm(eid=null){
  const lmsOptions=standard.map(v=>`<option value="${v}" ${(isOther?v==="Other":v===lmsVal)?"selected":""}>${v}</option>`).join("");
  modal(eid?"Edit Appeal":"New Appeal",`<div class="grid">
  <div class="field"><label>Appeal LMS</label><select id="Appeal_LMS" onchange="toggleOtherLMS('Appeal_LMS','Appeal_LMS_OtherWrap')">${lmsOptions}</select><div id="Appeal_LMS_OtherWrap" style="display:${isOther||lmsVal==='Other'?'block':'none'};margin-top:6px"><input id="Appeal_LMS_Other" type="text" placeholder="Enter Other" value="${esc(isOther?lmsVal:'')}"></div></div>
- ${fld("Appeal No.","Appeal_Num","number",r.Appeal_Num)}${fld("Appeal Year","Appeal_Year","number",r.Appeal_Year)}${fld("Name of Appellant","Name_of_Appellant","text",r.Name_of_Appellant)}${fld("Name Urdu","Name_Urdu","text",r.Name_Urdu)}${respondentSelectField(r.Respondents)}${sel("Member","Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member)}${fld("File No.","File_No","text",r.File_No)}${sel("Status","Status",["Pending","Decided"],r.Status)}${sel("Bench","Bench",["Faisalabad","Lahore"],r.Bench)}${area("Prayer","Prayer",r.Prayer,"full")}<div class="actions full"><button class="green" type="button" onclick="saveAppeal()">Save</button><button class="gray" type="button" onclick="closeM()">Cancel</button></div></div>`);
+ ${fld("Appeal No.","Appeal_Num","number",r.Appeal_Num)}${fld("Appeal Year","Appeal_Year","number",r.Appeal_Year)}${fld("Name of Appellant","Name_of_Appellant","text",r.Name_of_Appellant)}${fld("Name Urdu","Name_Urdu","text",r.Name_Urdu)}${rankFieldHtml("Rank",r.Rank)}${respondentSelectField(r.Respondents,eid?appealRespondentList(r):null)}${sel("Member","Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member)}${fld("Marking / Entry No.","File_No","text",r.File_No)}${dateDmyField("Marking / Entry Date","Entry_Date",r.Entry_Date)}${sel("Status","Status",["Pending","Decided"],r.Status)}${sel("Bench","Bench",["Faisalabad","Lahore"],r.Bench)}${area("Prayer","Prayer",r.Prayer,"full")}<div class="actions full"><button class="green" type="button" onclick="saveAppeal()">Save</button><button class="gray" type="button" onclick="closeM()">Cancel</button></div></div>`);
 }
 function toggleOtherLMS(selectId,wrapId){const s=$(selectId),w=$(wrapId);if(!s||!w)return;w.style.display=s.value==='Other'?'block':'none';}
 function normalizeAppealLMS(prefix){const s=$(prefix+'_Appeal_LMS')||$(prefix==='ae'?'ae_Appeal_LMS':prefix);return ''}
 
-function saveAppeal(){const wasEdit=!!editId;const old=wasEdit?appealRecordById(editId):null;let r={...(old||{}),id:old?.id??old?.ID??old?.Appeal_ID??editId??id()};["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Member","File_No","Prayer","Status","Bench"].forEach(k=>{const e=$(k);r[k]=e?e.value:""});if(r.Appeal_LMS==="Other"){const other=$("Appeal_LMS_Other")?.value.trim();if(!other)return alert("Other کی detail لکھیں۔");r.Appeal_LMS=other;}r.Respondents=selectedRespondents("Respondents");if(!r.Appeal_Num)return alert("Appeal No. required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year,editId)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}r._modifiedAt=new Date().toISOString();if(wasEdit)db.appeals=db.appeals.map(x=>String(x.id??x.ID??x.Appeal_ID)===String(editId)?r:x);else db.appeals.push(r);persist();logActivity(wasEdit?"Edit Appeal":"Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);closeM()}
+function saveAppeal(){const wasEdit=!!editId;const old=wasEdit?appealRecordById(editId):null;let r={...(old||{}),id:old?.id??old?.ID??old?.Appeal_ID??editId??id()};["Appeal_LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Rank","Member","File_No","Prayer","Status","Bench"].forEach(k=>{const e=$(k);r[k]=e?e.value:""});if(r.Rank==="Other"){r.Rank=$("Rank_Other")?.value.trim()||"";if(!r.Rank)return alert("Rank کی detail لکھیں۔");}if(r.Appeal_LMS==="Other"){const other=$("Appeal_LMS_Other")?.value.trim();if(!other)return alert("Other کی detail لکھیں۔");r.Appeal_LMS=other;}r.Entry_Date=$("Entry_Date")?$("Entry_Date").value:(old?.Entry_Date||"");if(($("Entry_Date_txt")?.value||"").trim()&&!r.Entry_Date)return alert("Marking / Entry Date درست نہیں۔ dd/mm/yyyy format استعمال کریں۔");r.Respondents=selectedRespondents("Respondents");if(!r.Appeal_Num)return alert("Appeal No. required");if(isDuplicateAppeal(r.Appeal_Num,r.Appeal_Year,editId)){alert("⚠️ Yeh Appeal No. "+r.Appeal_Num+" / Year "+(r.Appeal_Year||"-")+" پہلے سے موجود ہے۔ Duplicate Appeal save نہیں ہو سکتا۔");return;}r._modifiedAt=new Date().toISOString();if(wasEdit)db.appeals=db.appeals.map(x=>String(x.id??x.ID??x.Appeal_ID)===String(editId)?r:x);else db.appeals.push(r);setAppealRespondents(r.id,respList("Respondents"));persist();logActivity(wasEdit?"Edit Appeal":"Add Appeal",`${r.Appeal_Num}/${r.Appeal_Year} - ${r.Name_of_Appellant}`);closeM()}
 function ensureRespondentsExist(names){let changed=false;(names||[]).forEach(n=>{n=String(n||"").trim();if(n&&!(db.respondents||[]).some(r=>r.Respondent.toLowerCase()===n.toLowerCase())){db.respondents=db.respondents||[];db.respondents.push({id:id(),Respondent:n});changed=true;}});return changed;}
 function yearOptions(){const cur=new Date().getFullYear();const arr=[];for(let y=cur+1;y>=cur-20;y--)arr.push(y);return arr}
-function respondentSelectFieldGeneric(label,fieldId,v=""){const vals=String(v||"").split(",").map(x=>x.trim()).filter(Boolean);ensureRespondentsExist(vals);const btnLabel=vals.length?`👥 Respondents (${vals.length}): ${esc(vals.slice(0,2).join(", "))}${vals.length>2?"…":""}`:"👥 Select Respondents";return `<div class="field"><label>${label}</label><button type="button" class="light" id="${fieldId}Btn" style="width:100%;text-align:left" onclick="openRespondentPicker('${fieldId}')">${btnLabel}</button><select id="${fieldId}" multiple style="display:none">${(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}" ${vals.includes(r.Respondent)?"selected":""}>${esc(r.Respondent)}</option>`).join("")}</select></div>`}
-function respondentSelectField(v=""){return respondentSelectFieldGeneric("Respondents","Respondents",v)}
+function respondentSelectFieldGeneric(label,fieldId,v="",list=null){const items=list||parseRespondentNames(v).map(n=>({name:n,role:"",decision:""}));const vals=items.map(x=>x.name);ensureRespondentsExist(vals);respStore[fieldId]=items.map(x=>({...x}));const btnLabel=vals.length?`Respondents (${vals.length}): ${esc(vals.slice(0,2).join(", "))}${vals.length>2?"…":""}`:"Select Respondents";return `<div class="field"><label>${label}</label><button type="button" class="light" id="${fieldId}Btn" style="width:100%;text-align:left" onclick="openRespondentPicker('${fieldId}')">${RESP_ICON}<span>${btnLabel}</span></button><select id="${fieldId}" multiple style="display:none">${(db.respondents||[]).map(r=>`<option value="${esc(r.Respondent)}" ${vals.includes(r.Respondent)?"selected":""}>${esc(r.Respondent)}</option>`).join("")}</select></div>`}
+function respondentSelectField(v="",list=null){return respondentSelectFieldGeneric("Respondents","Respondents",v,list)}
 function optionsAppeal(){return db.appeals.map(x=>({v:x.id,t:`${x.Appeal_Num} - ${x.Name_of_Appellant}`}))}
 function appealPicker(currentId=""){
  const a=getAppeal(currentId);
@@ -894,6 +1007,7 @@ function del(key,eid){
    db.cplaHearings=db.cplaHearings.filter(x=>!cplaIds.includes(x.parent_id));
    db.cms=db.cms.filter(x=>x.appeal_id!==eid);
    db.cplas=db.cplas.filter(x=>x.appeal_id!==eid);
+   db.appealRespondents=(db.appealRespondents||[]).filter(x=>String(x.appeal_id)!==String(eid));
    db.appeals=db.appeals.filter(x=>x.id!==eid);
  }else if(key==="cms"){
    db.cmHearings=db.cmHearings.filter(x=>x.parent_id!==eid);
@@ -914,7 +1028,7 @@ function benchSelectStyle(value){return "select-teal-outline";}
 function memberSelectStyle(){return "select-teal-outline";}
 function registerInlineSelect(regKey,eid,field,options,value,extraClass=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
-  return `<select class="${extraClass}" onchange="registerInlineUpdate('${regKey}','${eid}','${field}',this.value)" style="min-width:110px;font-size:13px">${opts}</select>`;
+  return `<select class="${extraClass}" onchange="registerInlineUpdate('${regKey}','${eid}','${field}',this.value)" style="min-width:110px;font-size:15px">${opts}</select>`;
 }
 function registerInlineUpdate(regKey,eid,field,value){
   const list=db[regKey];
@@ -1114,7 +1228,7 @@ function renderAppealsList(list){
 function renderAppealsPagination(total,totalPages){
  const el=$("appealsPagination"); if(!el)return;
  if(total<=APPEALS_PER_PAGE){el.innerHTML="";return}
- el.innerHTML=`<button class="light" type="button" onclick="appealsGoPage(1)" ${appealsPage<=1?"disabled":""}>« First</button><button class="light" type="button" onclick="appealsGoPage(${appealsPage-1})" ${appealsPage<=1?"disabled":""}>‹ Prev</button>${pageButtonsHtml(appealsPage,totalPages,"appealsGoPage")}<button class="light" type="button" onclick="appealsGoPage(${appealsPage+1})" ${appealsPage>=totalPages?"disabled":""}>Next ›</button><button class="light" type="button" onclick="appealsGoPage(${totalPages})" ${appealsPage>=totalPages?"disabled":""}>Last »</button><span style="margin-left:6px;color:var(--muted);font-size:13px;white-space:nowrap">(${total} appeals)</span>`;
+ el.innerHTML=`<button class="light" type="button" onclick="appealsGoPage(1)" ${appealsPage<=1?"disabled":""}>« First</button><button class="light" type="button" onclick="appealsGoPage(${appealsPage-1})" ${appealsPage<=1?"disabled":""}>‹ Prev</button>${pageButtonsHtml(appealsPage,totalPages,"appealsGoPage")}<button class="light" type="button" onclick="appealsGoPage(${appealsPage+1})" ${appealsPage>=totalPages?"disabled":""}>Next ›</button><button class="light" type="button" onclick="appealsGoPage(${totalPages})" ${appealsPage>=totalPages?"disabled":""}>Last »</button><span style="margin-left:6px;color:var(--muted);font-size:15px;white-space:nowrap">(${total} appeals)</span>`;
 }
 function appealsGoPage(p){appealsPage=p;renderAppealsList(appealsCurrentList);}
 function isPendingAppeal(a){return String(a.Status||"").trim().toLowerCase()!=="decided"}
@@ -1251,6 +1365,7 @@ function importExcel(ev){
     const read=(name)=>wb.Sheets[name]?sheetToObjects(wb.Sheets[name]):[];
     const a=read("Appeal LMS"), ah=read("Appeal Hearing"), c=read("CM"), ch=read("CM Hearing"), p=read("CPLA"), ph=read("CPLA Hearing");
     db.appeals=a.map(r=>({...r,id:String(r.ID||id())}));
+    db.appealRespondents=read("Appeal Respondents").map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
     db.appealHearings=ah.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.Appeal_ID||"")}));
     db.cms=c.map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
     db.cmHearings=ch.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.CM_ID||"")}));
@@ -1266,17 +1381,19 @@ function exportExcel(){
  const wb=XLSX.utils.book_new();
  const make=(headers,rows)=>XLSX.utils.json_to_sheet(rows.map(r=>{let o={};headers.forEach(h=>o[h]=normalize(r[h]));return o}),{header:headers});
  const defs={
- "Appeal LMS":["ID","Appeal LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Respondents","Member","File_No","Prayer","Status","Bench"],
+ "Appeal LMS":["ID","Appeal LMS","Appeal_Num","Appeal_Year","Name_of_Appellant","Name_Urdu","Respondents","Member","File_No","Entry_Date","Rank","Prayer","Status","Bench"],
+ "Appeal Respondents":["ID","Appeal_ID","Respondent","Role","Decision","Sort_Order"],
  "Appeal Hearing":["ID","Appeal_ID","Date_of_Hearing","Court_Proceedings","Crux_of_Judgement"],
  "CM":["ID","Appeal_ID","CM_No","CM_Year","CM_File","CM_Members","CM_Respondents","CM_Status","CM_Prayer"],
  "CM Hearing":["ID","CM_ID","Date_of_Hearing","Decision"],
  "CPLA":["ID","Appeal_ID","CPLA_Title","CPLA_No","CPLA_Year","CPLA_Status","CPLA_Brief","CPLA_filed_against_the_Judgement","Judgement_Implemented_or_Not"],
  "CPLA Hearing":["ID","CPLA_ID","Date_of_Hearing","Decision"]
  };
- const maps={"Appeal LMS":"appeals","Appeal Hearing":"appealHearings","CM":"cms","CM Hearing":"cmHearings","CPLA":"cplas","CPLA Hearing":"cplaHearings"};
+ const maps={"Appeal LMS":"appeals","Appeal Respondents":"appealRespondents","Appeal Hearing":"appealHearings","CM":"cms","CM Hearing":"cmHearings","CPLA":"cplas","CPLA Hearing":"cplaHearings"};
  Object.entries(defs).forEach(([name,headers])=>{
-   let rows=db[maps[name]].map(r=>{
+   let rows=(db[maps[name]]||[]).map(r=>{
      let x={...r};
+     if(name==="Appeal Respondents")x.Appeal_ID=x.appeal_id;
      if(name==="Appeal Hearing")x.Appeal_ID=x.parent_id;
      if(name==="CM Hearing")x.CM_ID=x.parent_id;
      if(name==="CPLA Hearing")x.CPLA_ID=x.parent_id;
@@ -1337,17 +1454,17 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
   padding:5px 9px !important;
   margin:0 !important;
   border-radius:7px !important;
-  font-size:12px !important;
+  font-size:14px !important;
   line-height:20px !important;
 }
 #appealRows .actionbuttons .actionbtn::before,
 #appealRows .actionbuttons button[title="Report"]::before{
-  font-size:15px !important;
+  font-size:17px !important;
   line-height:1 !important;
   margin-right:3px !important;
 }
 </style>
-</head><body><div class="report"><h1>APPEAL CASE REPORT</h1><h2>Appeal No. ${esc(a.Appeal_Num)} / ${esc(a.Appeal_Year)}</h2><p><b>Name of Appellant:</b> ${esc(a.Name_of_Appellant)}</p><p><b>Name Urdu:</b> ${esc(a.Name_Urdu)}</p><p><b>Respondents:</b> ${esc(a.Respondents)}</p><p><b>Member:</b> ${esc(a.Member)} &nbsp; <b>Bench:</b> ${esc(a.Bench)}</p><p><b>File No:</b> ${esc(a.File_No)} &nbsp; <b>Status:</b> ${esc(a.Status)}</p><p><b>Prayer:</b> ${esc(a.Prayer)}</p><h3>Appeal Hearings</h3><table class="t"><tr><th>Date</th><th>Court Proceedings</th><th>Crux of Judgement</th></tr>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td></tr>`).join("")}</table><h3>CMs</h3><table class="t"><tr><th>CM No.</th><th>Year</th><th>Status</th><th>Members</th></tr>${cms.map(c=>`<tr><td>${esc(c.CM_No)}</td><td>${esc(c.CM_Year)}</td><td>${esc(c.CM_Status)}</td><td>${esc(c.CM_Members)}</td></tr>`).join("")}</table><h3>CPLAs</h3><table class="t"><tr><th>CPLA No.</th><th>Year</th><th>Status</th><th>Implemented</th></tr>${cplas.map(c=>`<tr><td>${esc(c.CPLA_No)}</td><td>${esc(c.CPLA_Year)}</td><td>${esc(c.CPLA_Status)}</td><td>${esc(c.Judgement_Implemented_or_Not)}</td></tr>`).join("")}</table></div></body></html>`);w.document.close();setTimeout(()=>w.print(),400)}
+</head><body><div class="report"><h1>APPEAL CASE REPORT</h1><h2>Appeal No. ${esc(a.Appeal_Num)} / ${esc(a.Appeal_Year)}</h2><p><b>Name of Appellant:</b> ${esc(a.Name_of_Appellant)}</p><p><b>Name Urdu:</b> ${esc(a.Name_Urdu)}</p><p><b>Rank:</b> ${esc(a.Rank)}</p>${respondentsReportHtml(a)}<p><b>Member:</b> ${esc(a.Member)} &nbsp; <b>Bench:</b> ${esc(a.Bench)}</p><p><b>Marking / Entry No:</b> ${esc(a.File_No)} &nbsp; <b>Marking / Entry Date:</b> ${dateOnly(a.Entry_Date)} &nbsp; <b>Status:</b> ${esc(a.Status)}</p><p><b>Prayer:</b> ${esc(a.Prayer)}</p><h3>Appeal Hearings</h3><table class="t"><tr><th>Date</th><th>Court Proceedings</th><th>Crux of Judgement</th></tr>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.hearing_text)}</td><td>${esc(h.crux_of_Judgement)}</td></tr>`).join("")}</table><h3>CMs</h3><table class="t"><tr><th>CM No.</th><th>Year</th><th>Status</th><th>Members</th></tr>${cms.map(c=>`<tr><td>${esc(c.CM_No)}</td><td>${esc(c.CM_Year)}</td><td>${esc(c.CM_Status)}</td><td>${esc(c.CM_Members)}</td></tr>`).join("")}</table><h3>CPLAs</h3><table class="t"><tr><th>CPLA No.</th><th>Year</th><th>Status</th><th>Implemented</th></tr>${cplas.map(c=>`<tr><td>${esc(c.CPLA_No)}</td><td>${esc(c.CPLA_Year)}</td><td>${esc(c.CPLA_Status)}</td><td>${esc(c.Judgement_Implemented_or_Not)}</td></tr>`).join("")}</table></div></body></html>`);w.document.close();setTimeout(()=>w.print(),400)}
 // ===== CUSTOM REPORT (Pending / Decided — Year / Month / Date-range) =====
 const monthNames=["","January","February","March","April","May","June","July","August","September","October","November","December"];
 let customReportPage=1;
@@ -1381,7 +1498,7 @@ function populateCaseYears(){
 function renderNameChips(){
   const box=$("rep_nameChips");if(!box)return;
   const active=new Set(($("rep_nameKeys")?.value||"").split(/[,،\n]+/).map(x=>x.trim().toUpperCase()).filter(Boolean));
-  box.innerHTML=REPORT_NAME_CHIPS.map(k=>{const on=active.has(k.toUpperCase());return `<button type="button" class="light" style="padding:5px 12px;font-size:13px!important;border-radius:999px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}" onclick="toggleNameChip('${k}')">${esc(k)}</button>`}).join("")+`<button type="button" class="light" style="padding:5px 12px;font-size:13px!important;border-radius:999px;color:#e11d48" onclick="clearNameKeys()">✖ Clear</button>`;
+  box.innerHTML=REPORT_NAME_CHIPS.map(k=>{const on=active.has(k.toUpperCase());return `<button type="button" class="light" style="padding:5px 12px;font-size:15px!important;border-radius:999px;${on?'background:var(--accent);color:#fff;border-color:var(--accent)':''}" onclick="toggleNameChip('${k}')">${esc(k)}</button>`}).join("")+`<button type="button" class="light" style="padding:5px 12px;font-size:15px!important;border-radius:999px;color:#e11d48" onclick="clearNameKeys()">✖ Clear</button>`;
 }
 function toggleNameChip(k){
   const inp=$("rep_nameKeys");if(!inp)return;
@@ -1476,7 +1593,9 @@ const REPORT_FIELD_DEFS={
     {key:"Appeal_Num",label:"Appeal No.",get:(r)=>esc(r.Appeal_Num)},
     {key:"Appeal_Year",label:"Appeal Year",get:(r)=>esc(r.Appeal_Year)},
     {key:"Name_of_Appellant",label:"Appellant Name",get:(r)=>esc(r.Name_of_Appellant)},
-    {key:"File_No",label:"File No.",get:(r)=>esc(r.File_No)},
+    {key:"Rank",label:"Rank",get:(r)=>esc(r.Rank)},
+    {key:"File_No",label:"Marking / Entry No.",get:(r)=>esc(r.File_No)},
+    {key:"Entry_Date",label:"Marking / Entry Date",get:(r)=>dateOnly(r.Entry_Date)},
     {key:"Respondents",label:"Respondents",get:(r)=>esc(r.Respondents)},
     {key:"Member",label:"Member",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Member):reportInlineSelect(r.id,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,memberSelectStyle())},
     {key:"Status",label:"Status",get:(r,ctx)=>ctx?.mode==="print"?esc(r.Status):reportInlineSelect(r.id,"Status",["Pending","Decided"],r.Status,isDecidedStatus(r.Status)?"status-decided":"")},
@@ -1530,8 +1649,8 @@ function openReportFieldsModal(){
   const boxesHtml=defs.map(d=>`<label class="repfield-row"><span>${esc(d.label)}</span><input type="checkbox" value="${d.key}" ${selected.has(d.key)?"checked":""}></label>`).join("");
   modal(`🧾 ${typeLabel} Report — Select Fields`,`
     <div style="display:flex;gap:14px;margin-bottom:10px">
-      <span style="font-size:12px;color:#000;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(true)">Select All</span>
-      <span style="font-size:12px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(false)">Clear All</span>
+      <span style="font-size:14px;color:#000;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(true)">Select All</span>
+      <span style="font-size:14px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:600" onclick="reportFieldsModalSelectAll(false)">Clear All</span>
     </div>
     <div id="reportFieldsModalList" class="repfield-grid">${boxesHtml}</div>
     <div class="actions" style="margin-top:16px">
@@ -1614,7 +1733,7 @@ function reportRowHtml(type,r,idx,mode){
 }
 function reportInlineSelect(appealId,field,options,value,extraClass=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
-  return `<select class="${extraClass}" onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;font-size:13px">${opts}</select>`;
+  return `<select class="${extraClass}" onchange="reportInlineUpdate('${appealId}','${field}',this.value)" style="min-width:110px;font-size:15px">${opts}</select>`;
 }
 function reportInlineUpdate(appealId,field,value){
   const a=db.appeals.find(x=>String(x.id??x.ID??x.Appeal_ID)===String(appealId));
@@ -1697,7 +1816,7 @@ function renderReportPreview(){
     <button type="button" class="light" onclick="customReportGoPage(${customReportPage+1})" ${customReportPage>=totalPages?"disabled":""}>Next ›</button>
     <button type="button" class="light" onclick="customReportGoPage(${totalPages})" ${customReportPage>=totalPages?"disabled":""}>Last »</button>
   </div>`:"";
-  $("customReportPreview").innerHTML=`<div style="margin-bottom:8px;color:var(--muted);font-size:13px">${esc(reportSubtitle(criteria))}</div><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><div style="margin-top:10px;font-weight:bold;color:var(--nav)">Total Records: ${rows.length}</div>${pager}`;
+  $("customReportPreview").innerHTML=`<div style="margin-bottom:8px;color:var(--muted);font-size:15px">${esc(reportSubtitle(criteria))}</div><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><div style="margin-top:10px;font-weight:bold;color:var(--nav)">Total Records: ${rows.length}</div>${pager}`;
   const bar=$("rep_selectionBar");if(bar)bar.style.display=rows.length?"flex":"none";
   updateRepSelectionCount();
 }
@@ -1725,7 +1844,7 @@ function showCMsForAppeal(appealId){
   const bar=$("cmFilterBar");
   bar.style.display="flex";
   bar.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:9px 12px;background:var(--accent-tint);border:1px solid var(--accent-tint-border);border-radius:8px";
-  bar.innerHTML=`<span style="font-size:13px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CMs</span><span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCMFilter()">✖ Clear Filter</span>`;
+  bar.innerHTML=`<span style="font-size:15px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CMs</span><span style="font-size:14.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCMFilter()">✖ Clear Filter</span>`;
   tab("cm",document.querySelector(".tab:nth-child(2)"));
 }
 function clearCMFilter(){applySearchAndFilters()} // hides the drill-down bar and re-renders honouring search + status/year filters
@@ -1736,7 +1855,7 @@ function showCPLAsForAppeal(appealId){
   const bar=$("cplaFilterBar");
   bar.style.display="flex";
   bar.style.cssText="display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:9px 12px;background:var(--accent-tint);border:1px solid var(--accent-tint-border);border-radius:8px";
-  bar.innerHTML=`<span style="font-size:13px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CPLAs</span><span style="font-size:12.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCPLAFilter()">✖ Clear Filter</span>`;
+  bar.innerHTML=`<span style="font-size:15px;color:#000;font-weight:700">Filtered: Appeal ${esc(a?.Appeal_Num||"-")}/${esc(a?.Appeal_Year||"-")} ki CPLAs</span><span style="font-size:14.5px;color:#e11d48;cursor:pointer;text-decoration:underline;font-weight:700" onclick="clearCPLAFilter()">✖ Clear Filter</span>`;
   tab("cpla",document.querySelector(".tab:nth-child(3)"));
 }
 function clearCPLAFilter(){applySearchAndFilters()} // hides the drill-down bar and re-renders honouring search + status/year filters
