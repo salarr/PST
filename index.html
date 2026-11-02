@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PST Appeal Management System</title>
 <style>
-:root{--nav:#5b2a86;--accent:#1d4ed8;--accent-2:#2563eb;--accent-dark:#1e40af;--accent-tint:#eff6ff;--accent-tint-border:#bfdbfe;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#ddd6fe;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#7c3aed}
+:root{--nav:#047857;--accent:#059669;--accent-2:#10b981;--accent-dark:#047857;--accent-tint:#e8f5ef;--accent-tint-border:#d8e2dc;--gold:#d97706;--bg:#f7f7fb;--card:#fff;--line:#d8e2dc;--text:#25213a;--muted:#6b6578;--red:#dc2626;--green:#15803d;--orange:#ea580c;--purple:#059669}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Aptos Display','Aptos','Segoe UI',system-ui,-apple-system,Arial,sans-serif}
-header{background:linear-gradient(135deg,#5b2a86,#7c3aed);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:24px}.head small{color:#ede9fe}
+header{background:linear-gradient(135deg,#047857,#059669);color:white;padding:18px 25px;box-shadow:0 4px 16px #0002}.head{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center}.head h1{margin:0;font-size:24px}.head small{color:#e8f5ef}
 .wrap{max-width:1500px;margin:20px auto;padding:0 16px}.toolbar,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #1836530b}.toolbar{padding:13px;display:flex;gap:8px;flex-wrap:wrap}.toolbar input{flex:1;min-width:260px}
 input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff;font:inherit}textarea{min-height:85px;resize:vertical}
-button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--nav);color:#fff}.green{background:var(--green);color:#fff}.red{background:var(--red);color:#fff}.gray{background:#657386;color:#fff}.light{background:#ede9fe;color:#5b2a86}
+button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:var(--nav);color:#fff}.green{background:var(--green);color:#fff}.red{background:var(--red);color:#fff}.gray{background:#657386;color:#fff}.light{background:#e8f5ef;color:#047857}
 .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.stat{padding:15px}.stat b{font-size:26px;color:var(--nav)}.stat small{display:block;color:var(--muted);margin-top:4px}
 .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tab{background:white;color:#536273;border:1px solid var(--line)}.tab.active{background:var(--nav);color:#fff}
 .panel{display:none}.panel.active{display:block}.title{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.title h2{margin:0;font-size:20px}.body{padding:16px}.tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f3e8ff;font-size:14px;color:#5b21b6}tr:hover td{background:#faf5ff}.badge{padding:4px 8px;border-radius:20px;background:#e8f4ed;color:#17613d;font-size:13px;font-weight:bold}
+table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#e8f5ef;font-size:14px;color:#047857}tr:hover td{background:#f5faf7}.badge{padding:4px 8px;border-radius:20px;background:#e8f4ed;color:#17613d;font-size:13px;font-weight:bold}
 .modal-bg{display:none;position:fixed;inset:0;background:#0007;z-index:50;padding:20px;align-items:center;justify-content:center}.modal-bg.show{display:flex}.modal{width:min(1050px,100%);max-height:92vh;overflow:auto;background:white;border-radius:15px}.mh{background:var(--nav);color:#fff;padding:14px 18px;display:flex;justify-content:space-between}.mh h3{margin:0}.close{background:none;color:#fff;font-size:25px;padding:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{font-size:14px;font-weight:bold;color:#536273;display:block;margin-bottom:4px}.full{grid-column:1/-1}.actions{display:flex;gap:8px;margin-top:12px}
 .search{display:flex;gap:8px;flex:1}.search select{max-width:150px}
 .report{width:210mm;min-height:297mm;background:white;margin:auto;padding:18mm;font-family:Arial}.report h1{text-align:center;font-size:16pt;margin:0;text-decoration:underline}.report h2{text-align:center;font-size:14pt;margin:25px 0;text-decoration:underline}.report p{line-height:1.5}.rtable{min-width:0;border-collapse:collapse}.rtable th,.rtable td{border:1px solid #777}.printbar{position:fixed;right:15px;top:15px}@media(max-width:1000px){.stats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media print{body{background:white}.printbar{display:none}.report{margin:0}}
 
 /* Attractive UI additions */
 .icon{font-size:16px;vertical-align:-2px;margin-right:6px}.head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.filebox{display:flex;align-items:center;gap:8px;background:#fff7ed;border:1px dashed #c4b5fd;border-radius:10px;padding:6px 8px}
-.filebox input{display:none}.filebox label{cursor:pointer;font-weight:700;color:#6d28d9;padding:6px 9px}
+.filebox{display:flex;align-items:center;gap:8px;background:#fff7ed;border:1px dashed #d8e2dc;border-radius:10px;padding:6px 8px}
+.filebox input{display:none}.filebox label{cursor:pointer;font-weight:700;color:#047857;padding:6px 9px}
 .btnexcel{background:#287a58!important;color:#fff!important}.btnexport{background:#c96f32!important;color:#fff!important}
-.toolbar{background:linear-gradient(135deg,#ffffff,#f5f3ff)}.stat:nth-child(1){border-top:4px solid #c96f32}.stat:nth-child(2){border-top:4px solid #287a58}.stat:nth-child(3){border-top:4px solid #72539a}.stat:nth-child(4){border-top:4px solid #d6a84f}.stat:nth-child(5){border-top:4px solid #b85b72}.stat:nth-child(6){border-top:4px solid #8b6a54}
+.toolbar{background:linear-gradient(135deg,#ffffff,#f5f3ff)}.stat:nth-child(1){border-top:4px solid #c96f32}.stat:nth-child(2){border-top:4px solid #287a58}.stat:nth-child(3){border-top:4px solid #116149}.stat:nth-child(4){border-top:4px solid #d6a84f}.stat:nth-child(5){border-top:4px solid #b85b72}.stat:nth-child(6){border-top:4px solid #8b6a54}
 .title{background:linear-gradient(90deg,#fff9f5,#fff)}.tab{transition:.15s}.tab:hover{transform:translateY(-1px);box-shadow:0 3px 10px #5b2a8618}
 button{transition:.15s}button:hover{transform:translateY(-1px)}
 <style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:14px}.searchmatches{position:relative;z-index:20;margin-top:4px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;max-height:190px;overflow:auto}.match{padding:9px 11px;border-bottom:1px solid #f0e6df;cursor:pointer}.match:hover{background:#fff7ed}.match.muted{color:#777;cursor:default}.picked{margin-top:6px;padding:8px 10px;background:#eef8f0;border:1px solid #c9e7d0;border-radius:8px}.mini{padding:3px 8px;font-size:14px;margin-left:8px}</style></style>
@@ -53,9 +53,9 @@ button{transition:.15s}button:hover{transform:translateY(-1px)}
   transform:translateY(-1px);
   box-shadow:0 4px 9px rgba(0,0,0,.13) !important;
 }
-.icon-action.edit-action{color:#2563eb !important;}
+.icon-action.edit-action{color:#10b981 !important;}
 .icon-action.delete-action{color:#dc2626 !important;}
-.icon-action.report-action{color:#7c3aed !important;}
+.icon-action.report-action{color:#059669 !important;}
 </style>
 
 <style id="action-icon-hard-fix">
@@ -116,13 +116,13 @@ button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";
 button[title="Delete"]::before,button[aria-label="Delete"]::before{content:"🗑️";font-size:27px;}
 button[title="Report"]::before,button[aria-label="Report"]::before{content:"📄";font-size:27px;}
 .status-pending{color:#b91c1c;font-weight:800}.status-decided{color:#15803d;font-weight:800}.resp-table{width:100%;border-collapse:collapse}.resp-table th,.resp-table td{padding:10px;border-bottom:1px solid var(--line)}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5b2a86,#7c3aed);padding:16px}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#047857,#059669);padding:16px}
 .login-card{background:#fff;padding:32px;border-radius:16px;width:min(380px,100%);box-shadow:0 10px 40px #0004}
 .login-card h1{font-size:22px;margin:0 0 6px;color:#25213a}.login-card p{margin:0 0 18px;color:#6b6578}
 .login-card .field{margin-bottom:12px}
 table.t{width:100%;border-collapse:collapse}
 table.t th,table.t td{border:1px solid #d1d5db;padding:7px;text-align:left;font-size:15px}
-table.t th{background:#f3e8ff}
+table.t th{background:#e8f5ef}
 </style>
 
 <style id="requested-ui-fixes">
@@ -148,7 +148,7 @@ header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px 
 .title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
 th{background:var(--accent-tint);color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:var(--accent-tint)}
 .stat b{color:var(--accent)}
-.stat:nth-child(1){border-top-color:var(--accent)}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.stat:nth-child(1){border-top-color:var(--accent)}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#059669}.stat:nth-child(6){border-top-color:#64748b}
 .filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
 .login-wrap{background:linear-gradient(135deg,#20262e,var(--accent))}
 .login-card h1{color:#1f2933}.login-card p{color:#667085}
@@ -376,19 +376,19 @@ body{font-size:18px}
 .rd-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;background:#fff;color:var(--text);border:1px solid #d1d5db;border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left;font-weight:500}
 .rd-menu{position:absolute;z-index:70;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #d1d5db;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.18);max-height:280px;overflow:auto}
 .rd-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;cursor:pointer;border-bottom:1px solid #f1f5f9}
-.rd-item:hover{background:#eff6ff}.rd-label{flex:1}.rd-add{color:#15803d;font-weight:700;border-bottom:0}
+.rd-item:hover{background:#e8f5ef}.rd-label{flex:1}.rd-add{color:#15803d;font-weight:700;border-bottom:0}
 .rd-del{background:none!important;border:0;color:#dc2626!important;padding:4px!important;border-radius:6px;display:inline-flex;cursor:pointer}.rd-del:hover{background:#fee2e2!important}
 .ico-users{flex:none;vertical-align:-3px}
 button.light[id$="RespondentsBtn"],button.light[id="RespondentsBtn"]{display:flex!important;align-items:center;gap:8px}
 .rp-row{display:block!important;padding:10px!important}
 .rp-head{display:flex;align-items:center;gap:10px}
-.rp-handle{cursor:grab;font-size:22px;line-height:1;color:#6b7280;user-select:none;padding:2px 6px;border-radius:6px}.rp-handle:hover{background:#eef2ff;color:#1d4ed8}.rp-handle:active{cursor:grabbing}
-.rp-num{min-width:28px;height:28px;border-radius:50%;background:#1d4ed8;color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.rp-handle{cursor:grab;font-size:22px;line-height:1;color:#6b7280;user-select:none;padding:2px 6px;border-radius:6px}.rp-handle:hover{background:#e8f5ef;color:#059669}.rp-handle:active{cursor:grabbing}
+.rp-num{min-width:28px;height:28px;border-radius:50%;background:#059669;color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
 .rp-name{flex:1;font-weight:700;word-break:break-word}
 .rp-arrows{display:inline-flex;gap:4px}.rp-mv{padding:2px 8px!important;min-width:30px}
 .rp-detail{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0 0 78px}
 .rp-detail textarea{width:100%;resize:vertical}
-.rp-over{outline:2px dashed #1d4ed8;outline-offset:-2px;background:#eff6ff}
+.rp-over{outline:2px dashed #059669;outline-offset:-2px;background:#e8f5ef}
 .rp-list{max-height:55vh!important}
 .dmy-wrap{position:relative;display:flex;gap:6px;align-items:center}
 .dmy-txt{flex:1;min-width:0}
@@ -396,6 +396,96 @@ button.light[id$="RespondentsBtn"],button.light[id="RespondentsBtn"]{display:fle
 .dmy-native{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
 @media(max-width:600px){.rp-detail{margin-left:0}.rp-head{flex-wrap:wrap}}
 </style>
+<style id="pg-active-style">button.pg-active,.pagination button.pg-active{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;border-color:rgba(255,255,255,.6)!important;font-weight:800!important;font-size:18px!important}</style>
+<style id="liquid-glass-theme">
+/* ===== LIQUID GLASS THEME (Original Green) ===== */
+:root{
+ --accent-hi:#34d399; --lg-a:#a7f3d0; --lg-b:#d1fae5; --lg-c:#cbd5e1; --lg-base:#e8f0ec;
+ --accent:#059669; --accent-2:#10b981; --accent-dark:#047857; --nav:#1f2937; --purple:#059669;
+ --accent-tint:rgba(255,255,255,.35); --accent-tint-border:rgba(255,255,255,.6);
+ --line:rgba(255,255,255,.55); --text:#13203a; --muted:#475569;
+ --glass:rgba(255,255,255,.42); --glass-strong:rgba(255,255,255,.62); --glass-edge:rgba(255,255,255,.75);
+ --glass-shadow:0 10px 34px rgba(5,150,105,.22), inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(255,255,255,.25);
+}
+html{background:var(--lg-base)!important;min-height:100%}
+body{background:transparent!important;color:var(--text)!important;min-height:100vh}
+body::before{content:"";position:fixed;inset:-10%;z-index:-2;pointer-events:none;
+ background:
+  radial-gradient(42% 38% at 12% 18%,var(--lg-a),transparent 70%),
+  radial-gradient(38% 42% at 88% 12%,var(--lg-b),transparent 70%),
+  radial-gradient(46% 44% at 78% 92%,var(--lg-c),transparent 70%),
+  radial-gradient(34% 36% at 8% 88%,var(--lg-b),transparent 72%),
+  var(--lg-base);
+ filter:saturate(1.15)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(circle at 50% -10%,rgba(255,255,255,.35),transparent 55%)}
+
+/* glass surfaces */
+header,.toolbar,.card,.stat,.login-card,.modal,.sort-menu,.add-menu,.searchmatches,.mobile-bottom-actions,.selected-resp-list,.hearing-list,.rd-menu{
+ background:var(--glass)!important;
+ -webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);
+ border:1px solid var(--glass-edge)!important;box-shadow:var(--glass-shadow)!important}
+header{background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.14))!important;color:#0f1d38!important;border-radius:0 0 26px 26px;border-top:0!important}
+header *,header .head h1,.head small{color:#0f1d38!important}
+header #whoami{color:#0f1d38!important}
+.toolbar,.card,.stat,.modal{border-radius:22px!important}
+.card{overflow:hidden}
+.stat b{color:var(--accent-dark)!important}
+.title{background:transparent!important;border-color:rgba(255,255,255,.55)!important}
+.modal{background:var(--glass-strong)!important}
+.mh{background:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.2))!important;color:#0f1d38!important;border-bottom:1px solid rgba(255,255,255,.65)}
+.mh h3,.mh *,.close{color:#0f1d38!important}
+.modal-bg{background:rgba(15,23,42,.28)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.login-wrap{background:transparent!important}
+.login-card h1,.login-card p{color:#0f1d38!important}
+
+/* tables */
+table{background:transparent!important}
+table th{background:rgba(255,255,255,.55)!important;color:#0f1d38!important;border-color:rgba(255,255,255,.7)!important;font-weight:700!important}
+table td{background:transparent!important;border-color:rgba(255,255,255,.55)!important;color:#0f1d38!important}
+tr:hover td{background:rgba(255,255,255,.45)!important}
+table.t th,table.t td{border-color:rgba(255,255,255,.7)}
+
+/* inputs */
+input[type=checkbox],input[type=radio],input[type=range]{accent-color:var(--accent)}
+::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+input,select,textarea{background:rgba(255,255,255,.55)!important;border:1px solid rgba(255,255,255,.85)!important;color:#0f1d38!important;border-radius:12px!important;
+ box-shadow:inset 0 2px 6px rgba(31,41,55,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+input::placeholder,textarea::placeholder{color:#64748b}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent),inset 0 2px 6px rgba(31,41,55,.06)}
+.field label,.status-filter-bar label{color:#334155!important}
+
+/* buttons */
+button{border-radius:14px;transition:transform .15s ease,box-shadow .15s ease,background .15s}
+button:hover{transform:translateY(-1px)}
+button:active{transform:translateY(0) scale(.98)}
+.primary{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;border:1px solid rgba(255,255,255,.55)!important;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 40%,transparent),inset 0 1px 0 rgba(255,255,255,.55)}
+.green{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;border:1px solid rgba(255,255,255,.55)!important;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 40%,transparent),inset 0 1px 0 rgba(255,255,255,.55)}
+.primary:hover,.green:hover{filter:brightness(1.1);box-shadow:0 10px 22px color-mix(in srgb,var(--accent) 50%,transparent),inset 0 1px 0 rgba(255,255,255,.6)}
+.tab:hover,.tabs .tab:hover{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;border-color:rgba(255,255,255,.6)!important}
+.tab.active:hover,.tabs .tab.active:hover{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;filter:brightness(1.08)}
+.red{background:linear-gradient(180deg,#fb7185,#e11d48)!important;color:#fff!important;border:1px solid rgba(255,255,255,.5)!important;box-shadow:0 6px 14px rgba(225,29,72,.32),inset 0 1px 0 rgba(255,255,255,.5)}
+.gray{background:linear-gradient(180deg,#94a3b8,#475569)!important;color:#fff!important;border:1px solid rgba(255,255,255,.45)!important;box-shadow:0 6px 14px rgba(71,85,105,.3),inset 0 1px 0 rgba(255,255,255,.45)}
+.light,.headbtn,.hearings-link,.count-pill,.icon-action,.icon-only{background:rgba(255,255,255,.5)!important;color:#0f1d38!important;border:1px solid rgba(255,255,255,.85)!important;
+ box-shadow:0 4px 12px rgba(31,41,55,.1),inset 0 1px 0 rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.light:hover,.headbtn:hover{background:rgba(255,255,255,.75)!important}
+.tab,.tabs .tab{background:rgba(255,255,255,.4)!important;color:#1e293b!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:0 4px 12px rgba(31,41,55,.08),inset 0 1px 0 rgba(255,255,255,.8)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.tab.active,.tabs .tab.active{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;border-color:rgba(255,255,255,.6)!important;box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.6)!important}
+.tab-count,.hearings-count{background:var(--accent)!important;color:#fff!important}
+.badge{background:rgba(255,255,255,.6)!important}
+.picked{background:rgba(255,255,255,.5)!important;border-color:rgba(255,255,255,.85)!important}
+.match:hover,.sort-menu div:hover,.add-menu div:hover,.rd-item:hover{background:rgba(255,255,255,.6)!important}
+.case-link{color:var(--accent-dark)!important}
+.rd-toggle,.rp-row,.selected-resp-row{background:rgba(255,255,255,.35)!important;color:#0f1d38!important;border-color:rgba(255,255,255,.75)!important}
+.rd-menu{background:var(--glass-strong)!important}
+.rp-over{background:rgba(255,255,255,.7)!important}
+.rp-num{background:var(--accent)!important}
+#appToast{background:rgba(15,23,42,.72)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.3)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.65);border-radius:10px;border:2px solid transparent;background-clip:padding-box}::-webkit-scrollbar-track{background:transparent}
+@media (prefers-reduced-transparency:reduce){header,.toolbar,.card,.stat,.modal{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.9)!important}}
+@media print{body::before,body::after{display:none}html{background:#fff!important}}
+</style>
+<style id="pg-active-style2">button.pg-active,.pagination button.pg-active,.panel button.pg-active{background:linear-gradient(180deg,var(--accent-hi),var(--accent))!important;color:#fff!important;font-weight:800!important;font-size:18px!important}</style>
 </head>
 <body>
 <div id="loginScreen" class="login-wrap">
@@ -415,7 +505,7 @@ button.light[id$="RespondentsBtn"],button.light[id="RespondentsBtn"]{display:fle
 <div class="tabs">
 <button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals <span class="tab-count" id="appealsTabCount">0</span></button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM <span class="tab-count" id="cmTabCount">0</span></button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA <span class="tab-count" id="cplaTabCount">0</span></button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button>
 </div>
-<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:13px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'appealsYearMenu','appealsYearFilter',db.appeals,'Appeal_Year')">Year <span style="font-size:13px">▾</span><div id="appealsYearMenu" class="sort-menu" style="display:none"></div></th><th>Appellant</th><th>Member</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'appealsStatusMenu')">Status <span style="font-size:13px">▾</span><div id="appealsStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('appealsStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','decided',event)">Decided</div></div></th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
+<div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:13px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'appealsYearMenu','appealsYearFilter',db.appeals,'Appeal_Year')">Year <span style="font-size:13px">▾</span><div id="appealsYearMenu" class="sort-menu" style="display:none"></div></th><th>Appellant</th><th>Rank</th><th>Member</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'appealsStatusMenu')">Status <span style="font-size:13px">▾</span><div id="appealsStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('appealsStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','decided',event)">Decided</div></div></th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
 <div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cmYearMenu','cmYearFilter',db.cms,'CM_Year')">Year <span style="font-size:13px">▾</span><div id="cmYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cmStatusMenu')">Status <span style="font-size:13px">▾</span><div id="cmStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cmStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cmStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cmStatusFilter','decided',event)">Decided</div></div></th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
 <div id="cpla" class="panel card"><div class="body"><div id="cplaFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CPLA No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cplaYearMenu','cplaYearFilter',db.cplas,'CPLA_Year')">Year <span style="font-size:13px">▾</span><div id="cplaYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appeal Year</th><th>Appellant</th><th>Title</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cplaStatusMenu')">Status <span style="font-size:13px">▾</span><div id="cplaStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cplaStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cplaStatusFilter','decided',event)">Decided</div></div></th><th>Judgement</th><th>Implemented</th><th>Actions</th></tr></thead><tbody id="cplaRows"></tbody></table></div></div></div>
 <div id="upcoming" class="panel card"><div class="body">
@@ -443,17 +533,6 @@ button.light[id$="RespondentsBtn"],button.light[id="RespondentsBtn"]{display:fle
 <div class="field full" style="margin-bottom:10px">
   <button class="light" type="button" id="rep_fieldsBtn" onclick="openReportFieldsModal()">🧾 Report mein kaunse fields print karne hain?</button>
 </div>
-<div class="field full" style="margin-bottom:10px">
-  <label>🔎 Search (Appeal No. / Appellant Name / CM No. / CPLA No.)</label>
-  <input id="rep_search" type="text" placeholder="Type to filter the records below..." oninput="repSearchChanged()">
-</div>
-<div class="field full" style="margin-bottom:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fafafd">
-  <label>🏷️ Appellant Name Filter (Rank / Words) — comma se alag karein, e.g. ASI, T/ASI, SI, IP, Inspector</label>
-  <input id="rep_nameKeys" type="text" placeholder="Jin names mein ye words hon, unhi ki list banegi..." oninput="repExtraChanged()">
-  <div id="rep_nameChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
-  <label style="display:flex;align-items:center;gap:8px;margin-top:8px;cursor:pointer;font-size:15px"><input type="checkbox" id="rep_nameWhole" checked onchange="repExtraChanged()" style="width:auto"> Poora word match karein (SI likhne par "Hussain" match na ho; ASI aur T/ASI alag rahen)</label>
-</div>
-<p style="color:var(--muted);font-size:14.5px;margin:4px 0 14px">Decided cases ke liye date filter <b>Next / Last Hearing Date</b> ki base par lagta hai (koi alag Decided Date field نہیں ہے).</p>
 <div class="actions" style="margin-bottom:6px"><button class="primary" type="button" onclick="generateCustomReport()">🔍 Preview</button><button class="green" type="button" onclick="printCustomReport()">🖨️ Print Report</button><button class="green" type="button" onclick="exportCustomReportExcel()">📥 Export Excel</button></div>
 <div id="rep_selectionBar" style="display:none;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;padding:9px 12px;background:var(--accent-tint);border:1px solid var(--accent-tint-border);border-radius:8px">
   <span style="font-size:14.5px;color:#000;cursor:pointer;text-decoration:underline;font-weight:700" onclick="repSelectAllRecords(true)">☑ Select All</span>
@@ -691,30 +770,30 @@ function printBreakdown(){
   const w=open("","_blank");
   w.document.write(`<html><head><title>Breakdown Report</title><style>body{font-family:Arial;margin:20mm}h1{text-align:center}h2{margin-top:22px}table.t{width:100%;border-collapse:collapse;margin-top:6px}table.t th,table.t td{border:1px solid #777;padding:6px;text-align:left}</style>
 <style id="final-color-theme">
-:root{--nav:#1f2937;--accent:#1d4ed8;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#1d4ed8}
+:root{--nav:#1f2937;--accent:#059669;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#059669}
 body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
 header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px rgba(31,41,55,.18)}
 .head small{color:#d1fae5}
 .toolbar,.card,.stat{border-color:#d8e2dc;box-shadow:0 7px 22px rgba(31,41,55,.07)}
 .toolbar{background:linear-gradient(135deg,#fff,#f0f7f3)}
-.primary{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff}
+.primary{background:linear-gradient(135deg,#059669,#10b981);color:#fff}
 .green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
 .light{background:#e8f5ef;color:#116149;border:1px solid var(--accent-tint-border)}
-.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#059669;color:#fff;border-color:#059669}
 .title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
 th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
-.stat b{color:#1d4ed8}
-.stat:nth-child(1){border-top-color:#1d4ed8}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.stat b{color:#059669}
+.stat:nth-child(1){border-top-color:#059669}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#059669}.stat:nth-child(6){border-top-color:#64748b}
 .filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
-.login-wrap{background:linear-gradient(135deg,#20262e,#1d4ed8)}
+.login-wrap{background:linear-gradient(135deg,#20262e,#059669)}
 .login-card h1{color:#1f2933}.login-card p{color:#667085}
 .modal-bg{background:rgba(15,23,42,.68)}.mh{background:linear-gradient(135deg,#20262e,#374151)}
 .match:hover{background:#f0fdf4}.picked{background:#ecfdf5;border-color:#bbf7d0}
 .selected-resp-list{border-color:#d8e2dc}.selected-resp-row{border-color:#e5ebe7}
 .resp-x{background:#e11d48!important}.resp-x:hover{background:#be123c!important}
 .tomorrow-date{color:#be123c!important;background:#ffe4e6!important}
-.icon-action.edit-action{color:#1d4ed8!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
-button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#1d4ed8}
+.icon-action.edit-action{color:#059669!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#059669}
 .status-pending{color:#be123c}.status-decided{color:#15803d}
 </style>
 
@@ -884,7 +963,7 @@ function dmySet(id,iso){const n=$(id),t=$(id+"_txt");if(n)n.value=isoDateOnly(is
 function fld(label,id,type="text",v="",cl=""){const val=type==="date"?isoDateOnly(v):v;return `<div class="field ${cl}"><label>${label}</label><input id="${id}" type="${type}" value="${esc(val)}"></div>`}
 function area(label,id,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><textarea id="${id}">${esc(v)}</textarea></div>`}
 function sel(label,id,arr,v="",cl=""){return `<div class="field ${cl}"><label>${label}</label><select id="${id}">${arr.map(o=>`<option value="${esc(o.v??o)}" ${(o.v??o)==v?"selected":""}>${esc(o.t??o)}</option>`).join("")}</select></div>`}
-const APPEAL_RANKS=["IP","SI","ASI","HC","Const","Other"];
+const APPEAL_RANKS=["IP","SI","ASI","HC","Const","DSP","SP","Other"];
 function rankFieldHtml(id,v){const cur=String(v||"");const other=cur&&!APPEAL_RANKS.includes(cur);return `<div class="field"><label>Rank</label><select id="${id}" onchange="toggleOtherLMS('${id}','${id}_OtherWrap')"><option value="">-- Select Rank --</option>${APPEAL_RANKS.map(r=>`<option value="${r}" ${(other?r==="Other":r===cur)?"selected":""}>${r}</option>`).join("")}</select><div id="${id}_OtherWrap" style="display:${other?"block":"none"};margin-top:6px"><input id="${id}_Other" type="text" placeholder="Enter Rank" value="${esc(other?cur:"")}"></div></div>`}
 function appealEntryFormHtml(){return `<div class="grid">
 <div class="field"><label>Appeal LMS</label><select id="ae_Appeal_LMS" onchange="toggleOtherLMS('ae_Appeal_LMS','ae_Appeal_LMS_OtherWrap')"><option value="Yes">Yes</option><option value="No">No</option><option value="Other">Other</option></select><div id="ae_Appeal_LMS_OtherWrap" style="display:none;margin-top:6px"><input id="ae_Appeal_LMS_Other" type="text" placeholder="Enter Other"></div></div>
@@ -1023,12 +1102,24 @@ function del(key,eid){
 }
 function isDecidedStatus(v){return String(v||"").trim().toLowerCase().includes("decid")}
 function statusText(v){return isDecidedStatus(v)?`<span class="status-decided">${esc(v)}</span>`:esc(v)}
-function statusSelectStyle(value){return isDecidedStatus(value)?"select-teal-outline status-decided":"select-teal-outline";}
-function benchSelectStyle(value){return "select-teal-outline";}
-function memberSelectStyle(){return "select-teal-outline";}
+function statusSelectStyle(value){return isDecidedStatus(value)?"status-decided":"";}
+function benchSelectStyle(value){return "";}
+function memberSelectStyle(){return "";}
 function registerInlineSelect(regKey,eid,field,options,value,extraClass=""){
   const opts=options.map(o=>`<option value="${esc(o)}" ${o===value?"selected":""}>${esc(o)}</option>`).join("");
   return `<select class="${extraClass}" onchange="registerInlineUpdate('${regKey}','${eid}','${field}',this.value)" style="min-width:110px;font-size:15px">${opts}</select>`;
+}
+function rankInlineSelect(eid,value){
+  const base=(typeof APPEAL_RANKS!=="undefined"?APPEAL_RANKS:["IP","SI","ASI","HC","Const","Other"]).filter(x=>x!=="Other");
+  const cur=String(value||"");
+  const list=["",...base,...(cur&&!base.includes(cur)?[cur]:[]),"Other"];
+  const opts=list.map(o=>`<option value="${esc(o)}" ${o===cur?"selected":""}>${o===""?"—":esc(o)}</option>`).join("");
+  return `<select onchange="rankInlineUpdate('${eid}',this)" style="min-width:90px;font-size:15px">${opts}</select>`;
+}
+function rankInlineUpdate(eid,el){
+  let v=el.value;
+  if(v==="Other"){v=(prompt("Rank likhein:")||"").trim();if(!v){render();return;}}
+  registerInlineUpdate("appeals",eid,"Rank",v);
 }
 function registerInlineUpdate(regKey,eid,field,value){
   const list=db[regKey];
@@ -1180,6 +1271,7 @@ function applyAppealsSort(list){
   if(appealsSortMode==="asc")arr.sort((a,b)=>(Number(a.Appeal_Num)||0)-(Number(b.Appeal_Num)||0));
   else if(appealsSortMode==="desc")arr.sort((a,b)=>(Number(b.Appeal_Num)||0)-(Number(a.Appeal_Num)||0));
   else if(appealsSortMode==="modified")arr.sort((a,b)=>new Date(b._modifiedAt||0)-new Date(a._modifiedAt||0));
+  else arr.reverse(); // default: latest entry on top
   return arr;
 }
 function toggleAppealSortMenu(e){
@@ -1209,7 +1301,7 @@ function pageButtonsHtml(current,total,goFn){
   nums.forEach(p=>{
     if(p-prev>1)html+=`<span style="padding:0 4px;color:var(--muted)">…</span>`;
     const active=p===current;
-    html+=`<button class="light" type="button" onclick="${goFn}(${p})" style="min-width:34px;padding:6px 8px${active?';background:var(--accent);color:#000;border-color:var(--accent);font-weight:700':''}">${p}</button>`;
+    html+=`<button class="light${active?' pg-active':''}" type="button" onclick="${goFn}(${p})" style="min-width:34px;padding:6px 8px">${p}</button>`;
     prev=p;
   });
   return html;
@@ -1351,7 +1443,7 @@ function dateOnly(value){
 }
 function nextHearingDate(appealId){const hs=db.appealHearings.filter(h=>h.parent_id===appealId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
 function nextCMHearingDate(cmId){const hs=db.cmHearings.filter(h=>h.parent_id===cmId&&h.Date_of_Hearing);if(!hs.length)return "-";let maxD=hs[0].Date_of_Hearing;hs.forEach(h=>{if(new Date(h.Date_of_Hearing)>new Date(maxD))maxD=h.Date_of_Hearing});return dateOnly(maxD)}
-function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");const hCount=db.appealHearings.filter(x=>x.parent_id===rid).length;const cmCount=db.cms.filter(x=>String(x.appeal_id)===rid).length;const cplaCount=db.cplas.filter(x=>String(x.appeal_id)===rid).length;const cmClickable=cmCount>0?` onclick="showCMsForAppeal('${rid}')" style="cursor:pointer"`:'';const cplaClickable=cplaCount>0?` onclick="showCPLAsForAppeal('${rid}')" style="cursor:pointer"`:'';return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}${(cmCount>0||cplaCount>0)?`<div style="margin-top:4px">${cmCount>0?`<a class="case-link" onclick="showCMsForAppeal('${rid}')" title="View CMs for this Appeal">CM (${cmCount})</a>`:''}${cplaCount>0?`<a class="case-link" onclick="showCPLAsForAppeal('${rid}')" title="View CPLAs for this Appeal">CPLA (${cplaCount})</a>`:''}</div>`:''}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,memberSelectStyle())}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench,benchSelectStyle(r.Bench))}</td><td>${nextHearingDate(rid)}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
+function appealRow(r,idx){const rid=String(r.id??r.ID??r.Appeal_ID??"");const hCount=db.appealHearings.filter(x=>x.parent_id===rid).length;const cmCount=db.cms.filter(x=>String(x.appeal_id)===rid).length;const cplaCount=db.cplas.filter(x=>String(x.appeal_id)===rid).length;const cmClickable=cmCount>0?` onclick="showCMsForAppeal('${rid}')" style="cursor:pointer"`:'';const cplaClickable=cplaCount>0?` onclick="showCPLAsForAppeal('${rid}')" style="cursor:pointer"`:'';return `<tr><td>${idx}</td><td>${esc(r.Appeal_Num)}</td><td>${esc(r.Appeal_Year)}</td><td>${esc(r.Name_of_Appellant)}${(cmCount>0||cplaCount>0)?`<div style="margin-top:4px">${cmCount>0?`<a class="case-link" onclick="showCMsForAppeal('${rid}')" title="View CMs for this Appeal">CM (${cmCount})</a>`:''}${cplaCount>0?`<a class="case-link" onclick="showCPLAsForAppeal('${rid}')" title="View CPLAs for this Appeal">CPLA (${cplaCount})</a>`:''}</div>`:''}</td><td>${rankInlineSelect(rid,r.Rank)}</td><td>${registerInlineSelect("appeals",rid,"Member",["Chairman","Member-I","Member-II","Member-III","Member-IV","Member-V","Member-VI"],r.Member,memberSelectStyle())}</td><td>${registerInlineSelect("appeals",rid,"Status",["Pending","Decided"],r.Status,statusSelectStyle(r.Status))}</td><td>${registerInlineSelect("appeals",rid,"Bench",["Faisalabad","Lahore"],r.Bench,benchSelectStyle(r.Bench))}</td><td>${nextHearingDate(rid)}</td><td><div class="actionbuttons">${acts("appeals",rid,"appealForm")}<button class="light actionbtn icon-only" onclick="report('${rid}')" title="Print Report" aria-label="Print Report">${ICON_PRINT}</button><span class="hearings-link" title="Add Appeal Hearings" onclick="appealDetails('${rid}')">Hearings <span class="hearings-count">${hCount}</span></span></div></td></tr>`}
 
 function normalize(v){return v===undefined||v===null?"":v}
 function sheetToObjects(ws){return XLSX.utils.sheet_to_json(ws,{defval:""})}
@@ -1415,30 +1507,30 @@ function cmDetails(cid){let c=db.cms.find(x=>x.id===cid),a=getAppeal(c?.appeal_i
 function cplaDetails(cid){let c=db.cplas.find(x=>x.id===cid),a=getAppeal(c?.appeal_id),hs=sortHearingsAsc(db.cplaHearings.filter(x=>x.parent_id===cid));modal(`CPLA ${esc(c?.CPLA_No)} — Details / Hearings`,`<div style="padding:10px"><b>Appeal:</b> ${esc(a?.Appeal_Num||'-')} &nbsp; <b>Year:</b> ${esc(c?.CPLA_Year)} &nbsp; <b>Status:</b> ${statusText(c?.CPLA_Status)}</div><div class="actions"><button class="green" onclick="addHearingFor('cpla','${cid}')">➕ Add Hearing</button></div><div class="hearing-list"><table><thead><tr><th>Date</th><th>Officer Appeared</th><th>Court</th><th>Decision</th><th>Action</th></tr></thead><tbody>${hs.map(h=>`<tr><td>${dateOnly(h.Date_of_Hearing)}</td><td>${esc(h.Officer_Appeared)}</td><td>${esc(h.Court)}</td><td>${esc(h.hearing_text)}</td><td><button class="light mini" onclick="hearingForm('cpla','${h.id}')">✏️</button><button class="red mini" onclick="del('cplaHearings','${h.id}')">🗑️</button></td></tr>`).join("")||'<tr><td colspan="5">No hearings</td></tr>'}</tbody></table></div>`)}
 function report(aid){let a=getAppeal(aid);let cms=db.cms.filter(x=>x.appeal_id===aid),cplas=db.cplas.filter(x=>x.appeal_id===aid),hs=sortHearingsAsc(db.appealHearings.filter(x=>x.parent_id===aid));let w=open("","_blank");w.document.write(`<html><head><title>Appeal Report</title><style>body{margin:0}.report{width:210mm;min-height:297mm;padding:18mm;font:12pt Arial}.report h1{text-align:center;font-size:16pt;text-decoration:underline}.report h2{text-align:center;text-decoration:underline}.report p{line-height:1.5}.t{width:100%;border-collapse:collapse}.t th,.t td{border:1px solid #777;padding:6px}<style>.iconbtn{width:34px;height:34px;padding:6px!important;display:inline-flex;align-items:center;justify-content:center}.actionbtn{white-space:nowrap}.actionbuttons{display:flex;gap:6px;flex-wrap:wrap}.actionicons{display:flex;gap:5px;flex-wrap:wrap}.hearing-list{margin-top:12px;border:1px solid #e5e7eb;border-radius:10px;overflow:auto}.hearing-list table{min-width:0}.mini{padding:6px 9px!important;font-size:12px}</style></style>
 <style id="final-color-theme">
-:root{--nav:#1f2937;--accent:#1d4ed8;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#1d4ed8}
+:root{--nav:#1f2937;--accent:#059669;--gold:#f59e0b;--bg:#f4f7f5;--card:#ffffff;--line:#d8e2dc;--text:#1f2933;--muted:#667085;--red:#e11d48;--green:#15803d;--orange:#ea580c;--purple:#059669}
 body{background:linear-gradient(135deg,#f4f7f5 0%,#eef4f0 100%);color:var(--text)}
 header{background:linear-gradient(135deg,#20262e,#374151);box-shadow:0 5px 18px rgba(31,41,55,.18)}
 .head small{color:#d1fae5}
 .toolbar,.card,.stat{border-color:#d8e2dc;box-shadow:0 7px 22px rgba(31,41,55,.07)}
 .toolbar{background:linear-gradient(135deg,#fff,#f0f7f3)}
-.primary{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff}
+.primary{background:linear-gradient(135deg,#059669,#10b981);color:#fff}
 .green{background:#15803d;color:#fff}.red{background:#e11d48;color:#fff}.gray{background:#4b5563;color:#fff}
 .light{background:#e8f5ef;color:#116149;border:1px solid var(--accent-tint-border)}
-.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.tab{background:#fff;color:#4b5563;border-color:#d8e2dc}.tab.active{background:#059669;color:#fff;border-color:#059669}
 .title{background:linear-gradient(90deg,#f1f8f4,#fff);border-color:#d8e2dc}
 th{background:#e8f5ef;color:#14532d}th,td{border-color:#dfe7e2}tr:hover td{background:#f5faf7}
-.stat b{color:#1d4ed8}
-.stat:nth-child(1){border-top-color:#1d4ed8}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#7c3aed}.stat:nth-child(6){border-top-color:#64748b}
+.stat b{color:#059669}
+.stat:nth-child(1){border-top-color:#059669}.stat:nth-child(2){border-top-color:#15803d}.stat:nth-child(3){border-top-color:#f59e0b}.stat:nth-child(4){border-top-color:#e11d48}.stat:nth-child(5){border-top-color:#059669}.stat:nth-child(6){border-top-color:#64748b}
 .filebox{background:#f0fdf4;border-color:#86efac}.filebox label{color:#166534}.btnexcel{background:#15803d!important}.btnexport{background:#ea580c!important}
-.login-wrap{background:linear-gradient(135deg,#20262e,#1d4ed8)}
+.login-wrap{background:linear-gradient(135deg,#20262e,#059669)}
 .login-card h1{color:#1f2933}.login-card p{color:#667085}
 .modal-bg{background:rgba(15,23,42,.68)}.mh{background:linear-gradient(135deg,#20262e,#374151)}
 .match:hover{background:#f0fdf4}.picked{background:#ecfdf5;border-color:#bbf7d0}
 .selected-resp-list{border-color:#d8e2dc}.selected-resp-row{border-color:#e5ebe7}
 .resp-x{background:#e11d48!important}.resp-x:hover{background:#be123c!important}
 .tomorrow-date{color:#be123c!important;background:#ffe4e6!important}
-.icon-action.edit-action{color:#1d4ed8!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
-button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#1d4ed8}
+.icon-action.edit-action{color:#059669!important}.icon-action.report-action{color:#f59e0b!important}.icon-action.delete-action{color:#e11d48!important}
+button[title="Edit"]::before,button[aria-label="Edit"]::before{content:"✏️";font-size:27px;color:#059669}
 .status-pending{color:#be123c}.status-decided{color:#15803d}
 </style>
 
@@ -1828,7 +1920,7 @@ function printCustomReport(){
   const bodyRows=rows.map((r,i)=>reportRowHtml(criteria.type,r,i+1,"print")).join("")||`<tr><td colspan="${headers.length}" style="text-align:center;padding:24px">کوئی ریکارڈ نہیں ملا</td></tr>`;
   const subtitle=reportSubtitle(criteria);
   const w=open("","_blank");
-  w.document.write(`<html><head><title>${subtitle}</title><style>body{font-family:Arial;margin:16mm}h1{text-align:center;text-decoration:underline;font-size:14pt;margin-bottom:4px}p.meta{text-align:center;color:#666;font-size:9pt;margin-top:0}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{border:0;padding:2px 6px;text-align:left;font-size:10pt;line-height:1.2}tbody tr{border-bottom:1px solid #eee}th{background:#f3e8ff;padding:4px 6px}p.total{margin-top:10px;font-size:10pt}</style></head><body><h1>${esc(subtitle)}</h1><p class="meta">Generated: ${dateOnly(new Date())}</p><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><p class="total"><b>Total Records:</b> ${rows.length}</p></body></html>`);
+  w.document.write(`<html><head><title>${subtitle}</title><style>body{font-family:Arial;margin:16mm}h1{text-align:center;text-decoration:underline;font-size:14pt;margin-bottom:4px}p.meta{text-align:center;color:#666;font-size:9pt;margin-top:0}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{border:0;padding:2px 6px;text-align:left;font-size:10pt;line-height:1.2}tbody tr{border-bottom:1px solid #eee}th{background:#e8f5ef;padding:4px 6px}p.total{margin-top:10px;font-size:10pt}</style></head><body><h1>${esc(subtitle)}</h1><p class="meta">Generated: ${dateOnly(new Date())}</p><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table><p class="total"><b>Total Records:</b> ${rows.length}</p></body></html>`);
   w.document.close();
   setTimeout(()=>w.print(),400);
 }
