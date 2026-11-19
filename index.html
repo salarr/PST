@@ -524,6 +524,58 @@ button:active{transform:translateY(0) scale(.98)}
 .panel.card{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important;overflow:visible!important}
 .panel.card>.body{padding-left:6px;padding-right:6px}
 </style>
+<style>
+.lptbl{table-layout:fixed}.lptbl{width:100%}.lptbl th:nth-child(1){width:5%}.lptbl th:nth-child(2){width:10%}.lptbl th:nth-child(3){width:10%}.lptbl th:nth-child(4){width:65%}.lptbl th:nth-child(5){width:10%}.lptbl .actionbuttons{flex-wrap:wrap;gap:4px}.lptbl td{vertical-align:top}.lptbl .lp-desc,.lptbl .lp-pt{white-space:pre-wrap;word-break:break-word}.lptbl .lp-pt{font-weight:600}.lptbl button.copied{background:#d1fae5!important;color:#047857!important}
+</style>
+<style id="charcoal-gold-theme">
+/* ===== Charcoal + Gold, flat (no gradients) ===== */
+:root{--accent:#3f3f46;--accent-hi:#3f3f46;--accent-2:#3f3f46;--accent-dark:#27272a;--nav:#27272a;--purple:#3f3f46;
+ --gold:#b45309;--gold-dark:#92400e;--gold-tint:#fef3c7;--lg-base:#f4f4f5;
+ --accent-tint:rgba(63,63,70,.07);--accent-tint-border:rgba(63,63,70,.18);
+ --line:rgba(63,63,70,.15);--text:#1f2937;--muted:#52525b;
+ --glass:rgba(255,255,255,.72);--glass-strong:rgba(255,255,255,.9);--glass-edge:rgba(63,63,70,.12);
+ --glass-shadow:0 8px 24px rgba(39,39,42,.08)}
+html{background:#f4f4f5!important}
+body::before,body::after{display:none!important}
+header{background:rgba(255,255,255,.8)!important}
+.login-wrap{background:#f4f4f5!important}
+.toolbar,.title{background:var(--glass)!important}
+/* buttons: flat charcoal */
+.primary,.green,button.pg-active,.pagination button.pg-active,.panel button.pg-active{background:#3f3f46!important;color:#fff!important;border:1px solid #3f3f46!important;box-shadow:none!important}
+.primary:hover,.green:hover,.toolbar button:hover{background:#27272a!important;border-color:#27272a!important;color:#fff!important;filter:none!important;box-shadow:none!important}
+.red{background:#dc2626!important;border:1px solid #dc2626!important;box-shadow:none!important}
+.gray{background:#71717a!important;border:1px solid #71717a!important;box-shadow:none!important}
+.light,.headbtn,.icon-only,.icon-action{box-shadow:none!important}
+.light:hover,.headbtn:hover{background:rgba(63,63,70,.1)!important}
+/* tabs: charcoal text, gold underline + gold count */
+.tabs .tab.active,.tab.active,.tabs .tab.active:hover,.tab.active:hover{color:#27272a!important;border-bottom:3px solid #b45309!important}
+.tab-count,.hearings-count{background:#b45309!important;color:#fff!important}
+/* highlights */
+.case-link,.bk-link{color:#b45309!important}
+.case-link:hover{color:#92400e!important}
+.bk-link:hover{background:#fef3c7!important;color:#92400e!important}
+.stat b{color:#27272a!important}
+.rp-num{background:#3f3f46!important}
+.rp-over{outline-color:#b45309!important;background:#fef3c7!important}
+.rp-handle:hover{background:#fef3c7!important;color:#b45309!important}
+.icon-action.report-action,.icon-action.edit-action{color:#3f3f46!important}
+.lptbl button.copied{background:#fef3c7!important;color:#92400e!important}
+/* tables */
+table th{background:#e4e4e7!important;color:#27272a!important}
+tr:hover td{background:rgba(180,83,9,.07)!important}
+#bkTable tr.bk-total td{border-top:2px solid #b45309!important;background:#fef3c7!important}
+.match:hover,.sort-menu div:hover,.add-menu div:hover,.rd-item:hover{background:#fef3c7!important}
+/* inputs */
+input:focus,select:focus,textarea:focus{border-color:#b45309!important;box-shadow:0 0 0 3px rgba(180,83,9,.22),inset 0 2px 6px rgba(31,41,55,.06)!important}
+/* popups */
+.modal-bg{background:rgba(24,24,27,.45)!important}
+.modal{background:rgba(255,255,255,.94)!important;border:1px solid rgba(63,63,70,.15)!important;box-shadow:0 24px 60px rgba(24,24,27,.3)!important}
+.mh{background:#3f3f46!important;border-bottom:0!important;box-shadow:none!important}
+.mh h3,.mh *,.mh .close,.modal .close{color:#fff!important;text-shadow:none!important}
+.modal .close{background:rgba(255,255,255,.15)!important}
+.modal .close:hover{background:rgba(255,255,255,.3)!important}
+::-webkit-scrollbar-thumb{background:rgba(63,63,70,.35)!important}
+</style>
 </head>
 <body>
 <div id="loginScreen" class="login-wrap">
@@ -541,7 +593,7 @@ button:active{transform:translateY(0) scale(.98)}
 <div class="toolbar"><div class="search"><select id="searchType" onchange="searchAppeals()" style="max-width:150px"><option value="all">All</option><option value="appeal">Appeal</option><option value="cm">CM</option><option value="cpla">CPLA</option><option value="appellant">Appellant Name</option></select><input id="search" placeholder="Search Appeal No, Appellant, CM No, CPLA No..." oninput="searchAppeals()"></div><div style="position:relative"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><div class="add-menu" id="addMenu"><div onclick="closeAddMenu();openAppealEntryModal()">⚖️ Appeal</div><div onclick="closeAddMenu();cmForm()">📁 CM</div><div onclick="closeAddMenu();cplaForm()">📜 CPLA</div></div></div><button class="light" type="button" onclick="openBreakdownModal()">📊 Breakdown</button><button class="light" type="button" id="toolbarBurgerBtn" onclick="toggleToolbarMenu()" title="More Actions">☰</button><div class="toolbar-menu" id="toolbarMenu"><button class="primary" type="button" onclick="toggleAddMenu(event)">➕ Add</button><button class="light" type="button" onclick="openBreakdownModal();closeToolbarMenu()">📊 Breakdown</button></div></div>
 
 <div class="tabs">
-<button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals <span class="tab-count" id="appealsTabCount">0</span></button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM <span class="tab-count" id="cmTabCount">0</span></button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA <span class="tab-count" id="cplaTabCount">0</span></button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button><button class="tab" onclick="tab('breakup',this);renderBreakup()" id="breakupTab" style="display:none"><span class="icon">📊</span>Breakup</button>
+<button class="tab active" onclick="clearCMFilter();clearCPLAFilter();tab('appeals',this)"><span class="icon">⚖️</span>Appeals <span class="tab-count" id="appealsTabCount">0</span></button><button class="tab" onclick="clearCMFilter();tab('cm',this)"><span class="icon">📁</span>CM <span class="tab-count" id="cmTabCount">0</span></button><button class="tab" onclick="clearCPLAFilter();tab('cpla',this)"><span class="icon">📜</span>CPLA <span class="tab-count" id="cplaTabCount">0</span></button><button class="tab" onclick="tab('upcoming',this)"><span class="icon">📅</span>Upcoming Hearings</button><button class="tab" onclick="tab('customReport',this)" id="printReportTab" style="display:none"><span class="icon">🖨️</span>Print Report</button><button class="tab" onclick="tab('breakup',this);renderBreakup()" id="breakupTab" style="display:none"><span class="icon">📊</span>Breakup</button><button class="tab" onclick="tab('lawpoints',this);renderLawPoints()" id="lawTab"><span class="icon">📚</span>Law Points</button>
 </div>
 <div id="appeals" class="panel active card"><div class="body"><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th style="position:relative;cursor:pointer" onclick="toggleAppealSortMenu(event)">Appl # <span style="font-size:13px">⇅</span><div id="appealSortMenu" class="sort-menu" style="display:none"><div onclick="setAppealsSort('asc',event)">⬆ Ascending</div><div onclick="setAppealsSort('desc',event)">⬇ Descending</div><div onclick="setAppealsSort('modified',event)">🕒 Date Modified</div></div></th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'appealsYearMenu','appealsYearFilter',db.appeals,'Appeal_Year')">Year <span style="font-size:13px">▾</span><div id="appealsYearMenu" class="sort-menu" style="display:none"></div></th><th>Appellant</th><th>Rank</th><th>Member</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'appealsStatusMenu')">Status <span style="font-size:13px">▾</span><div id="appealsStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('appealsStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('appealsStatusFilter','decided',event)">Decided</div></div></th><th>Bench</th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="appealRows"></tbody></table></div><div id="appealsPagination" class="pagination"></div></div></div>
 <div id="cm" class="panel card"><div class="body"><div id="cmFilterBar" style="display:none"></div><div class="tablewrap"><table><thead><tr><th>Sr.#</th><th>CM No.</th><th style="position:relative;cursor:pointer" onclick="toggleYearMenu(event,'cmYearMenu','cmYearFilter',db.cms,'CM_Year')">Year <span style="font-size:13px">▾</span><div id="cmYearMenu" class="sort-menu" style="display:none"></div></th><th>Appeal</th><th>Appellant</th><th>File</th><th>Members</th><th style="position:relative;cursor:pointer" onclick="toggleStatusMenu(event,'cmStatusMenu')">Status <span style="font-size:13px">▾</span><div id="cmStatusMenu" class="sort-menu" style="display:none"><div onclick="setRegisterStatusFilter('cmStatusFilter','all',event)">All</div><div onclick="setRegisterStatusFilter('cmStatusFilter','pending',event)">Pending</div><div onclick="setRegisterStatusFilter('cmStatusFilter','decided',event)">Decided</div></div></th><th>Next Hearing</th><th>Actions</th></tr></thead><tbody id="cmRows"></tbody></table></div></div></div>
@@ -563,6 +615,15 @@ button:active{transform:translateY(0) scale(.98)}
  <button class="green" type="button" onclick="printBreakup()">🖨️ Print</button>
 </div>
 <div class="tablewrap" id="breakupBox"></div>
+</div></div>
+
+<div id="lawpoints" class="panel card"><div class="body">
+<div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px">
+ <div class="field" style="min-width:240px;flex:1"><label>Search</label><input id="lp_search" placeholder="Category, Law Point ya Description likhein..." oninput="renderLawPoints()"></div>
+ <div class="field" style="min-width:200px"><label>Category</label><select id="lp_cat" onchange="renderLawPoints()"></select></div>
+ <button class="primary" type="button" onclick="lawForm()">➕ Add Law Point</button>
+</div>
+<div class="tablewrap"><table class="lptbl"><thead><tr><th>Sr. No.</th><th>Category</th><th>Law Point</th><th>Description</th><th>Actions</th></tr></thead><tbody id="lawRows"></tbody></table></div>
 </div></div>
 <div id="customReport" class="panel card">
 <div class="body">
@@ -611,7 +672,7 @@ button:active{transform:translateY(0) scale(.98)}
 // ===== GOOGLE SHEETS CONNECTION =====
 // Apps Script Web App URL یہاں paste کریں
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwzjemK3Hb3W5vtt37QlC-L3jwrQQ3NMW7DzbOdRFCRZQLi_2HqEzTTbi-kHtBnUhs/exec";
-let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:[],respondents:[],appealRespondents:[]},editId=null;
+let db={appeals:[],appealHearings:[],cms:[],cmHearings:[],cplas:[],cplaHearings:[],respondents:[],appealRespondents:[],lawPoints:[]},editId=null;
 let authToken=null,currentUser=null;
 const $=x=>document.getElementById(x), id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -621,7 +682,7 @@ const ICON_TRASH=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" st
 const ICON_PRINT=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`;
 function statusBadge(status){const s=String(status||"").trim();const key=s.toLowerCase();const cls=key==="decided"?"badge badge-decided":key==="pending"?"badge badge-pending":"badge";return `<span class="${cls}">${esc(s||"-")}</span>`}
 async function api(action,payload={}){if(!WEB_APP_URL.startsWith("http"))throw new Error("Apps Script Web App URL ابھی set نہیں کی گئی");const r=await fetch(WEB_APP_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,payload,token:authToken})});return await r.json()}
-async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];db.appealRespondents=db.appealRespondents||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
+async function syncFromServer(){try{const x=await api("getData",{});if(!x.ok)throw new Error(x.error||"Load failed");db=x.data||db;db.respondents=db.respondents||[];db.appealRespondents=db.appealRespondents||[];db.lawPoints=db.lawPoints||[];seedDefaultRespondents();render();fillRespondentSelect();}catch(e){console.error(e);seedDefaultRespondents();render();fillRespondentSelect();alert("Google Sheets load نہیں ہوئی: "+e.message)}}
 
 // ===== SESSION PERSISTENCE (survive page refresh) + INACTIVITY AUTO-LOGOUT =====
 const SESSION_KEY="pst_session_v1";
@@ -1023,6 +1084,41 @@ function catKey(ev,id){
   if(top&&top.toLowerCase().startsWith(inp.value.toLowerCase())){ev.preventDefault();inp.value=top;catSuggest(id)}
  }else if(ev.key==="Escape")catHide(id);
 }
+
+/* ===== Law Points ===== */
+const ICON_COPY=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const ICON_CHECK=`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+function lawCategories(){return [...new Set((db.lawPoints||[]).map(x=>String(x.Category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
+function renderLawPoints(){
+ const body=$("lawRows");if(!body)return;
+ const catSel=$("lp_cat"),cats=lawCategories();
+ const cur=catSel.value;
+ catSel.innerHTML=`<option value="">All</option>`+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+ catSel.value=cats.includes(cur)?cur:"";
+ const q=($("lp_search").value||"").trim().toLowerCase(),cf=catSel.value;
+ const list=(db.lawPoints||[]).slice().reverse().filter(x=>(!cf||String(x.Category||"").trim()===cf)&&(!q||[x.Category,x.Law_Point,x.Description].some(v=>String(v||"").toLowerCase().includes(q))));
+ body.innerHTML=list.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.Category)}</td><td class="lp-pt">${esc(x.Law_Point)}</td><td class="lp-desc">${esc(x.Description)}</td><td><div class="actionbuttons"><button class="light actionbtn icon-only" title="Copy (Law Point + Description)" aria-label="Copy" onclick="copyLawPoint('${x.id}',this)">${ICON_COPY}</button>${acts("lawPoints",x.id,"lawForm")}</div></td></tr>`).join("")||`<tr><td colspan="5" style="text-align:center;color:#888">No Law Points</td></tr>`;
+}
+function lawForm(eid=null){
+ const r=eid?(db.lawPoints||[]).find(x=>x.id===eid)||{}:{};editId=eid;
+ modal(eid?"Edit Law Point":"New Law Point",`<div class="grid"><div class="field full"><label>Category</label><input id="lp_f_cat" list="lp_cat_list" autocomplete="off" value="${esc(r.Category||"")}"><datalist id="lp_cat_list">${lawCategories().map(c=>`<option value="${esc(c)}">`).join("")}</datalist></div>${area("Law Point","lp_f_pt",r.Law_Point,"full")}${area("Description","lp_f_desc",r.Description,"full")}<div class="actions full"><button class="green" onclick="saveLawPoint()">Save</button><button class="gray" onclick="closeM()">Cancel</button></div></div>`);
+}
+function saveLawPoint(){
+ const wasEdit=!!editId;
+ const r={id:editId||id(),Category:$("lp_f_cat").value.trim(),Law_Point:$("lp_f_pt").value.trim(),Description:$("lp_f_desc").value.trim()};
+ if(!r.Law_Point)return alert("Law Point required");
+ db.lawPoints=db.lawPoints||[];
+ if(editId)db.lawPoints=db.lawPoints.map(x=>x.id===editId?r:x);else db.lawPoints.push(r);
+ persist();logActivity(wasEdit?"Edit Law Point":"Add Law Point",r.Law_Point.slice(0,80));closeM();
+}
+function copyLawPoint(eid,btn){
+ const x=(db.lawPoints||[]).find(v=>v.id===eid);if(!x)return;
+ const text=String(x.Law_Point||"")+(x.Description?"\n"+x.Description:"");
+ const done=()=>{const old=btn.innerHTML;btn.innerHTML=ICON_CHECK;btn.classList.add("copied");setTimeout(()=>{btn.innerHTML=old;btn.classList.remove("copied")},1200)};
+ const fallback=()=>{const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();try{document.execCommand("copy");done()}catch(e){alert("Copy nahi ho saka")}t.remove()};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done).catch(fallback);else fallback();
+}
+
 /* ===== Breakup (rank-wise appeals) ===== */
 function breakupYears(){const a=["all"];for(let y=2026;y>=2000;y--)a.push(String(y));return a}
 const BREAKUP_ORDER=[["SP","SP"],["DSP","DSP"],["IP","IP"],["SI","SI"],["ASI","ASI"],["HC","HC"],["Const","Const."]];
@@ -1528,6 +1624,7 @@ const cplaBar=$("cplaFilterBar");if(cplaBar){cplaBar.style.display="none";cplaBa
 if($("appealsTabCount"))$("appealsTabCount").textContent=pendingAppeals().length;
 if($("cmTabCount"))$("cmTabCount").textContent=pendingCMs().length;
 if($("cplaTabCount"))$("cplaTabCount").textContent=pendingCPLAs().length;
+if(typeof renderLawPoints==="function")renderLawPoints();
 renderUpcomingHearings();
 if($("rep_type")){populateReportYears();initReportFieldSelectionDefaults();updateReportFieldsButtonLabel();}
 }
@@ -1602,6 +1699,7 @@ function importExcel(ev){
     db.cms=c.map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
     db.cmHearings=ch.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.CM_ID||"")}));
     db.cplas=p.map(r=>({...r,id:String(r.ID||id()),appeal_id:String(r.Appeal_ID||"")}));
+    db.lawPoints=read("Law Points").map(r=>({id:String(r.ID||id()),Category:r.Category||"",Law_Point:r.Law_Point||"",Description:r.Description||""}));
     db.cplaHearings=ph.map(r=>({...r,id:String(r.ID||id()),parent_id:String(r.CPLA_ID||"")}));
     persist(); alert("Excel successfully loaded.\n\nAppeals: "+db.appeals.length+"\nCMs: "+db.cms.length+"\nCPLAs: "+db.cplas.length);
    }catch(err){console.error(err);alert("Excel file read نہیں ہو سکی۔ درست PST database Excel file استعمال کریں۔")}
@@ -1619,9 +1717,10 @@ function exportExcel(){
  "CM":["ID","Appeal_ID","CM_No","CM_Year","CM_File","CM_Members","CM_Respondents","CM_Status","CM_Prayer"],
  "CM Hearing":["ID","CM_ID","Date_of_Hearing","Decision"],
  "CPLA":["ID","Appeal_ID","CPLA_Title","CPLA_No","CPLA_Year","CPLA_Status","CPLA_Brief","CPLA_filed_against_the_Judgement","Judgement_Implemented_or_Not"],
- "CPLA Hearing":["ID","CPLA_ID","Date_of_Hearing","Decision"]
+ "CPLA Hearing":["ID","CPLA_ID","Date_of_Hearing","Decision"],
+ "Law Points":["ID","Category","Law_Point","Description"]
  };
- const maps={"Appeal LMS":"appeals","Appeal Respondents":"appealRespondents","Appeal Hearing":"appealHearings","CM":"cms","CM Hearing":"cmHearings","CPLA":"cplas","CPLA Hearing":"cplaHearings"};
+ const maps={"Appeal LMS":"appeals","Appeal Respondents":"appealRespondents","Appeal Hearing":"appealHearings","CM":"cms","CM Hearing":"cmHearings","CPLA":"cplas","CPLA Hearing":"cplaHearings","Law Points":"lawPoints"};
  Object.entries(defs).forEach(([name,headers])=>{
    let rows=(db[maps[name]]||[]).map(r=>{
      let x={...r};
@@ -1649,7 +1748,7 @@ const PST_LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAACVCAYAAAAqhn
 function respGroupedHtml(rl,dash,tbl){
  const ord=r=>{const k=RESP_ROLES.indexOf(r.x.role);return k<0?99:k};
  const items=rl.map((x,i)=>({x,n:i+1})).sort((p,q)=>ord(p)-ord(q)||p.n-q.n);
- return tbl(["Respondent","Role","Decision / Punishment"],items.map(o=>`<tr><td><b>${esc(o.x.name)}</b><small class="rno">Respondent No. ${o.n}</small></td><td>${dash(o.x.role)}</td><td>${dash(o.x.decision)}</td></tr>`));
+ return tbl(["Respondent","Role","Decision / Punishment"],items.map(o=>`<tr><td><b>${esc(o.x.name)}</b><small class="rno">Respondent No. ${o.n}</small></td><td>${dash(o.x.role)}</td><td>${dash(o.x.decision)}</td></tr>`),"rs");
 }
 function report(aid){
  const a=getAppeal(aid);if(!a)return;
@@ -1669,7 +1768,7 @@ function report(aid){
 h3{font-size:8.5pt;color:#047857;text-transform:uppercase;letter-spacing:1.2px;margin:18px 0 6px;padding-bottom:3px;border-bottom:1px dotted #555;font-weight:700;page-break-after:avoid}p{margin:0;line-height:1.5;font-size:9pt}
 table{width:100%;border-collapse:collapse}th{text-align:left;font-weight:700;font-size:7.5pt;color:#333;padding:5px 6px;border-bottom:1px solid #ccc}td{padding:7px 6px;border-bottom:1px solid #eee;font-size:9pt;vertical-align:top}tr{page-break-inside:avoid}
 table.fx{table-layout:fixed}table.fx th:nth-child(-n+3),table.fx td:nth-child(-n+3){width:0.7in}.top{display:flex;justify-content:space-between;align-items:baseline}.top small{color:#888;letter-spacing:2px;font-size:7pt}.top i{font-style:normal;color:#888;letter-spacing:2px;font-size:7pt}.hd{align-items:center!important;margin-bottom:12px!important}.hd .lg{height:15mm;margin:1mm 0 0}.hd h1{display:inline-block;vertical-align:middle;margin-right:12px}.hd .st{vertical-align:middle}
-.rno{display:block;font-size:7pt;color:#888;margin-top:1px}
+table.rs{table-layout:fixed}table.rs th:nth-child(1){width:30%}table.rs th:nth-child(2){width:20%}table.rs th:nth-child(3){width:50%}.rno{display:block;font-size:7pt;color:#888;margin-top:1px}
 .ev{display:flex;border-left:2px solid #cfe9dd;margin-left:5px;padding:0 0 12px 0;position:relative;page-break-inside:avoid}.dot{position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:#047857}.evb{margin-left:16px}.crux{margin-top:2px;color:#444}.crux span{color:#047857;font-weight:700}.evb b{font-weight:700}`;
  const w=open("","_blank");
  w.document.write(`<html><head><meta charset="utf-8"><title>Appeal Report</title><style>${css}</style></head><body><div class="p">
